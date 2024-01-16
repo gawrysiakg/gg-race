@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { NgxRaceModule } from 'ngx-race';
+import { NgxRaceComponent, NgxRaceModule } from 'ngx-race';
 import { GameTimerComponent } from './game-timer/game-timer.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [NgxRaceModule, GameTimerComponent],
+  imports: [CommonModule,  NgxRaceModule, GameTimerComponent],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss'
 })
@@ -15,7 +16,13 @@ export class GameComponent  {
   public theme = this.darkMode ? "black-and-white" : '';
   public darkModeButton = this.darkMode ? "Dark Mode OFF" : "Dark Mode ON";
   public points = 0;
-  public date = new Date();
+  public boardHeight: number = 20;
+  public boardWidth: number = 14;
+
+
+ 
+
+
 
 
 
@@ -29,13 +36,26 @@ toggleDarkMode(){
   this.darkModeButton = this.darkMode ? "Dark Mode OFF" : "Dark Mode ON";
 }
 
+gameOver(){
+  alert("Game over, total points: "+ this.points);
+}
+
+handleActionReset(){
+  this.timerStop();
+  this.elapsedTime= 0;
+  this.points=0;
+}
+
+
+
 
 public elapsedTime: number = 0;
 private timer: any;
-private interval: number = 10; // interwał w milisekundach (tu ustawiony na 10ms)
+private interval: number = 100; // interwał w milisekundach (tu ustawiony na 10ms)
 
 timerStart(): void {
   // Ustawia interwał aktualizacji co interwał (w milisekundach)
+  console.log("timer started")
   this.timer = setInterval(() => {
     this.elapsedTime += this.interval / 1000; // dodaj interwał w sekundach
     this.elapsedTime = parseFloat(this.elapsedTime.toFixed(2)); // ogranicz do dwóch miejsc po przecinku
@@ -43,7 +63,7 @@ timerStart(): void {
 }
 
 timerStop(): void {
-  // Zatrzymuje interwał przed zniszczeniem komponentu, aby uniknąć wycieków pamięci
+  console.log("timer stopped")
   clearInterval(this.timer);
 }
 

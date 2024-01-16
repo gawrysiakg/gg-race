@@ -13,7 +13,10 @@ html, body {
 
     display: flex;
     flex-direction: column;
-   
+    // height: 100vh; /* Ustawienie wysokości na 100% wysokości widoku */
+    // width: 100%;
+    overflow: hidden; /* Ukrycie paska przewijania */
+
 }
 
 header {
@@ -74,63 +77,6 @@ footer p {
     width: 100%;
 }
 
-// ngx-race {
-//     display: flex;
-//     justify-content: center; /* Dodane style, aby umieścić ngx-race na środku */
-//     align-items: center;
-//     // align-items: flex-start; // u góry
-//         // align-items: normal;
-//         padding-top: 30px;
-//    // height: 100vh; /* Dodane style, aby ngx-race zajmował całą wysokość sekcji (większa wysokość */
-//     ngx-race-tile {
-//         background: #ffffff;
-//         &.free {
-//             div {
-//                 background: #ffffff;
-//             }
-//         }
-
-//         &.car {
-//             div {
-//                 background: #000000;
-//             }
-//         }
-
-//         &.othercar {
-//             div {
-//                 background: #7c7c7c;
-//             }
-//         }
-//     }
-
-//     &.black-and-white {
-//         display: flex;
-//         justify-content: center; /* Dodane style, aby umieścić ngx-race na środku */
-//         align-items: center;
-//         // height: 100vh; /* Dodane style, aby ngx-race zajmował całą wysokość sekcji */
-       
-//         ngx-race-tile {
-//             background: #ffffff;
-//             &.free {
-//                 div {
-//                     background: #ffffff;
-//                 }
-//             }
-
-//             &.car {
-//                 div {
-//                     background: #000000;
-//                 }
-//             }
-
-//             &.othercar {
-//                 div {
-//                     background: #7c7c7c;
-//                 }
-//             }
-//         }
-//     }
-// }
 
 ngx-race {
 
@@ -171,12 +117,11 @@ ngx-race {
 
 
 
-/* Dodana sekcja na przyciski */
+
 .buttons-section {
     display: flex;
     justify-content: center;
     align-items: center;
-    // padding-bottom: 30px;
 }
 
 .button {

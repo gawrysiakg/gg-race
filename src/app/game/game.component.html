@@ -16,12 +16,16 @@
 <!-- <ngx-race  #game class="black-and-white"> </ngx-race> -->
 
 <div class="points-section">
-<h2>Points: {{points}}</h2>
-<!-- <app-game-timer></app-game-timer> -->
-<p>Elapsed Time: {{ elapsedTime }} seconds</p>
+<div class="points">Points: {{points}} </div>  <div class="time">Time: {{ elapsedTime | number: '1.2-2' }}</div> 
 </div>
 
-<ngx-race #game [class.black-and-white]="darkMode" (carOvertaken)="grantPoints()"></ngx-race>
+<ngx-race #game [class.black-and-white]="darkMode" 
+(carOvertaken)="grantPoints()" 
+(gameOver)="gameOver()" 
+[boardHeight]="boardHeight"
+[boardWidth]="boardWidth"
+
+></ngx-race>
 
 
 <div class="buttons-section">
@@ -31,7 +35,7 @@
 <div class="buttons-section">
     <button class="button" (click)="game.actionStart()" (click)="timerStart()">Start</button>
     <button class="button" (click)="game.actionStop()" (click)="timerStop()">Stop</button> 
-    <button class="button" (click)="game.actionReset()" (click)="points=0" >Reset</button>
+    <button class="button" (click)="game.actionReset()" (click)="handleActionReset()" >Reset</button>
     <button class="button" (click)="game.actionTurboOn()">Turbo ON</button>
     <button class="button" (click)="game.actionTurboOff()">Turbo OFF</button>
 
