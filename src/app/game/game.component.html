@@ -1,0 +1,39 @@
+
+<!-- <ngx-race #game ></ngx-race> -->
+<!-- <ngx-race #game (carOvertaken)="grantPoints()"></ngx-race> -->
+<!-- 
+<button (click)="game.actionStart()">Start</button>
+<button (click)="game.actionStop()">Stop</button>
+<button (click)="game.actionReset()">Reset</button>
+<button (click)="game.actionTurboOn()">Turbo ON</button>
+<button (click)="game.actionLeft()">Left</button>
+<button (click)="game.actionRight()">Right</button>
+<button (click)="game.actionTurboOff()">Turbo OFF</button>
+
+ -->
+
+
+<!-- <ngx-race  #game class="black-and-white"> </ngx-race> -->
+
+<div class="points-section">
+<h2>Points: {{points}}</h2>
+<!-- <app-game-timer></app-game-timer> -->
+<p>Elapsed Time: {{ elapsedTime }} seconds</p>
+</div>
+
+<ngx-race #game [class.black-and-white]="darkMode" (carOvertaken)="grantPoints()"></ngx-race>
+
+
+<div class="buttons-section">
+    <button class="button" (click)="game.actionLeft()">Left</button>
+    <button class="button" (click)="game.actionRight()">Right</button>
+</div>
+<div class="buttons-section">
+    <button class="button" (click)="game.actionStart()" (click)="timerStart()">Start</button>
+    <button class="button" (click)="game.actionStop()" (click)="timerStop()">Stop</button> 
+    <button class="button" (click)="game.actionReset()" (click)="points=0" >Reset</button>
+    <button class="button" (click)="game.actionTurboOn()">Turbo ON</button>
+    <button class="button" (click)="game.actionTurboOff()">Turbo OFF</button>
+
+    <button class="button" (click)="toggleDarkMode()">{{darkModeButton}}</button>
+</div>

@@ -1,1 +1,196 @@
-/* You can add global styles to this file, and also import other style files */
+
+html, body {
+    background-image: url('assets/bg/road-forest.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: cover;
+
+    position: relative;
+    height: 100%;
+    min-height: 100% !important;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+   
+}
+
+header {
+    display: flex;
+    align-items: center;
+    min-height: 100px;
+}
+
+header .navbar-brand {
+    position: absolute;
+    top: 0;
+}
+
+header .navbar-brand img {
+    height: 52px;
+}
+
+section#main-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 75vh;
+}
+
+.text-violet {
+    color: #14121d;
+}
+
+.bg-violet {
+    background-color: #14121d;
+}
+
+.bg-header {
+    background-image: url('assets/bg/road-forest.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: cover;
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+footer p {
+    font-size: .8rem;
+}
+
+.bg-cover {
+    margin: 0 -12px;
+    transform: rotate(180deg);
+}
+
+.bg-cover svg {
+    height: 32px;
+    width: 100%;
+}
+
+// ngx-race {
+//     display: flex;
+//     justify-content: center; /* Dodane style, aby umieścić ngx-race na środku */
+//     align-items: center;
+//     // align-items: flex-start; // u góry
+//         // align-items: normal;
+//         padding-top: 30px;
+//    // height: 100vh; /* Dodane style, aby ngx-race zajmował całą wysokość sekcji (większa wysokość */
+//     ngx-race-tile {
+//         background: #ffffff;
+//         &.free {
+//             div {
+//                 background: #ffffff;
+//             }
+//         }
+
+//         &.car {
+//             div {
+//                 background: #000000;
+//             }
+//         }
+
+//         &.othercar {
+//             div {
+//                 background: #7c7c7c;
+//             }
+//         }
+//     }
+
+//     &.black-and-white {
+//         display: flex;
+//         justify-content: center; /* Dodane style, aby umieścić ngx-race na środku */
+//         align-items: center;
+//         // height: 100vh; /* Dodane style, aby ngx-race zajmował całą wysokość sekcji */
+       
+//         ngx-race-tile {
+//             background: #ffffff;
+//             &.free {
+//                 div {
+//                     background: #ffffff;
+//                 }
+//             }
+
+//             &.car {
+//                 div {
+//                     background: #000000;
+//                 }
+//             }
+
+//             &.othercar {
+//                 div {
+//                     background: #7c7c7c;
+//                 }
+//             }
+//         }
+//     }
+// }
+
+ngx-race {
+
+    display: flex;
+    justify-content: center; /* Dodane style, aby umieścić ngx-race na środku */
+    align-items: center;
+        // align-items: flex-start; // u góry
+            // align-items: normal;
+   // padding-top: 30px;
+
+
+   
+    &.black-and-white {
+        ngx-race-tile {
+            background: #ffffff;
+            &.free {
+                div {
+                    background: #ffffff;
+                }
+            }
+
+            &.car {
+                div {
+                    background: #000000;
+                }
+            }
+
+            &.othercar {
+                div {
+                    background: #7c7c7c;
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+/* Dodana sekcja na przyciski */
+.buttons-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // padding-bottom: 30px;
+}
+
+.button {
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #45a049;
+}
