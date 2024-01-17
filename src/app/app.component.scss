@@ -1,0 +1,9 @@
+app-intro {
+    display: grid;
+    align-content: center;
+    justify-content: space-between; /* Rozmieszcza elementy równomiernie wzdłuż osi głównej (poziomej) */
+    align-items: center; /* Wyśrodkowuje elementy wzdłuż osi przeciwnych*/
+    justify-content: center;
+    justify-items: center;
+   // padding: 20px;
+}

@@ -1,13 +1,16 @@
 
-<div class="user-form-class">
+<!-- <div class="user-form-class"> -->
 
-    <p>Enter Your name</p>
+    <!-- <p>Enter Your name</p><br> -->
+    <label>Enter Your name</label>
 <input [(ngModel)]="name" type="text"
        placeholder="Name"
        [disabled]="!editing"
        />
       
-<br/>
+<br>
+<br>
+<label>Enter Your name</label>
 <input [(ngModel)]="email"
        placeholder="E-mail"
        [disabled]="!editing"
@@ -17,4 +20,4 @@
 <button *ngIf="editing" [disabled]="!name || !email"  (click)="submit()"> Submit</button>
 <button *ngIf="!editing"  (click)="edit()"> Edit</button>
 
-</div>
+<!-- </div> -->

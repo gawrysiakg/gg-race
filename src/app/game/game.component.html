@@ -20,6 +20,7 @@
 </div>
 
 <ngx-race #game [class.black-and-white]="darkMode" 
+
 (carOvertaken)="grantPoints()" 
 (gameOver)="gameOver()" 
 [boardHeight]="boardHeight"
