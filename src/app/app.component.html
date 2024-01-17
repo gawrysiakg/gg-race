@@ -1,1 +1,9 @@
-<app-game></app-game>
+
+@if(isLoggedIn===false){
+   <app-intro (isLoggedIn)="logIn($event)"></app-intro>
+} 
+
+
+@if(isLoggedIn===true){
+    <app-game  (isLoggedIn)="quitGame($event)" ></app-game>
+}

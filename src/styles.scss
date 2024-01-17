@@ -126,7 +126,7 @@ ngx-race {
 
 .button {
     margin: 10px;
-    padding: 10px 20px;
+    padding: 8px 20px;
     background-color: #4CAF50;
     color: white;
     text-align: center;
@@ -134,6 +134,9 @@ ngx-race {
     display: inline-block;
     font-size: 16px;
     cursor: pointer;
+    border-color: white;
+    border-width: 5px;
+    border-radius: 5px
 }
 
 .button:hover {

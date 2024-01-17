@@ -1,0 +1,20 @@
+
+<div class="user-form-class">
+
+    <p>Enter Your name</p>
+<input [(ngModel)]="name" type="text"
+       placeholder="Name"
+       [disabled]="!editing"
+       />
+      
+<br/>
+<input [(ngModel)]="email"
+       placeholder="E-mail"
+       [disabled]="!editing"
+       />
+       
+<br/>
+<button *ngIf="editing" [disabled]="!name || !email"  (click)="submit()"> Submit</button>
+<button *ngIf="!editing"  (click)="edit()"> Edit</button>
+
+</div>

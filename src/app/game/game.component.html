@@ -29,15 +29,28 @@
 
 
 <div class="buttons-section">
-    <button class="button" (click)="game.actionLeft()">Left</button>
-    <button class="button" (click)="game.actionRight()">Right</button>
+    <button class="button" (click)="game.actionLeft()"  >&#x2190; Left</button>
+    <button class="button" (click)="game.actionRight()">Right &#x2192;</button>
 </div>
 <div class="buttons-section">
-    <button class="button" (click)="game.actionStart()" (click)="timerStart()">Start</button>
-    <button class="button" (click)="game.actionStop()" (click)="timerStop()">Stop</button> 
+
+    @if(gameStarted){ 
+        <button class="button" (click)="game.actionStop()" (click)="handleStop()">Pause</button> } 
+    @if (!gameStarted){
+        <button class="button" (click)="game.actionStart()" (click)="handleStart()">Start</button> }
+    
+   
+
     <button class="button" (click)="game.actionReset()" (click)="handleActionReset()" >Reset</button>
-    <button class="button" (click)="game.actionTurboOn()">Turbo ON</button>
-    <button class="button" (click)="game.actionTurboOff()">Turbo OFF</button>
+    @if(!turboMode){
+        <button class="button" (click)="game.actionTurboOn()" (click)="turboMode=true">Turbo ON</button>}
+   @if(turboMode){
+    <button class="button" (click)="game.actionTurboOff()"  (click)="turboMode=false">Turbo OFF</button>
+   } 
 
     <button class="button" (click)="toggleDarkMode()">{{darkModeButton}}</button>
+   
+</div>
+<div class="buttons-section">
+<button class="button" (click)="quitGame()">Quit game</button>
 </div>

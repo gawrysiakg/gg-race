@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { NgxRaceComponent, NgxRaceModule } from 'ngx-race';
 import { GameTimerComponent } from './game-timer/game-timer.component';
 import { CommonModule } from '@angular/common';
@@ -18,8 +18,10 @@ export class GameComponent  {
   public points = 0;
   public boardHeight: number = 20;
   public boardWidth: number = 14;
+  public gameStarted = false;
+  public turboMode = false;
 
-
+  @Output() public isLoggedIn = new EventEmitter<boolean>();
  
 
 
@@ -38,6 +40,7 @@ toggleDarkMode(){
 
 gameOver(){
   alert("Game over, total points: "+ this.points);
+  this.timerStop();
 }
 
 handleActionReset(){
@@ -46,7 +49,18 @@ handleActionReset(){
   this.points=0;
 }
 
+quitGame(){
+  this.isLoggedIn.emit(false);
+}
 
+handleStart(){
+  this.timerStart()
+  this.gameStarted = true;
+}
+handleStop(){
+  this.timerStop()
+  this.gameStarted = false;
+}
 
 
 public elapsedTime: number = 0;
