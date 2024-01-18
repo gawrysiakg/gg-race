@@ -21,6 +21,7 @@ export class GameComponent  {
   public gameStarted = false;
   public turboMode = false;
 
+
   @Output() public isLoggedIn = new EventEmitter<boolean>();
  
 

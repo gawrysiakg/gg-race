@@ -1,5 +1,17 @@
 <p class="main-text">Welcome in GG Race Game!</p>
-<app-person-form></app-person-form>
+
+@if(showScore){
+    <app-score></app-score>
+    <button  class="play-button" (click)="toggleScore()">{{scoreButtonText}}</button>
+}
+
+@if(!showScore){
+    <app-person-form (isFormValid)="validationResult($event)" ></app-person-form>
+    <button  class="play-button" (click)="toggleScore()">{{scoreButtonText}}</button>
+    <button [disabled]="!isFormValid" class="play-button" (click)="startGame()">Play</button>
+}
+
+<!-- <button  class="play-button" (click)="toggleScore()">{{scoreButtonText}}</button> -->
 
 
-<button class="play-button" (click)="startGame()">Play</button>
+
