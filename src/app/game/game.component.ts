@@ -24,8 +24,11 @@ export class GameComponent  {
   public showMoreButton = 'Simple View'
   public isExtendedView = true;
   public gameClass = this.isExtendedView ? ['game-center'] : ['game-simple'] ;
+  public isGameOver = false;
+
 
   @Output() public isLoggedIn = new EventEmitter<boolean>();
+  @Output() public displayScoreAfterGame = new EventEmitter<boolean>();
   @Input() public player: User | undefined;
 
 
@@ -35,6 +38,9 @@ export class GameComponent  {
   public grantPoints() {
     console.log('points');
     this.points++;
+    if (this.player) {
+      this.player.points = this.points;
+    }
 }
 
 toggleDarkMode(){
@@ -47,9 +53,29 @@ toggleShowMoreButton(){
   this.gameClass = this.isExtendedView ? ['game-center'] : ['game-simple'];
 }
 
-gameOver(){
-  alert("Game over, total points: "+ this.points);
-  this.timerStop();
+// gameOver(){
+//   alert("Game over, total points: "+ this.points);
+//   this.timerStop();
+//   this.isGameOver=true;
+//   this.quitGame()
+// }
+
+gameOver(): void {
+  const confirmation = window.confirm(`Game over ${this.player?.name}, total points: ${this.points}\n
+  Click OK to end game`);
+  this.gameStarted = false;
+  this.turboMode = false;
+
+  if (confirmation) {
+    this.timerStop();
+    this.isGameOver = true;
+    this.quitGame();
+    this.displayScoreAfterGame.emit(true);
+  }
+
+  this.handleActionReset();
+ // this.gameStarted=false
+ 
 }
 
 handleActionReset(){
@@ -60,6 +86,7 @@ handleActionReset(){
 
 quitGame(){
   this.isLoggedIn.emit(false);
+  this.isGameOver=true;
 }
 
 handleStart(){
@@ -90,5 +117,11 @@ timerStop(): void {
   clearInterval(this.timer);
 }
 
+
+
+
+onInit(){
+  this.isGameOver=false;
+}
 
 }

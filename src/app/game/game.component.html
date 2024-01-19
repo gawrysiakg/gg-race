@@ -17,14 +17,16 @@
     }
 
 
+    
+        <ngx-race #game [class.black-and-white]="darkMode" 
+            (carOvertaken)="grantPoints()" 
+            (gameOver)="gameOver()" 
+            [boardHeight]="boardHeight"
+            [boardWidth]="boardWidth"
+            ></ngx-race>
 
-    <ngx-race #game [class.black-and-white]="darkMode" 
-    (carOvertaken)="grantPoints()" 
-    (gameOver)="gameOver()" 
-    [boardHeight]="boardHeight"
-    [boardWidth]="boardWidth"
-    ></ngx-race>
-
+    
+   
 
 
     @if(isExtendedView){
@@ -34,6 +36,8 @@
 
  </div>
 
+
+@if(!isGameOver){
 
 
 
@@ -64,3 +68,4 @@
         <button class="button" (click)="quitGame()">Quit game</button>
     </div>
 </div>
+}
