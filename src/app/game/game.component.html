@@ -1,57 +1,66 @@
 
-<!-- <ngx-race #game ></ngx-race> -->
-<!-- <ngx-race #game (carOvertaken)="grantPoints()"></ngx-race> -->
-<!-- 
-<button (click)="game.actionStart()">Start</button>
-<button (click)="game.actionStop()">Stop</button>
-<button (click)="game.actionReset()">Reset</button>
-<button (click)="game.actionTurboOn()">Turbo ON</button>
-<button (click)="game.actionLeft()">Left</button>
-<button (click)="game.actionRight()">Right</button>
-<button (click)="game.actionTurboOff()">Turbo OFF</button>
 
- -->
+@if(!isExtendedView){
+    <span class="simple-points-time">Points: {{points}}   ---   Time: {{ elapsedTime | number: '1.2-2' }}</span> 
+}
 
 
-<!-- <ngx-race  #game class="black-and-white"> </ngx-race> -->
-
-<div class="points-section">
-<div class="points">Points: {{points}} </div>  <div class="time">Time: {{ elapsedTime | number: '1.2-2' }}</div> 
-</div>
-
-<ngx-race #game [class.black-and-white]="darkMode" 
-
-(carOvertaken)="grantPoints()" 
-(gameOver)="gameOver()" 
-[boardHeight]="boardHeight"
-[boardWidth]="boardWidth"
-
-></ngx-race>
+ <div [class]=gameClass>
 
 
-<div class="buttons-section">
-    <button class="button" (click)="game.actionLeft()"  >&#x2190; Left</button>
-    <button class="button" (click)="game.actionRight()">Right &#x2192;</button>
-</div>
-<div class="buttons-section">
+    @if(isExtendedView){
+        <div class="points-section">
+        @if(player){   <p>Player name: {{player.name}}</p>  }
 
-    @if(gameStarted){ 
-        <button class="button" (click)="game.actionStop()" (click)="handleStop()">Pause</button> } 
-    @if (!gameStarted){
-        <button class="button" (click)="game.actionStart()" (click)="handleStart()">Start</button> }
-    
-   
+        <div class="points">Points: {{points}} </div>  <div class="time">Time: {{ elapsedTime | number: '1.2-2' }}</div> 
+        </div>
+    }
 
-    <button class="button" (click)="game.actionReset()" (click)="handleActionReset()" >Reset</button>
-    @if(!turboMode){
-        <button class="button" (click)="game.actionTurboOn()" (click)="turboMode=true">Turbo ON</button>}
-   @if(turboMode){
-    <button class="button" (click)="game.actionTurboOff()"  (click)="turboMode=false">Turbo OFF</button>
-   } 
 
-    <button class="button" (click)="toggleDarkMode()">{{darkModeButton}}</button>
-   
-</div>
-<div class="buttons-section">
-<button class="button" (click)="quitGame()">Quit game</button>
+
+    <ngx-race #game [class.black-and-white]="darkMode" 
+    (carOvertaken)="grantPoints()" 
+    (gameOver)="gameOver()" 
+    [boardHeight]="boardHeight"
+    [boardWidth]="boardWidth"
+    ></ngx-race>
+
+
+
+    @if(isExtendedView){
+        <div class="logs" [hidden]="!isExtendedView"> End</div>
+    }
+
+
+ </div>
+
+
+
+
+<div class="buttons-panel">
+    <div class="buttons-section">
+        <button class="button" (click)="game.actionLeft()"  >&#x2190; Left</button>
+        <button class="button" (click)="game.actionRight()">Right &#x2192;</button>
+    </div>
+
+
+    <div class="buttons-section">
+        @if(gameStarted){ 
+            <button class="button" (click)="game.actionStop()" (click)="handleStop()">Pause</button> } 
+        @if (!gameStarted){
+            <button class="button" (click)="game.actionStart()" (click)="handleStart()">Start</button> }
+        <button class="button" (click)="game.actionReset()" (click)="handleActionReset()" >Reset</button>
+        @if(!turboMode){
+            <button class="button" (click)="game.actionTurboOn()" (click)="turboMode=true">Turbo ON</button>}
+        @if(turboMode){
+            <button class="button" (click)="game.actionTurboOff()"  (click)="turboMode=false">Turbo OFF</button>
+        } 
+        <button class="button" (click)="toggleDarkMode()">{{darkModeButton}}</button>
+        <button class="button" (click)="toggleShowMoreButton()">{{showMoreButton}}</button>
+    </div>
+
+
+    <div class="buttons-section">
+        <button class="button" (click)="quitGame()">Quit game</button>
+    </div>
 </div>

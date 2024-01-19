@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { User } from '../models';
 
 @Component({
   selector: 'app-person-form',
@@ -14,25 +15,39 @@ export class PersonFormComponent {
   public email = ''; 
   public editing=true;
   isValid =true// this.name || this.email;
+  public id= 0;
+  //public loggedInDate:Date = new Date();
 
-  @Output() public isFormValid = new EventEmitter<boolean>();
+  public player: User | undefined;
 
-  emitValidForm(){
-    if(this.isValid){
-      this.isFormValid.emit(true);
-  } else {
-    this.isFormValid.emit(false);
-  }
-    }
+  // @Output() public isFormValid = new EventEmitter<boolean>();
+  @Output() public currentPlayer = new EventEmitter<User>();
+
+  // emitValidForm(){
+  //   if(this.isValid){
+  //     this.isFormValid.emit(true);
+  // } else {
+  //   this.isFormValid.emit(false);
+  // }
+  //   }
     
   edit(){
     this.editing= true;
     this.isValid=false;
-    this.emitValidForm();
+    //this.emitValidForm();
   }
   submit(){
+    this.player = {
+      id: this.id+1,
+      name: this.name,
+      email: this.email,
+      points: 0,
+      lastLoggedIn: new Date()
+    }
     this.editing = false;
     this.isValid=true;
-    this.emitValidForm();
+    //this.emitValidForm();
+    this.currentPlayer.emit(this.player);
+    console.log(this.player.name)
   }
 }

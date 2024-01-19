@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgxRaceComponent, NgxRaceModule } from 'ngx-race';
 import { GameTimerComponent } from './game-timer/game-timer.component';
 import { CommonModule } from '@angular/common';
+import { User } from '../models';
 
 @Component({
   selector: 'app-game',
@@ -20,10 +21,12 @@ export class GameComponent  {
   public boardWidth: number = 14;
   public gameStarted = false;
   public turboMode = false;
-
+  public showMoreButton = 'Simple View'
+  public isExtendedView = true;
+  public gameClass = this.isExtendedView ? ['game-center'] : ['game-simple'] ;
 
   @Output() public isLoggedIn = new EventEmitter<boolean>();
- 
+  @Input() public player: User | undefined;
 
 
 
@@ -37,6 +40,11 @@ export class GameComponent  {
 toggleDarkMode(){
   this.darkMode=!this.darkMode;
   this.darkModeButton = this.darkMode ? "Dark Mode OFF" : "Dark Mode ON";
+}
+toggleShowMoreButton(){
+  this.isExtendedView = !this.isExtendedView;
+  this.showMoreButton = this.isExtendedView ? 'Simple View' : 'Extended View';
+  this.gameClass = this.isExtendedView ? ['game-center'] : ['game-simple'];
 }
 
 gameOver(){

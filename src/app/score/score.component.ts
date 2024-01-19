@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { User } from '../models';
 
 @Component({
   selector: 'app-score',
@@ -10,5 +11,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class ScoreComponent {
 
   //@Output() public isLoggedIn = new EventEmitter<boolean>();
+
+  @Input() usersList:Array<User> = [];
 
 }

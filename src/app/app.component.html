@@ -1,12 +1,37 @@
 
-
-@if(isLoggedIn===false){
-   <app-intro (isLoggedIn)="logIn($event)"></app-intro>
-} 
-
-
 @if(isLoggedIn===true){
-    <app-game  (isLoggedIn)="quitGame($event)" ></app-game>
+    <!-- @if(player){
+        <h3>Player name: {{player.name}}</h3> -->
+    <app-game [player]="player" (isLoggedIn)="quitGame($event)" ></app-game>
 }
 
 
+
+
+
+@if(isLoggedIn===false){
+    <p class="main-text">GG Race Game!</p>
+
+
+
+
+@if(showScore){
+    <app-score [usersList]="usersList" ></app-score>
+    <button  class="play-button" (click)="toggleScore()">{{scoreButtonText}}</button>
+}
+
+@if(!showScore){
+    <!-- <app-person-form (isFormValid)="validationResult($event)" (currentPlayer)="setCurrentPlayer($event)" ></app-person-form> -->
+    <app-person-form  (currentPlayer)="setCurrentPlayer($event)" ></app-person-form>
+
+    <button  class="play-button" (click)="toggleScore()">{{scoreButtonText}}</button>
+    <!-- <button [disabled]="!isFormValid" class="play-button" (click)="startGame()">Play</button> -->
+    <button [disabled]="player===undefined" class="play-button" (click)="startGame()">Play</button>
+
+}
+
+
+
+
+
+}

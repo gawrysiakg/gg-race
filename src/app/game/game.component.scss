@@ -1,43 +1,70 @@
-.points-section {
-    color: #4CAF50;
-   // margin: 10px;
-    // padding: 10px 20px;
 
-  
-    // text-align: center;
-    // text-decoration: double;
-    // // display: inline-block;
-    
-    // width: 378px;
-    // display: inline-table;
-    // align-items: center;
-
-
-    //width: 378px;
-   // margin: auto; /* Ustawia marginesy na "auto" w poziomie, co sprawi, że div będzie wyśrodkowany */
-   // text-align: center; /* Wyśrodkuje tekst wewnątrz diva */
-   // padding: 10px; /* Dodaje odstępy wokół tekstu */
-
-
-    font-size: 24px;
+.game-center {
     display: flex;
-    justify-content: space-between; /* Ustawia odstępy między elementami, pierwszy na lewej, drugi na prawej */
-    width: 378px;
+    padding-top: 30px;
+    
+}
+.game-simple {
+    padding-top: 30px;
+
+}
+
+.simple-points-time {
+    color:#45a049;
+    font-family: cursive;
+    font-size: normal;
+}
+body {
+    margin: 0 auto;
+    display: block;
+}
+
+.points-section {
+    // color: #4CAF50;
+    // font-size: 24px;
+    // display: flex;
+    // justify-content: space-between; /* Ustawia odstępy między elementami, pierwszy na lewej, drugi na prawej */
+    // width: 378px;
+    // margin: auto;
+    // text-align: center;
+    // padding: 10px;
+
+
+    // background-color: rgba(119, 136, 153, 0.7);
+    background-color: #bdbdbdbd;
+
+    display: grid;
+     width: 300px;
+     height: 300px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px white;
     margin: auto;
-    text-align: center;
-    padding: 10px;
-   
-    .points, .time {
-        flex: 1; /* Rozciąga elementy, aby pierwszy był po lewej, a drugi po prawej */
-        //width: 180px;
-    }
+
+   // to chyba ok
+    // .points, .time {
+    //     flex: 1; /* Rozciąga elementy, aby pierwszy był po lewej, a drugi po prawej */
+    // }
     
 
     
 } 
 
 
+.logs {
+    // background-color: lightslategray; //#7c7c7c
+    //  background-color: rgba(119, 136, 153, 0.7);
+    background-color: #bdbdbdbd;
 
+    display: grid;
+     width: 300px;
+     height: 300px;
+    padding: 20px;
+    border-radius: 10px;
+    // box-shadow: 0 0 20px gray;
+    box-shadow: 0 0 20px white;
+    margin: auto;
+}
 
 
 
@@ -58,12 +85,6 @@ header .navbar-brand img {
     height: 52px;
 }
 
-// section#main-body {
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     min-height: 75vh;
-// }
 
 .text-violet {
     color: #14121d;

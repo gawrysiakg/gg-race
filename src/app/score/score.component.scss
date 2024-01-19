@@ -1,11 +1,89 @@
+// .score-list-container {
+//     background-color: lightslategray;
+//     // display: flex;
+//     display: grid;
+//      width: 300px;
+//      height: 300px;
+//     // justify-content: center;
+//     padding: 20px;
+//     border-radius: 10px;
+//     box-shadow: 0 0 20px gray;
+
+
+//     overflow: auto; /* Dodane, aby dodać pasek przewijania w przypadku zbyt wielu elementów */
+
+// }
+
+// .score-list {
+//     list-style: none;
+//     padding: 0;
+//     margin: 0;
+//   }
+  
+//   .score-list li {
+//     background-color: #ffffff;
+//     border-radius: 5px;
+//     margin-bottom: 10px;
+//     padding: 10px;
+//     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//   }
+  
+//   .score-list li span {
+//     font-weight: bold;
+//   }
+  
+//   .score-list li:nth-child(even) {
+//     background-color: #f2f2f2;
+//   }
+
+
+
+
+
+
+
 .score-list-container {
     background-color: lightslategray;
-    // display: flex;
     display: grid;
-     width: 300px;
-     height: 300px;
-    // justify-content: center;
+    width: 300px;
+    height: 300px;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 20px gray;
-}
+    overflow: auto;
+  }
+  
+  .score-list {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-family: cursive;
+    
+  }
+  
+  .score-list th,
+  .score-list td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .score-list th {
+    background-color: #f2f2f2;
+  }
+  
+  .score-list td {
+    // background-color: #ffffff;
+    background-color: rgba(236, 231, 231, 0.935);
+
+  }
+  
+  .score-list th,
+  .score-list td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }

@@ -1,9 +1,35 @@
-<div class="score-list-container">
+<!-- <div class="score-list-container">
 
-<p>score works!</p>
-<p>score works!</p>
-<p>score works!</p>
-<p>score works!</p>
 
+<ul class="score-list">
+@for(user of usersList; track user){
+   <li>{{user.id}} - {{user.name}} - {{user.points}}</li> 
+   
+}
+</ul>
 </div>
+ -->
 
+
+
+
+ <div class="score-list-container">
+    <table class="score-list">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Points</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(user of usersList; track user){
+          <tr>
+            <td>{{user.id}}</td>
+            <td>{{user.name}}</td>
+            <td>{{user.points}}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
