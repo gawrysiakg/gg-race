@@ -49,7 +49,8 @@ export class PersonFormComponent {
       name: this.name,
       email: this.email,
       points: 0,
-      lastLoggedIn: new Date()
+      lastLoggedIn: new Date(),
+      lastGameHistory: []
     }
     this.editing = false;
     this.isValid=true;

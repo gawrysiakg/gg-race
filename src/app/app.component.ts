@@ -23,12 +23,9 @@ export class AppComponent {
   public showScore=false;
   public isFormValid=false;
   public scoreButtonText =  "Show score";
-  // public lastUserId = this.usersList.length===0 ? 0 : this.usersList[this.usersList.length-1].id;
- 
   public userId =1;
   public player: User | undefined;
    
-
 
   setCurrentPlayer(event: User){
     this.player=event;

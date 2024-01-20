@@ -34,13 +34,19 @@ body {
     background-color: #bdbdbdbd;
 
     display: grid;
-     width: 300px;
-     height: 300px;
+    width: 300px;
+    height: 300px;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 20px white;
     margin: auto;
+    font-family: cursive;
+    font-size: x-large;
 
+
+        p {
+           
+        }
    // to chyba ok
     // .points, .time {
     //     flex: 1; /* Rozciąga elementy, aby pierwszy był po lewej, a drugi po prawej */
@@ -64,6 +70,11 @@ body {
     // box-shadow: 0 0 20px gray;
     box-shadow: 0 0 20px white;
     margin: auto;
+    font-family: cursive;
+    font-size: smaller;
+    overflow-y: auto; /* Dodaj suwak tylko w pionie, gdy zawartość wychodzi poza obszar */
+    //max-height: 300px; /* Maksymalna wysokość diva, po której pojawi się suwak */
+ 
 }
 
 

@@ -12,7 +12,9 @@
         <div class="points-section">
         @if(player){   <p>Player name: {{player.name}}</p>  }
 
-        <div class="points">Points: {{points}} </div>  <div class="time">Time: {{ elapsedTime | number: '1.2-2' }}</div> 
+        <div class="points"><img src="../../assets/bg/wheel.gif" width="30px" height="30px" />   Points: {{points}} </div>  
+        
+        <div class="time">Time: {{ elapsedTime | number: '1.2-2' }}</div> 
         </div>
     }
 
@@ -30,7 +32,19 @@
 
 
     @if(isExtendedView){
-        <div class="logs" [hidden]="!isExtendedView"> End</div>
+        <div class="logs" [hidden]="!isExtendedView"> 
+            <label>Game history</label>
+            Show <select> 
+                @for(status of player?.lastGameHistory; track status){
+                    
+                }
+            </select>
+           <ol>
+         @for(item of player?.lastGameHistory; track item ) {
+            <li>{{item.gameStatus}} - {{item.date | date:"short"}}</li>
+         }
+          </ol>   
+        </div>
     }
 
 
