@@ -1,0 +1,26 @@
+<div class="logs" [hidden]="!isExtendedView">
+    <p>Game history</p>
+    <p>
+      Show
+      <select  [(ngModel)]="filterOptions"  >
+        <option default value="all">Show All</option>
+        @for(status of statusOptions; track status){
+          <option value="status">{{status}}</option>
+        }
+      </select>
+      <!-- <button (click)="changeSortDirection('asc')">▲ Asc</button>
+      <button (click)="changeSortDirection('desc')">▼ Desc</button> -->
+      <button (click)="changeSortDirection('asc')">▲ Asc</button>
+      <button (click)="changeSortDirection('desc')">▼ Desc</button>
+    </p>
+    <ul>
+        @if(player){
+             @for(item of player.lastGameHistory | statusPipe:filterOptions.selectedStatus:filterOptions.sortDirection; track item) {
+        <li>{{item.elapsedTime}} - {{ item.gameStatus }} - {{ item.date | date: "short" }}</li>
+      }
+        }
+     
+    </ul>
+  </div>
+
+  <!-- (change)="onStatusChange()" -->

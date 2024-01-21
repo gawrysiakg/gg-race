@@ -10,7 +10,9 @@
 
     @if(isExtendedView){
         <div class="points-section">
-        @if(player){   <p>Player name: {{player.name}}</p>  }
+        @if(player){   
+            <p>Status: {{player.lastGameHistory[player.lastGameHistory.length-1].gameStatus}}</p>
+            <p>Player name: {{player.name}}</p>  }
 
         <div class="points"><img src="../../assets/bg/wheel.gif" width="30px" height="30px" />   Points: {{points}} </div>  
         
@@ -32,19 +34,23 @@
 
 
     @if(isExtendedView){
-        <div class="logs" [hidden]="!isExtendedView"> 
-            <label>Game history</label>
-            Show <select> 
-                @for(status of player?.lastGameHistory; track status){
-                    
+        <!-- <div class="logs" [hidden]="!isExtendedView"> 
+            <p>Game history</p><p>
+            Show   <select> 
+                <option default value="status">{{"Show All"}}</option>
+                @for(status of statusOptions; track status){
+                    <option value="status">{{status}}</option>
                 }
-            </select>
+            </select> <button (click)="changeSortDirection('asc')">▲ Asc</button>
+            <button (click)="changeSortDirection('desc')">▼ Desc</button>
+        </p>
            <ol>
          @for(item of player?.lastGameHistory; track item ) {
             <li>{{item.gameStatus}} - {{item.date | date:"short"}}</li>
          }
           </ol>   
-        </div>
+        </div> -->
+        <app-list [player]="player" [isExtendedView]="isExtendedView" ></app-list>
     }
 
 
@@ -83,3 +89,9 @@
     </div>
 </div>
 }
+
+<app-game-over-dialog *ngIf="showGameOverDialog"
+(quitGame)="endGame()"
+(restartGame)="restart()">
+</app-game-over-dialog>
+

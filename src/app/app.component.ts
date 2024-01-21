@@ -3,7 +3,7 @@ import { CommonModule, NgFor } from '@angular/common';
 import { GameComponent } from './game/game.component';
 import { IntroComponent } from './intro/intro.component';
 import { ScoreComponent } from './score/score.component';
-import { User } from './models';
+import { GameStatus, User } from './models';
 import { PersonFormComponent } from './person-form/person-form.component';
 
 
@@ -41,6 +41,7 @@ export class AppComponent {
 
   startGame(){
     this.isLoggedIn=true;
+    this.player?.lastGameHistory.push({gameStatus: GameStatus.READY, date: new Date(), elapsedTime: 0})
   }
 
 

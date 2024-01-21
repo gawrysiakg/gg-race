@@ -9,7 +9,9 @@ export interface User {
 
   export interface GameHistory {
     gameStatus: GameStatus,
-    date: Date
+    date: Date,
+    elapsedTime: number;
+
   }
 
 

@@ -4,11 +4,13 @@ import { GameTimerComponent } from './game-timer/game-timer.component';
 import { CommonModule, NgFor } from '@angular/common';
 import { User } from '../models';
 import { GameStatus } from '../models';
+import { GameOverDialogComponent } from '../game-over-dialog/game-over-dialog.component';
+import { ListComponent } from '../list/list.component';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [CommonModule,  NgxRaceModule, GameTimerComponent, NgFor],
+  imports: [CommonModule,  NgxRaceModule, GameTimerComponent, NgFor, GameOverDialogComponent, ListComponent],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss'
 })
@@ -26,7 +28,7 @@ export class GameComponent  {
   public isExtendedView = true;
   public gameClass = this.isExtendedView ? ['game-center'] : ['game-simple'] ;
   public isGameOver = false;
-   
+  statusOptions = Object.values(GameStatus);
 
   @Output() public isLoggedIn = new EventEmitter<boolean>();
   @Output() public displayScoreAfterGame = new EventEmitter<boolean>();
@@ -47,7 +49,7 @@ export class GameComponent  {
     this.points++;
     if (this.player) {
       this.player.points = this.points;
-      this.player.lastGameHistory.push({gameStatus: GameStatus.OVERTAKING, date: new Date()})
+      this.player.lastGameHistory.push({gameStatus: GameStatus.OVERTAKING, date: new Date(), elapsedTime: this.elapsedTime})
     }
   
 }
@@ -57,7 +59,7 @@ toggleDarkMode(){
   this.darkModeButton = this.darkMode ? "Dark Mode OFF" : "Dark Mode ON";
   const mode = this.darkMode ? GameStatus.DARK_MODE_ON : GameStatus.DARK_MODE_OFF;
   if (this.player) {
-    this.player.lastGameHistory.push({gameStatus: mode, date: new Date()})
+    this.player.lastGameHistory.push({gameStatus: mode, date: new Date(), elapsedTime: this.elapsedTime})
   }
 }
 toggleShowMoreButton(){
@@ -66,7 +68,7 @@ toggleShowMoreButton(){
   this.gameClass = this.isExtendedView ? ['game-center'] : ['game-simple'];
   const mode = this.isExtendedView ? GameStatus.EXTENDED_VIEW : GameStatus.SIMPLE_VIEW;
   if (this.player) {
-    this.player.lastGameHistory.push({gameStatus: mode, date: new Date()})
+    this.player.lastGameHistory.push({gameStatus: mode, date: new Date(), elapsedTime: this.elapsedTime})
   }
 }
 
@@ -78,52 +80,65 @@ toggleShowMoreButton(){
 // }
 
 gameOver(): void {
-  const confirmation = window.confirm(`Game over ${this.player?.name}, total points: ${this.points}\n
-  Click OK to end game`);
+    //ALERT 
+   // OPEN DIALOG
+    this.openDialog();
+
+  // const confirmation = window.confirm(`Game over ${this.player?.name}, total points: ${this.points}\n
+  // Click OK to end game`);
+ // this.showGameOverDialog = true;
+
+
   this.gameStarted = false;
   this.turboMode = false;
 
-  if (confirmation) {
+  // if (confirmation) {
+    
+    //this.isGameOver = true;
+   
+   // this.quitGame();
+    //this.displayScoreAfterGame.emit(true);
+    this.player?.lastGameHistory.push({gameStatus: GameStatus.GAME_OVER, date: new Date(), elapsedTime: this.elapsedTime});
     this.timerStop();
-    this.isGameOver = true;
-    this.quitGame();
-    this.displayScoreAfterGame.emit(true);
-    this.player?.lastGameHistory.push({gameStatus: GameStatus.GAME_OVER, date: new Date()})
-  }
+  // }
 
+ 
+ 
+}
+
+endGame(){
+  this.isGameOver = true;
+  this.quitGame();
+  this.displayScoreAfterGame.emit(true);
+}
+
+restart(){
   this.handleActionReset();
   this.game.actionReset();
- 
-  
- // this.gameStarted=false
- 
+  this.gameStarted = false;
+  this.showGameOverDialog = false
 }
 
 handleActionReset(){
+  this.player?.lastGameHistory.push({gameStatus: GameStatus.RESETED, date: new Date(), elapsedTime: this.elapsedTime})
   this.timerStop();
   this.elapsedTime= 0;
   this.points=0;
-  this.player?.lastGameHistory.push({gameStatus: GameStatus.RESETED, date: new Date()})
 }
 
 quitGame(){
+  this.player?.lastGameHistory.push({gameStatus: GameStatus.QUIT_GAME, date: new Date(), elapsedTime: this.elapsedTime})
   this.isLoggedIn.emit(false);
   this.isGameOver=true;
-  this.player?.lastGameHistory.push({gameStatus: GameStatus.QUIT_GAME, date: new Date()})
-  
 }
 
 handleStart(){
   this.timerStart()
   this.gameStarted = true;
-  if (this.player) {
-    this.player.lastGameHistory.push({gameStatus: GameStatus.STARTED, date: new Date()})
-  }
+  this.player?.lastGameHistory.push({gameStatus: GameStatus.STARTED, date: new Date(), elapsedTime: this.elapsedTime})
 }
 handleStop(){
-  if (this.player) {
-    this.player.lastGameHistory.push({gameStatus: GameStatus.PAUSED, date: new Date()})
-  }
+  this.player?.lastGameHistory.push({gameStatus: GameStatus.PAUSED, date: new Date(), elapsedTime: this.elapsedTime})
   this.timerStop()
   this.gameStarted = false;
 }
@@ -131,14 +146,13 @@ handleStop(){
 
 public elapsedTime: number = 0;
 private timer: any;
-private interval: number = 100; // interwał w milisekundach (tu ustawiony na 10ms)
+private interval: number = 100; 
 
 timerStart(): void {
-  // Ustawia interwał aktualizacji co interwał (w milisekundach)
   console.log("timer started")
   this.timer = setInterval(() => {
-    this.elapsedTime += this.interval / 1000; // dodaj interwał w sekundach
-    this.elapsedTime = parseFloat(this.elapsedTime.toFixed(2)); // ogranicz do dwóch miejsc po przecinku
+    this.elapsedTime += this.interval / 1000; 
+    this.elapsedTime = parseFloat(this.elapsedTime.toFixed(2)); 
   }, this.interval);
 }
 
@@ -152,6 +166,7 @@ timerStop(): void {
 
 onInit(){
   this.isGameOver=false;
+ 
 }
 
 
@@ -183,5 +198,33 @@ handleKeyboardEvent(event: KeyboardEvent): void {
       break; 
   }
 }
+
+
+// Game OVER
+
+  showGameOverDialog = false;
+
+  openDialog(): void {
+    this.showGameOverDialog = true;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

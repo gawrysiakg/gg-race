@@ -20,19 +20,7 @@ body {
 }
 
 .points-section {
-    // color: #4CAF50;
-    // font-size: 24px;
-    // display: flex;
-    // justify-content: space-between; /* Ustawia odstępy między elementami, pierwszy na lewej, drugi na prawej */
-    // width: 378px;
-    // margin: auto;
-    // text-align: center;
-    // padding: 10px;
-
-
-    // background-color: rgba(119, 136, 153, 0.7);
     background-color: #bdbdbdbd;
-
     display: grid;
     width: 300px;
     height: 300px;
@@ -43,7 +31,6 @@ body {
     font-family: cursive;
     font-size: x-large;
 
-
         p {
            
         }
@@ -51,20 +38,14 @@ body {
     // .points, .time {
     //     flex: 1; /* Rozciąga elementy, aby pierwszy był po lewej, a drugi po prawej */
     // }
-    
-
-    
 } 
 
 
 .logs {
-    // background-color: lightslategray; //#7c7c7c
-    //  background-color: rgba(119, 136, 153, 0.7);
     background-color: #bdbdbdbd;
-
-    display: grid;
-     width: 300px;
-     height: 300px;
+   // display: grid; //robiło wównomierne rozłożenie w pionie
+    width: 300px;
+    height: 300px;
     padding: 20px;
     border-radius: 10px;
     // box-shadow: 0 0 20px gray;
@@ -74,11 +55,25 @@ body {
     font-size: smaller;
     overflow-y: auto; /* Dodaj suwak tylko w pionie, gdy zawartość wychodzi poza obszar */
     //max-height: 300px; /* Maksymalna wysokość diva, po której pojawi się suwak */
- 
+    text-align: left;
 }
 
-
-
+app-list {
+    background-color: #bdbdbdbd;
+    // display: grid; //robiło wównomierne rozłożenie w pionie
+     width: 300px;
+     height: 300px;
+     padding: 20px;
+     border-radius: 10px;
+     // box-shadow: 0 0 20px gray;
+     box-shadow: 0 0 20px white;
+     margin: auto;
+     font-family: cursive;
+     font-size: smaller;
+     overflow-y: auto; /* Dodaj suwak tylko w pionie, gdy zawartość wychodzi poza obszar */
+     //max-height: 300px; /* Maksymalna wysokość diva, po której pojawi się suwak */
+     text-align: left;
+}
 
 
 header {
@@ -132,10 +127,6 @@ footer p {
     height: 32px;
     width: 100%;
 }
-
-
-
-
 
 
 
