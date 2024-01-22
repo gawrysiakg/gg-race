@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+ import { Component, Input } from '@angular/core';
+
 import { GameStatus, User } from '../models';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -19,37 +20,32 @@ export class ListComponent {
   @Input() player: User | undefined;
 
   selectedStatus: string = 'all';
-  //sortDirection: 'asc' | 'desc' = 'asc';
-  sortDirection = 'asc';
+  sortDirection: 'asc' | 'desc' = 'desc';
+ 
 
-  filterOptions = {
-    selectedStatus: this.selectedStatus,
-    sortDirection: this.sortDirection
-  };
+  
 
-  // get sortedGameHistory(): any[] {
-  //   let gameHistory = this.player?.lastGameHistory || [];
+  // filterOptions = {
+  //   selectedStatus: this.selectedStatus,
+  //   sortDirection: this.sortDirection
+  // };
 
-  //   // Sortowanie według statusu i kierunku
-  //   gameHistory = gameHistory.sort((a, b) => {
-  //     const factor = this.sortDirection === 'asc' ? 1 : -1;
-  //     return factor * (a.gameStatus.localeCompare(b.gameStatus));
-  //   });
+  
 
-  //   // Filtruj według wybranego statusu
-  //   if (this.selectedStatus !== 'all') {
-  //     gameHistory = gameHistory.filter(item => item.gameStatus === this.selectedStatus);
-  //   }
 
-  //   return gameHistory;
+  
+  // handleSortDirectionClick(direction: 'asc' | 'desc') {
+  //  this.filterOptions = {...this.filterOptions};
+  //   this.filterOptions.sortDirection=direction;
+  //   this.sortDirection=direction;
+  //   console.log( this.filterOptions.sortDirection);
+  //   // if(this.player)
+  //   // this.player = { ...this.player }; // Utworzenie nowej instancji obiektu player
   // }
-
-  onStatusChange() {
-    // Tutaj możesz dodać logikę, jeśli chcesz wykonać jakieś akcje po zmianie statusu
-  }
-
-  changeSortDirection(direction: 'asc' | 'desc') {
-    this.filterOptions.sortDirection = direction;
-  }
+  handleSortDirectionClick(direction: 'asc' | 'desc') {
+     this.sortDirection=direction;
+   }
+ 
+   
 
 }

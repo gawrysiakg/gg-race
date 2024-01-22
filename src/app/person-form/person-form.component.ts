@@ -19,6 +19,7 @@ export class PersonFormComponent {
   //public loggedInDate:Date = new Date();
 
   public player: User | undefined;
+  
 
   // @Output() public isFormValid = new EventEmitter<boolean>();
   @Output() public currentPlayer = new EventEmitter<User>();

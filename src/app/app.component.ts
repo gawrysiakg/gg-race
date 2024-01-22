@@ -37,6 +37,17 @@ export class AppComponent {
   }
   logIn(event: boolean){
     this.isLoggedIn=event;
+
+
+
+
+
+
+
+
+
+
+    
   }
 
   startGame(){

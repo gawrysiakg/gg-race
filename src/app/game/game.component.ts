@@ -117,6 +117,10 @@ restart(){
   this.game.actionReset();
   this.gameStarted = false;
   this.showGameOverDialog = false
+  if(this.player){
+     this.player.lastGameHistory = [];
+  }
+  this.player?.lastGameHistory.push({gameStatus: GameStatus.RESETED, date: new Date(), elapsedTime: this.elapsedTime})
 }
 
 handleActionReset(){
