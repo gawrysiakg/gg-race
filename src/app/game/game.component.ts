@@ -106,7 +106,7 @@ gameOver(): void {
  
 }
 
-endGame(){
+endGame(){ //emitowany z ramki game over
   this.isGameOver = true;
   this.quitGame();
   this.displayScoreAfterGame.emit(true);

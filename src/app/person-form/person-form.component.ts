@@ -11,37 +11,40 @@ import { User } from '../models';
   styleUrl: './person-form.component.scss'
 })
 export class PersonFormComponent {
-  public name = '';
-  public email = ''; 
-  public editing=true;
-  isValid =true// this.name || this.email;
-  // public id= 0;
-  //public loggedInDate:Date = new Date();
 
   public player: User | undefined;
+  @Input() isLoggedIn:boolean=false;
+  @Input() loggedInPlayer: User | undefined;
+  public name =  '';
+  public email = ''; 
+  public editing=true;
+  //isValid =true
+ 
+ 
+
+  
   
 
-  // @Output() public isFormValid = new EventEmitter<boolean>();
-  @Output() public currentPlayer = new EventEmitter<User>();
-  // public lastUserId = 0;
 
-  // emitValidForm(){
-  //   if(this.isValid){
-  //     this.isFormValid.emit(true);
-  // } else {
-  //   this.isFormValid.emit(false);
+  // constructor() {
+  //   if(this.loggedInPlayer){
+  //     this.name = this.loggedInPlayer?.name;
+  //  this.email = this.loggedInPlayer?.email; 
   // }
-  //   }
-    
+  //}
+
+ 
+  @Output() public currentPlayer = new EventEmitter<User>();
+ 
   edit(){
     this.editing= true;
-    this.isValid=false;
-    if(this.player){
-       this.name = this.player?.name;
-    this.email = this.player?.email; 
-    }
+   // this.isValid=false;
+    // if(this.player){
+    //    this.name = this.player?.name;
+    // this.email = this.player?.email; 
+    // }
    
-    //this.emitValidForm();
+
   }
   submit(){
     
@@ -54,7 +57,7 @@ export class PersonFormComponent {
       lastGameHistory: []
     }
     this.editing = false;
-    this.isValid=true;
+   // this.isValid=true;
     //this.emitValidForm();
     this.currentPlayer.emit(this.player);
     console.log(this.player.name);
@@ -62,4 +65,6 @@ export class PersonFormComponent {
     // this.email = ''; 
 
   }
+
+  
 }

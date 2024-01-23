@@ -1,34 +1,46 @@
-
-@if(isLoggedIn===true){
+@if(isGameStarted===true){
     <!-- @if(player){
         <h3>Player name: {{player.name}}</h3> -->
-    <app-game [player]="player" (isLoggedIn)="quitGame($event)"  (displayScoreAfterGame)="displayScoreAfterGame()" ></app-game>
+
+        @if(showScore){
+            <app-score [usersList]="usersList" ></app-score>
+            <button  class="play-button" (click)="toggleScore()">{{scoreButtonText}}</button>
+        }
+        @if(!showScore){
+            <app-game [player]="player" (isLoggedIn)="quitGame($event)"  (displayScoreAfterGame)="displayScoreAfterGame()" ></app-game>
+        }
 }
 
 
 
 
+@if(isGameStarted===false){
 
-@if(isLoggedIn===false){
-    <p class="main-text"> <img src="../../assets/bg/wheel.gif" width="30px" height="30px" />    GG Race Game!</p>
-
-
+        <p class="main-text"> <img src="../../assets/bg/wheel.gif" width="30px" height="30px" />  Hello {{player?.name}}! Try new GG Race Game!</p>
 
 
-@if(showScore){
-    <app-score [usersList]="usersList" ></app-score>
-    <button  class="play-button" (click)="toggleScore()">{{scoreButtonText}}</button>
-}
 
-@if(!showScore){
-    <!-- <app-person-form (isFormValid)="validationResult($event)" (currentPlayer)="setCurrentPlayer($event)" ></app-person-form> -->
-    <app-person-form  (currentPlayer)="setCurrentPlayer($event)" ></app-person-form>
+        @if(showScore){
+            <app-score [usersList]="usersList" ></app-score>
+            <button  class="play-button" (click)="toggleScore()">{{scoreButtonText}}</button>
+        }
 
-    <button  class="play-button" (click)="toggleScore()">{{scoreButtonText}}</button><br>
-    <!-- <button [disabled]="!isFormValid" class="play-button" (click)="startGame()">Play</button> -->
-    <button [disabled]="player===undefined" class="play-button" (click)="startGame()">Play</button>
+        @if(!showScore){
 
-}
+
+            <!-- @if(!isLoggedIn){ -->
+  <app-person-form  (currentPlayer)="setCurrentPlayer($event)" [isLoggedIn]="isLoggedIn" [loggedInPlayer]="player"></app-person-form>
+
+            <button  class="play-button" (click)="toggleScore()">{{scoreButtonText}}</button>
+            <!-- } -->
+            <!-- <app-person-form (isFormValid)="validationResult($event)" (currentPlayer)="setCurrentPlayer($event)" ></app-person-form> -->
+          
+            @if(isLoggedIn){<button  class="play-button" (click)="logout()">Log Out</button>}
+            <br>
+            <!-- <button [disabled]="player===undefined" class="play-button" (click)="startGame()">Play</button> -->
+            <button [disabled]="player===undefined" class="play-button" (click)="startGame()">Play</button>
+
+        }
 
 
 

@@ -62,7 +62,8 @@ font-size: xx-large;
     border-radius: 8px;
     cursor: pointer;
     transition: background 0.3s ease, transform 0.3s ease; /* Efekty płynnych przejść */
-    box-shadow: 0 0 2px 7px rgba(0, 0, 0, 0.1); /* Cień */
+    box-shadow: 0 0 8px 7px rgba(0, 0, 0, 0.1); /* Cień */
+    
   }
   
   .play-button:hover {
