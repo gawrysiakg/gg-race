@@ -1,13 +1,24 @@
 
  <label> Feel the rush of the wind, hear the roar of the engines, and push your skills to the limit in this fast-paced adventure.</label>
-   @if(player){
+  
+ @if(isLoggedIn){
+   <p class="good-luck"> Good luck, and have fun!</p>   
+   <p>
+      <img src="../../assets/bg/f1.png" width="250px" height="160px"  />
+   </p>
+}
+@if(!isLoggedIn){
+
+
+ 
+ <!-- @if(player){
           <p class="good-luck"> Good luck {{player.name}}!</p>   
        }
-   <br>
+   <br> -->
 
 
 
-
+   
    @if(!player){<label>Enter Player Name</label>}
    <input [(ngModel)]="name" type="text"
             placeholder="Name"
@@ -29,3 +40,4 @@
 <button *ngIf="editing" [disabled]="!name || !email" class="play-button" (click)="submit()"> Submit</button>
 <button *ngIf="!editing"  (click)="edit()"> Edit</button>
 
+}

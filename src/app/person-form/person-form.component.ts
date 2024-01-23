@@ -13,7 +13,7 @@ import { User } from '../models';
 export class PersonFormComponent {
 
   public player: User | undefined;
-  @Input() isLoggedIn:boolean=false;
+  @Input() isLoggedIn:boolean=true;
   @Input() loggedInPlayer: User | undefined;
   public name =  '';
   public email = ''; 

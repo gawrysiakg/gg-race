@@ -31,11 +31,12 @@
             <!-- @if(!isLoggedIn){ -->
   <app-person-form  (currentPlayer)="setCurrentPlayer($event)" [isLoggedIn]="isLoggedIn" [loggedInPlayer]="player"></app-person-form>
 
-            <button  class="play-button" (click)="toggleScore()">{{scoreButtonText}}</button>
+           
             <!-- } -->
             <!-- <app-person-form (isFormValid)="validationResult($event)" (currentPlayer)="setCurrentPlayer($event)" ></app-person-form> -->
-          
-            @if(isLoggedIn){<button  class="play-button" (click)="logout()">Log Out</button>}
+            <button  class="play-button" (click)="toggleScore()">{{scoreButtonText}}</button>
+            @if(isLoggedIn){<button  class="play-button" (click)="logout()">Log Out</button>
+        }
             <br>
             <!-- <button [disabled]="player===undefined" class="play-button" (click)="startGame()">Play</button> -->
             <button [disabled]="player===undefined" class="play-button" (click)="startGame()">Play</button>
