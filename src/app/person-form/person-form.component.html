@@ -9,20 +9,10 @@
 }
 @if(!isLoggedIn){
 
-
- 
- <!-- @if(player){
-          <p class="good-luck"> Good luck {{player.name}}!</p>   
-       }
-   <br> -->
-
-
-
    
    @if(!player){<label>Enter Player Name</label>}
    <input [(ngModel)]="name" type="text"
             placeholder="Name"
-            [disabled]="!editing"
             />
             @if(name.length>3){<div style="text-transform: lowercase; color: red;">'Name cannot contain 3 characters.'</div>}
    <br>
@@ -30,14 +20,13 @@
    @if(!player){<label>Enter Player E-mail</label>}
    <input [(ngModel)]="email"
          placeholder="E-mail"
-         [disabled]="!editing"
          />  
          @if(!email.includes('@') && email.length>3){<div style="text-transform: lowercase; color: red;">'Where's the monkey?'</div>}
    <br/>
 
 
    
-<button *ngIf="editing" [disabled]="!name || !email" class="play-button" (click)="submit()"> Submit</button>
-<button *ngIf="!editing"  (click)="edit()"> Edit</button>
+<button [disabled]="!name || !email" class="play-button" (click)="submit()"> Log In</button>
 
 }
+

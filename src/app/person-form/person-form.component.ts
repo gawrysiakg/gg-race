@@ -12,42 +12,13 @@ import { User } from '../models';
 })
 export class PersonFormComponent {
 
+  @Output() public currentPlayer = new EventEmitter<User>();
+  @Input() isLoggedIn: boolean = true;
   public player: User | undefined;
-  @Input() isLoggedIn:boolean=true;
-  @Input() loggedInPlayer: User | undefined;
   public name =  '';
   public email = ''; 
-  public editing=true;
-  //isValid =true
- 
- 
 
-  
-  
-
-
-  // constructor() {
-  //   if(this.loggedInPlayer){
-  //     this.name = this.loggedInPlayer?.name;
-  //  this.email = this.loggedInPlayer?.email; 
-  // }
-  //}
-
- 
-  @Output() public currentPlayer = new EventEmitter<User>();
- 
-  edit(){
-    this.editing= true;
-   // this.isValid=false;
-    // if(this.player){
-    //    this.name = this.player?.name;
-    // this.email = this.player?.email; 
-    // }
-   
-
-  }
   submit(){
-    
     this.player = {
       id: 0,
       name: this.name,
@@ -56,15 +27,10 @@ export class PersonFormComponent {
       lastLoggedIn: new Date(),
       lastGameHistory: []
     }
-    this.editing = false;
-   // this.isValid=true;
-    //this.emitValidForm();
     this.currentPlayer.emit(this.player);
-    console.log(this.player.name);
-    // this.name = '';
-    // this.email = ''; 
-
+    this.player=undefined;
+    this.name = '';
+    this.email = ''; 
   }
 
-  
 }

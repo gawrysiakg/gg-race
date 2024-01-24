@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { GameHistory, User } from '../../models';
+import { GameHistory } from '../../models';
 
 @Component({
   selector: 'app-status-pipe',

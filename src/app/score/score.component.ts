@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { User } from '../models';
 import { CommonModule } from '@angular/common';
 
@@ -10,8 +10,6 @@ import { CommonModule } from '@angular/common';
   styleUrl: './score.component.scss'
 })
 export class ScoreComponent {
-
-  //@Output() public isLoggedIn = new EventEmitter<boolean>();
 
   @Input() usersList:Array<User> = [];
 

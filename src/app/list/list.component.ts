@@ -16,36 +16,16 @@ export class ListComponent {
 
   statusOptions = Object.values(GameStatus);
 
-  @Input() isExtendedView = true;
+  //@Input() isExtendedView = true;
   @Input() player: User | undefined;
 
   selectedStatus: string = 'all';
   sortDirection: 'asc' | 'desc' = 'desc';
  
-
   
-
-  // filterOptions = {
-  //   selectedStatus: this.selectedStatus,
-  //   sortDirection: this.sortDirection
-  // };
-
-  
-
-
-  
-  // handleSortDirectionClick(direction: 'asc' | 'desc') {
-  //  this.filterOptions = {...this.filterOptions};
-  //   this.filterOptions.sortDirection=direction;
-  //   this.sortDirection=direction;
-  //   console.log( this.filterOptions.sortDirection);
-  //   // if(this.player)
-  //   // this.player = { ...this.player }; // Utworzenie nowej instancji obiektu player
-  // }
   handleSortDirectionClick(direction: 'asc' | 'desc') {
-     this.sortDirection=direction;
+     this.sortDirection = direction;
    }
  
    
-
 }

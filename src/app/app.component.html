@@ -7,7 +7,7 @@
             <button  class="play-button" (click)="toggleScore()">{{scoreButtonText}}</button>
         }
         @if(!showScore){
-            <app-game [player]="player" (isLoggedIn)="quitGame($event)"  (displayScoreAfterGame)="displayScoreAfterGame()" ></app-game>
+            <app-game [player]="player" (isEndGame)="quitGame($event)"  (displayScoreAfterGame)="displayScoreAfterGame()" ></app-game>
         }
 }
 
@@ -29,18 +29,19 @@
 
 
             <!-- @if(!isLoggedIn){ -->
-  <app-person-form  (currentPlayer)="setCurrentPlayer($event)" [isLoggedIn]="isLoggedIn" [loggedInPlayer]="player"></app-person-form>
+  <!-- <app-person-form  (currentPlayer)="setCurrentPlayer($event)" [isLoggedIn]="isLoggedIn" [loggedInPlayer]="player"></app-person-form> -->
+  <app-person-form  (currentPlayer)="setCurrentPlayer($event)" [isLoggedIn]="isLoggedIn" ></app-person-form>
 
            
             <!-- } -->
             <!-- <app-person-form (isFormValid)="validationResult($event)" (currentPlayer)="setCurrentPlayer($event)" ></app-person-form> -->
             <button  class="play-button" (click)="toggleScore()">{{scoreButtonText}}</button>
-            @if(isLoggedIn){<button  class="play-button" (click)="logout()">Log Out</button>
-        }
+            
             <br>
             <!-- <button [disabled]="player===undefined" class="play-button" (click)="startGame()">Play</button> -->
-            <button [disabled]="player===undefined" class="play-button" (click)="startGame()">Play</button>
-
+            <button [disabled]="player===undefined" class="play-button" (click)="startGame()">Play!</button>
+            <br>
+            @if(isLoggedIn){  <button  class="play-button" (click)="logout()">    Log out    </button>  }
         }
 
 

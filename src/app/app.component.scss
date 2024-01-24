@@ -49,6 +49,7 @@ font-size: xx-large;
 }
 
 .play-button {
+    width: 170px;
     margin-top: 30px;
     margin-left: 20px;
     margin-right: 20px;
@@ -58,20 +59,27 @@ font-size: xx-large;
     font-weight: bold;
     text-align: center;
     text-decoration: none;
-    background: linear-gradient(45deg, #4CAF50, #45a049); /* Gradient tła */
+    // background: linear-gradient(45deg, #4CAF50, #45a049); /* Gradient tła */
+    background: linear-gradient(180deg, #7ce880, #45a049);
     color: white;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     transition: background 0.3s ease, transform 0.3s ease; /* Efekty płynnych przejść */
     box-shadow: 0 0 8px 7px rgba(0, 0, 0, 0.1); /* Cień */
+    // box-shadow: 0 0 8px 7px rgba(116, 241, 14, 0.8); /* Cień */
+
     
   }
   
   .play-button:hover {
+    // background: linear-gradient(45deg, #45a049, #4CAF50);
+    // transform: scale(1.05); /* Powiększenie po najechaniu myszką */
+    // box-shadow: 0 2px 20px rgba(116, 241, 14, 0.99); /* Zwiększenie cienia */
     background: linear-gradient(45deg, #45a049, #4CAF50);
     transform: scale(1.05); /* Powiększenie po najechaniu myszką */
-    box-shadow: 0 2px 20px rgba(116, 241, 14, 0.99); /* Zwiększenie cienia */
+    box-shadow: 0 0 10px 5px rgba(116, 241, 14, 0.8), 0 0 20px 10px rgba(116, 241, 14, 0.6); /* Efekt lśnienia */
+
   }
 
 

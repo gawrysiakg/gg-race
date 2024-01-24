@@ -30,18 +30,9 @@ export class GameComponent  {
   public isGameOver = false;
   statusOptions = Object.values(GameStatus);
 
-  @Output() public isLoggedIn = new EventEmitter<boolean>();
+  @Output() public isEndGame = new EventEmitter<boolean>();
   @Output() public displayScoreAfterGame = new EventEmitter<boolean>();
   @Input() public player: User | undefined;
-
-  // public statuses: GameStatus[] = this.player?.lastGameHistory
-  // ?.map(history => history.gameStatus)
-  // .reduce((acc: GameStatus[], item: GameStatus) => {
-  //   if (!acc.includes(item)) {
-  //     acc.push(item);
-  //   }
-  //   return acc; 
-  // }, []) ?? [];
 
 
   public grantPoints() {
@@ -66,44 +57,18 @@ toggleShowMoreButton(){
   this.isExtendedView = !this.isExtendedView;
   this.showMoreButton = this.isExtendedView ? 'Simple View' : 'Extended View';
   this.gameClass = this.isExtendedView ? ['game-center'] : ['game-simple'];
-  const mode = this.isExtendedView ? GameStatus.EXTENDED_VIEW : GameStatus.SIMPLE_VIEW;
-  if (this.player) {
-    this.player.lastGameHistory.push({gameStatus: mode, date: new Date(), elapsedTime: this.elapsedTime})
-  }
+  // const mode = this.isExtendedView ? GameStatus.EXTENDED_VIEW : GameStatus.SIMPLE_VIEW;
+  // if (this.player) {
+  //   this.player.lastGameHistory.push({gameStatus: mode, date: new Date(), elapsedTime: this.elapsedTime})
+  // }
 }
 
-// gameOver(){
-//   alert("Game over, total points: "+ this.points);
-//   this.timerStop();
-//   this.isGameOver=true;
-//   this.quitGame()
-// }
-
 gameOver(): void {
-    //ALERT 
-   // OPEN DIALOG
-    this.openDialog();
-
-  // const confirmation = window.confirm(`Game over ${this.player?.name}, total points: ${this.points}\n
-  // Click OK to end game`);
- // this.showGameOverDialog = true;
-
-
+  this.openDialog();
   this.gameStarted = false;
   this.turboMode = false;
-
-  // if (confirmation) {
-    
-    //this.isGameOver = true;
-   
-   // this.quitGame();
-    //this.displayScoreAfterGame.emit(true);
-    this.player?.lastGameHistory.push({gameStatus: GameStatus.GAME_OVER, date: new Date(), elapsedTime: this.elapsedTime});
-    this.timerStop();
-  // }
-
- 
- 
+  this.player?.lastGameHistory.push({gameStatus: GameStatus.GAME_OVER, date: new Date(), elapsedTime: this.elapsedTime});
+  this.timerStop();
 }
 
 endGame(){ //emitowany z ramki game over
@@ -132,7 +97,7 @@ handleActionReset(){
 
 quitGame(){
   this.player?.lastGameHistory.push({gameStatus: GameStatus.QUIT_GAME, date: new Date(), elapsedTime: this.elapsedTime})
-  this.isLoggedIn.emit(false);
+  this.isEndGame.emit(false);
   this.isGameOver=true;
 }
 
@@ -168,10 +133,10 @@ timerStop(): void {
 
 
 
-onInit(){
-  this.isGameOver=false;
+// onInit(){
+//   this.isGameOver=false;
  
-}
+// }
 
 
 
@@ -202,9 +167,6 @@ handleKeyboardEvent(event: KeyboardEvent): void {
       break; 
   }
 }
-
-
-// Game OVER
 
   showGameOverDialog = false;
 

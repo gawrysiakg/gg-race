@@ -1,5 +1,3 @@
-
-
 @if(!isExtendedView){
     <span class="simple-points-time">Points: {{points}}   ---   Time: {{ elapsedTime | number: '1.2-2' }}</span> 
 }
@@ -34,25 +32,9 @@
 
 
     @if(isExtendedView){
-        <!-- <div class="logs" [hidden]="!isExtendedView"> 
-            <p>Game history</p><p>
-            Show   <select> 
-                <option default value="status">{{"Show All"}}</option>
-                @for(status of statusOptions; track status){
-                    <option value="status">{{status}}</option>
-                }
-            </select> <button (click)="changeSortDirection('asc')">▲ Asc</button>
-            <button (click)="changeSortDirection('desc')">▼ Desc</button>
-        </p>
-           <ol>
-         @for(item of player?.lastGameHistory; track item ) {
-            <li>{{item.gameStatus}} - {{item.date | date:"short"}}</li>
-         }
-          </ol>   
-        </div> -->
-        <app-list [player]="player" [isExtendedView]="isExtendedView" ></app-list>
+        <app-list [player]="player" ></app-list>
     }
-
+   
 
  </div>
 
