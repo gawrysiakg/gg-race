@@ -1,6 +1,5 @@
 import { Component, EventEmitter, HostListener, Input, Output, ViewChild } from '@angular/core';
 import { NgxRaceComponent, NgxRaceModule } from 'ngx-race';
-import { GameTimerComponent } from './game-timer/game-timer.component';
 import { CommonModule, NgFor } from '@angular/common';
 import { User } from '../models';
 import { GameStatus } from '../models';
@@ -10,7 +9,7 @@ import { ListComponent } from '../list/list.component';
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [CommonModule,  NgxRaceModule, GameTimerComponent, NgFor, GameOverDialogComponent, ListComponent],
+  imports: [CommonModule,  NgxRaceModule, NgFor, GameOverDialogComponent, ListComponent],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss'
 })
