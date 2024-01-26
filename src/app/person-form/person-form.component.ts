@@ -17,6 +17,12 @@ export class PersonFormComponent {
   public player: User | undefined;
   public name =  '';
   public email = ''; 
+  public check = this.name!=='' ? '✅' : ' ';
+
+  checkName(){
+    this.check = this.name!=='' ? '  ' : "✅";
+    return this.check;
+  }
 
   submit(){
     this.player = {

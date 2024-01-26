@@ -35,7 +35,6 @@ export class GameComponent  {
 
 
   public grantPoints() {
-    console.log('points');
     this.points++;
     if (this.player) {
       this.player.points = this.points;
@@ -74,6 +73,9 @@ endGame(){ //emitowany z ramki game over
   this.isGameOver = true;
   this.quitGame();
   this.displayScoreAfterGame.emit(true);
+  if(this.player){
+    this.player.lastGameHistory = [];
+ }
 }
 
 restart(){
@@ -81,23 +83,26 @@ restart(){
   this.game.actionReset();
   this.gameStarted = false;
   this.showGameOverDialog = false
-  if(this.player){
-     this.player.lastGameHistory = [];
-  }
-  this.player?.lastGameHistory.push({gameStatus: GameStatus.RESETED, date: new Date(), elapsedTime: this.elapsedTime})
 }
 
 handleActionReset(){
+    if(this.player){
+      this.player.lastGameHistory = [];
+  }
   this.player?.lastGameHistory.push({gameStatus: GameStatus.RESETED, date: new Date(), elapsedTime: this.elapsedTime})
   this.timerStop();
   this.elapsedTime= 0;
   this.points=0;
+  this.player?.lastGameHistory.push({gameStatus: GameStatus.READY, date: new Date(), elapsedTime: this.elapsedTime})
 }
 
 quitGame(){
   this.player?.lastGameHistory.push({gameStatus: GameStatus.QUIT_GAME, date: new Date(), elapsedTime: this.elapsedTime})
   this.isEndGame.emit(false);
   this.isGameOver=true;
+    if(this.player){
+      this.player.lastGameHistory = [];
+  }
 }
 
 handleStart(){
@@ -109,6 +114,17 @@ handleStop(){
   this.player?.lastGameHistory.push({gameStatus: GameStatus.PAUSED, date: new Date(), elapsedTime: this.elapsedTime})
   this.timerStop()
   this.gameStarted = false;
+}
+
+enableTurboMode(){
+  this.turboMode=true;
+  this.game.actionTurboOn();
+  this.player?.lastGameHistory.push({gameStatus: GameStatus.TURBO_ON, date: new Date(), elapsedTime: this.elapsedTime})
+}
+disableTurboMode(){
+  this.turboMode=false;
+  this.game.actionTurboOff();
+  this.player?.lastGameHistory.push({gameStatus: GameStatus.TURBO_OFF, date: new Date(), elapsedTime: this.elapsedTime})
 }
 
 
@@ -130,12 +146,6 @@ timerStop(): void {
 }
 
 
-
-
-// onInit(){
-//   this.isGameOver=false;
- 
-// }
 
 
 

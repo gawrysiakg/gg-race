@@ -7,7 +7,7 @@
 
 
     @if(isExtendedView){
-        <div class="points-section">
+        <!-- <div class="points-section">
         @if(player){   
             <p>Status: {{player.lastGameHistory[player.lastGameHistory.length-1].gameStatus}}</p>
             <p>Player name: {{player.name}}</p>  }
@@ -15,7 +15,18 @@
         <div class="points"><img src="../../assets/bg/wheel.gif" width="30px" height="30px" />   Points: {{points}} </div>  
         
         <div class="time">Time: {{ elapsedTime | number: '1.2-2' }}</div> 
-        </div>
+        </div> -->
+        <div class="points-section">
+            @if(player){   
+                <p>Status: {{player.lastGameHistory[player.lastGameHistory.length-1].gameStatus}}</p>
+                <p>Player: {{player.name}}</p>  }
+    
+            <p class="points">  Points: {{points}} </p>  
+            
+            <p class="time">Time: {{ elapsedTime | number: '1.2-2' }}</p> 
+            </div>
+
+
     }
 
 
@@ -57,9 +68,9 @@
             <button class="button" (click)="game.actionStart()" (click)="handleStart()">Start</button> }
         <button class="button" (click)="game.actionReset()" (click)="handleActionReset()" >Reset</button>
         @if(!turboMode){
-            <button class="button" (click)="game.actionTurboOn()" (click)="turboMode=true">Turbo ON</button>}
+            <button class="button" (click)="enableTurboMode()" >Turbo ON</button>}
         @if(turboMode){
-            <button class="button" (click)="game.actionTurboOff()"  (click)="turboMode=false">Turbo OFF</button>
+            <button class="button" (click)="disableTurboMode()" >Turbo OFF</button>
         } 
         <button class="button" (click)="toggleDarkMode()">{{darkModeButton}}</button>
         <button class="button" (click)="toggleShowMoreButton()">{{showMoreButton}}</button>

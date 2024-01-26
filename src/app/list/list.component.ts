@@ -3,7 +3,7 @@
 import { GameStatus, User } from '../models';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { StatusPipePipe } from './status-pipe.pipe';
+import { StatusPipePipe } from './status-pipe/status-pipe.pipe';
 
 @Component({
   selector: 'app-list',

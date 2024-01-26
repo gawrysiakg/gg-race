@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { GameHistory } from '../models';
+import { GameHistory } from '../../models';
 
 @Pipe({
   name: 'statusPipe',
@@ -42,11 +42,11 @@ transform(gameHistory: Array<GameHistory>, filterBy: string, sortDirection: stri
   if (sortDirection === 'desc') {
     if (filterBy === 'all') {
       // Return a new array to maintain immutability, and use slice to avoid modifying the original array
-      return gameHistory.slice().sort((a, b) => b.elapsedTime - a.elapsedTime);
+      return gameHistory.slice().sort((a, b) => b.date.getTime() - a.date.getTime()); //zwraca liczbę milisekund od 1 stycznia 1970 
     }
     return gameHistory.filter(history => history.gameStatus === filterBy)
                       .slice() // Return a new array to maintain immutability
-                      .sort((a, b) => b.elapsedTime - a.elapsedTime);
+                      .sort((a, b) =>  b.date.getTime() - a.date.getTime());
   }
 
   return [];
