@@ -27,12 +27,17 @@ export class GameComponent  {
   public isExtendedView = true;
   public gameClass = this.isExtendedView ? ['game-center'] : ['game-simple'] ;
   public isGameOver = false;
-  statusOptions = Object.values(GameStatus);
+  public showGameOverDialog = false;
+  public statusOptions = Object.values(GameStatus);
 
   @Output() public isEndGame = new EventEmitter<boolean>();
   @Output() public displayScoreAfterGame = new EventEmitter<boolean>();
   @Input() public player: User | undefined;
+  
 
+  openDialog(): void {
+    this.showGameOverDialog = true;
+  }
 
   public grantPoints() {
     this.points++;
@@ -40,7 +45,6 @@ export class GameComponent  {
       this.player.points = this.points;
       this.player.lastGameHistory.push({gameStatus: GameStatus.OVERTAKING, date: new Date(), elapsedTime: this.elapsedTime})
     }
-  
 }
 
 toggleDarkMode(){
@@ -51,14 +55,11 @@ toggleDarkMode(){
     this.player.lastGameHistory.push({gameStatus: mode, date: new Date(), elapsedTime: this.elapsedTime})
   }
 }
+
 toggleShowMoreButton(){
   this.isExtendedView = !this.isExtendedView;
   this.showMoreButton = this.isExtendedView ? 'Simple View' : 'Extended View';
   this.gameClass = this.isExtendedView ? ['game-center'] : ['game-simple'];
-  // const mode = this.isExtendedView ? GameStatus.EXTENDED_VIEW : GameStatus.SIMPLE_VIEW;
-  // if (this.player) {
-  //   this.player.lastGameHistory.push({gameStatus: mode, date: new Date(), elapsedTime: this.elapsedTime})
-  // }
 }
 
 gameOver(): void {
@@ -121,6 +122,7 @@ enableTurboMode(){
   this.game.actionTurboOn();
   this.player?.lastGameHistory.push({gameStatus: GameStatus.TURBO_ON, date: new Date(), elapsedTime: this.elapsedTime})
 }
+
 disableTurboMode(){
   this.turboMode=false;
   this.game.actionTurboOff();
@@ -144,7 +146,6 @@ timerStop(): void {
   console.log("timer stopped")
   clearInterval(this.timer);
 }
-
 
 
 
@@ -177,28 +178,7 @@ handleKeyboardEvent(event: KeyboardEvent): void {
   }
 }
 
-  showGameOverDialog = false;
-
-  openDialog(): void {
-    this.showGameOverDialog = true;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 
 

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
 import { GameComponent } from './game/game.component';
-import { IntroComponent } from './intro/intro.component';
 import { ScoreComponent } from './score/score.component';
 import { GameStatus, User } from './models';
 import { PersonFormComponent } from './person-form/person-form.component';
@@ -10,7 +9,7 @@ import { PersonFormComponent } from './person-form/person-form.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, NgFor, IntroComponent, GameComponent, ScoreComponent, PersonFormComponent],
+  imports: [CommonModule, NgFor, GameComponent, ScoreComponent, PersonFormComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -19,9 +18,7 @@ export class AppComponent {
 
   usersList:Array<User> = [];
   public isGameStarted = false;
- // isGameOver = false;
   public showScore=false;
- // public isFormValid=false;
   public scoreButtonText =  "Show score";
   public userId =1;
   public player: User | undefined;
@@ -36,15 +33,8 @@ export class AppComponent {
     this.playerName=this.player.name;
     this.isLoggedIn=true;
   }
-  // validationResult(event: boolean){
-  //   this.isFormValid = event;
-  // }
-
-  //może potzebne? 
-  // logIn(event: boolean){
-  //   this.isLoggedIn=event;
-  //  }
-
+  
+  
   startGame(){
     this.isGameStarted=true;
     this.isMainScreen=false;
@@ -54,17 +44,13 @@ export class AppComponent {
 
   quitGame(event: boolean){
     this.isGameStarted=event;  //event z gry jak skończy grać
-
-
-
     if(this.player){
        this.usersList.push(this.player)
     }
     this.isMainScreen=true;
-   // this.player=undefined;
-   // this.player=undefined;
-    //this.playerName='';
   }
+
+
   logout(){
     this.player=undefined;
     this.playerName='';
@@ -72,6 +58,7 @@ export class AppComponent {
     this.showScore=true;
     this.showScore=false;
   }
+
 
   toggleScore(){
     this.scoreButtonText = this.showScore ? "Show score" : "Hide score";
@@ -82,9 +69,7 @@ export class AppComponent {
 
   displayScoreAfterGame(){
     this.toggleScore();
-    //this.isFormValid=false;
     this.isGameStarted=false;
-   // this.player=undefined;  
   }
 
 }

@@ -16,7 +16,6 @@ export class ListComponent {
 
   statusOptions = Object.values(GameStatus);
 
-  //@Input() isExtendedView = true;
   @Input() player: User | undefined;
 
   selectedStatus: string = 'all';

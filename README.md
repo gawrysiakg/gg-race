@@ -1,27 +1,42 @@
-# GgRace
+# GG Race Game - Angular Project
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.1.
+## Project Overview
 
-## Development server
+This project is a simple game application that allows users to log in and play a simple game. Player can check score and view their current gameplay history. It is built using Angular and follows the specified requirements.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Specification
 
-## Code scaffolding
+#### Main Page
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+The intro page serves as the starting point for users and includes a quick introductory text and a player form. Users must enter their name and email before starting the game( do not register, only enter valid name and email).
 
-## Build
+- **Components Used:**
+  - `AppComponent`: Main component with player data and users list.
+  - `PersonFormComponent`: Manages the user input for name and email with ngModel and provides validation feedback.
+  - `ScoreComponent`: Takes the usersList as Input and render as a table.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+#### Game Page
 
-## Running unit tests
+The game page contains the actual gameplay and includes features such as an exit game button, extended view, dark mode changer and a points counting mechanism. The game itself is implemented using ngx-race library (from https://github.com/chrum/ngx-race).
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- **Components Used:**
+  - `GameComponent`: Integrates the game library (ngx-race) and manages game-related functionality: points-section (status, points, player name and timer).
+  - `NgxRaceComponent`: Main game logic from external library.
+  - `ListComponent`: It takes User an Input and displays current player's game history( implemented sorting by status or asc-desc using custom StatusPipe).
+  - `GameOverDialogComponent`: Activated after Game Over - End Game or Restart..
 
-## Running end-to-end tests
+## Usage
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+1. Clone the repository.
+2. Run `npm install` to install dependencies.
+3. Run `ng serve` to start the development server.
+4. Open the application in a web browser.
 
-## Further help
+## Additional Notes
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- The project does not use routing but relies on conditional rendering to navigate between pages.
+- NgModel is utilized for form management, providing user-friendly validation and error handling.
+- The game page integrates the ngx-race game library for an interactive gaming experience.
+- My extra points version includes a gameplay history feature with filtering and sorting options.
+
+## Author GG

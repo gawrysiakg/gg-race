@@ -17,13 +17,18 @@ export class PersonFormComponent {
   public player: User | undefined;
   public name =  '';
   public email = ''; 
-  public check = this.name!=='' ? '✅' : ' ';
 
-  checkName(){
-    this.check = this.name!=='' ? '  ' : "✅";
-    return this.check;
+
+  isValidName(): boolean {
+    return this.name.trim().length>0;
   }
 
+
+  isValidEmail(): boolean {
+    return this.email!=='' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email);
+  }
+
+  
   submit(){
     this.player = {
       id: 0,

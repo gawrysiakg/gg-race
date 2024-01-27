@@ -1,52 +1,30 @@
-// app-intro {
-//     display: grid;
-//     align-content: center;
-//     justify-content: space-between; /* Rozmieszcza elementy równomiernie wzdłuż osi głównej (poziomej) */
-//     align-items: center; /* Wyśrodkowuje elementy wzdłuż osi przeciwnych*/
-//     justify-content: center;
-//     justify-items: center;
-//    // padding: 20px;
-// }
-
-
-
 app-root {
-  
-        display: grid;
-        align-content: center;
-        justify-content: space-between; /* Rozmieszcza elementy równomiernie wzdłuż osi głównej (poziomej) */
-        align-items: center; /* Wyśrodkowuje elementy wzdłuż osi przeciwnych*/
-        justify-content: center;
-        justify-items: center;
-       // padding: 20px;
-    
-      
+  display: grid;
+  align-content: center;
+  justify-content: space-between;
+  align-items: center; 
+  justify-content: center;
+  justify-items: center;
 }
 
 
-
-
 app-person-form {
-    background-color: lightslategray;
-   // display: flex;
+   background-color: lightslategray;
    display: grid;
-    width: 400px;
-    height: 350px;
-   // justify-content: center;
+   width: 400px;
+   height: 350px;
    padding: 20px;
    border-radius: 10px;
    box-shadow: 0 0 20px gray;
    font-family: cursive;
-
- 
-
 }
+
 
 .main-text {
 font-family: cursive;
 font-size: xx-large;
-
 }
+
 
 .play-button {
     width: 170px;
@@ -59,33 +37,27 @@ font-size: xx-large;
     font-weight: bold;
     text-align: center;
     text-decoration: none;
-    // background: linear-gradient(45deg, #4CAF50, #45a049); /* Gradient tła */
     background: linear-gradient(180deg, #7ce880, #45a049);
     color: white;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    transition: background 0.3s ease, transform 0.3s ease; /* Efekty płynnych przejść */
-    box-shadow: 0 0 8px 7px rgba(0, 0, 0, 0.1); /* Cień */
-    // box-shadow: 0 0 8px 7px rgba(116, 241, 14, 0.8); /* Cień */
-
-    
+    transition: background 0.3s ease, transform 0.3s ease; 
+    box-shadow: 0 0 8px 7px rgba(0, 0, 0, 0.1); 
   }
   
+
   .play-button:hover {
-    // background: linear-gradient(45deg, #45a049, #4CAF50);
-    // transform: scale(1.05); /* Powiększenie po najechaniu myszką */
-    // box-shadow: 0 2px 20px rgba(116, 241, 14, 0.99); /* Zwiększenie cienia */
     background: linear-gradient(45deg, #45a049, #4CAF50);
     transform: scale(1.05); /* Powiększenie po najechaniu myszką */
-    box-shadow: 0 0 10px 5px rgba(116, 241, 14, 0.8), 0 0 20px 10px rgba(116, 241, 14, 0.6); /* Efekt lśnienia */
+    box-shadow: 0 0 10px 5px rgba(116, 241, 14, 0.8), 0 0 20px 10px rgba(116, 241, 14, 0.6); 
 
   }
 
 
   .play-button:disabled {
-    opacity: 0.7; /* Ustawienie przezroczystości dla przycisku wyłączonego */
-    cursor: not-allowed; /* Zmiana kursora na "not-allowed" w trybie wyłączonym */
-    pointer-events: none; /* Wyłączenie interakcji z przyciskiem w trybie wyłączonym */
-    filter: grayscale(50%); /* Dodatkowy efekt w postaci odbarwienia (opcjonalnie) */
+    opacity: 0.7; 
+    cursor: not-allowed; 
+    pointer-events: none; 
+    filter: grayscale(50%); 
 }

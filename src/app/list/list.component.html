@@ -14,10 +14,9 @@
     <ul>
         @if(player){
              @for(item of player.lastGameHistory | statusPipe:selectedStatus:sortDirection; track item) {
-        <li>{{item.elapsedTime}} - {{ item.gameStatus }} - {{ item.date | date: "short" }}</li>
-      }
+                <li>{{item.elapsedTime}} - {{ item.gameStatus }} - {{ item.date | date: "short" }}</li>
+            }
         }
-     
     </ul>
   </div>
 

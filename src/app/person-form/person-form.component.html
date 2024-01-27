@@ -7,28 +7,15 @@
       <img src="../../assets/bg/f1.png" width="250px" height="160px"  />
    </p>
 }
-@if(!isLoggedIn){
-
-   
-   @if(!name){<label>Enter Player Name</label>}
-   @if(name){<label> ✅</label>}
-   <input [(ngModel)]="name" type="text"
-            placeholder="Name"
-            />
-   <br>
-
-   @if(email.length<3 || (email.length<3 && !email.includes('@')) ){<label>Enter Player E-mail</label>} 
-   @if(email.includes('@') && email.length>=3){<label>✅</label>}
-   <input [(ngModel)]="email"
-         placeholder="E-mail"
-         type="email"
-         />  
-         <!-- @if(!email.includes('@') && email.length>3){<div style="text-transform: lowercase; color: red;">'Where's the monkey?'</div>} -->
-   <br/>
-
-
-   
-<button [disabled]="!name || !email" class="play-button" (click)="submit()"> Log In</button>
-
-}
+@if (!isLoggedIn) {
+   @if (!isValidName()) {     <label>Enter Player Name</label>   }
+   @if (isValidName())  {     <label>✅</label>   }
+   <input [(ngModel)]="name" type="text" placeholder="Name" /><br />
+ 
+   @if (!isValidEmail()) {     <label>Enter Player E-mail</label>   }
+   @if (isValidEmail())  {     <label>✅</label>   }
+   <input [(ngModel)]="email" placeholder="E-mail" type="email" /><br />
+ 
+   <button [disabled]="!name || !isValidEmail()" class="play-button" (click)="submit()">Log In</button>
+ }
 
