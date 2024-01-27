@@ -45,7 +45,9 @@ export class AppComponent {
   quitGame(event: boolean){
     this.isGameStarted=event;  //event z gry jak skończy grać
     if(this.player){
-       this.usersList.push(this.player)
+      const newPlayer: User = { ...this.player };
+      this.usersList.push(newPlayer);
+
     }
     this.isMainScreen=true;
   }

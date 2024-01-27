@@ -74,9 +74,7 @@ endGame(){ //emitowany z ramki game over
   this.isGameOver = true;
   this.quitGame();
   this.displayScoreAfterGame.emit(true);
-  if(this.player){
-    this.player.lastGameHistory = [];
- }
+
 }
 
 restart(){
@@ -101,9 +99,7 @@ quitGame(){
   this.player?.lastGameHistory.push({gameStatus: GameStatus.QUIT_GAME, date: new Date(), elapsedTime: this.elapsedTime})
   this.isEndGame.emit(false);
   this.isGameOver=true;
-    if(this.player){
-      this.player.lastGameHistory = [];
-  }
+  
 }
 
 handleStart(){
