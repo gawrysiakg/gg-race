@@ -4,6 +4,10 @@
 
 This project is a simple game application that allows users to log in and play a simple game. Player can check score and view their current gameplay history. It is built using Angular and follows the specified requirements.
 
+##
+
+![gg-game](/src/assets/bg/ggracegame.gif)
+
 ## Specification
 
 #### Main Page
