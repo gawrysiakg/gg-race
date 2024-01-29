@@ -1,5 +1,9 @@
 # GG Race Game - Angular Project
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/bb985da2-9e4e-4471-a408-171deba4bc34/deploy-status)](https://app.netlify.com/sites/gawrysiak-race/deploys)
+
+Link to demo: https://gawrysiak-race.netlify.app/
+
 ## Project Overview
 
 This project is a simple game application that allows users to log in and play a simple game. Player can check score and view their current gameplay history. It is built using Angular and follows the specified requirements.
