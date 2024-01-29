@@ -1,4 +1,11 @@
-import { Component, EventEmitter, HostListener, Input, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { NgxRaceComponent, NgxRaceModule } from 'ngx-race';
 import { CommonModule, NgFor } from '@angular/common';
 import { User } from '../models';
@@ -9,23 +16,28 @@ import { ListComponent } from '../list/list.component';
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [CommonModule,  NgxRaceModule, NgFor, GameOverDialogComponent, ListComponent],
+  imports: [
+    CommonModule,
+    NgxRaceModule,
+    NgFor,
+    GameOverDialogComponent,
+    ListComponent,
+  ],
   templateUrl: './game.component.html',
-  styleUrl: './game.component.scss'
+  styleUrl: './game.component.scss',
 })
-export class GameComponent  {
-
-  public darkMode=true;
-  public theme = this.darkMode ? "black-and-white" : '';
-  public darkModeButton = this.darkMode ? "Dark Mode OFF" : "Dark Mode ON";
+export class GameComponent {
+  public darkMode = true;
+  public theme = this.darkMode ? 'black-and-white' : '';
+  public darkModeButton = this.darkMode ? 'Dark Mode OFF' : 'Dark Mode ON';
   public points = 0;
   public boardHeight: number = 20;
-  public boardWidth: number = 14;
+  public boardWidth: number = 12;
   public gameStarted = false;
   public turboMode = false;
-  public showMoreButton = 'Simple View'
+  public showMoreButton = 'Simple View';
   public isExtendedView = true;
-  public gameClass = this.isExtendedView ? ['game-center'] : ['game-simple'] ;
+  public gameClass = this.isExtendedView ? ['game-center'] : ['game-simple'];
   public isGameOver = false;
   public showGameOverDialog = false;
   public statusOptions = Object.values(GameStatus);
@@ -33,7 +45,6 @@ export class GameComponent  {
   @Output() public isEndGame = new EventEmitter<boolean>();
   @Output() public displayScoreAfterGame = new EventEmitter<boolean>();
   @Input() public player: User | undefined;
-  
 
   openDialog(): void {
     this.showGameOverDialog = true;
@@ -43,139 +54,171 @@ export class GameComponent  {
     this.points++;
     if (this.player) {
       this.player.points = this.points;
-      this.player.lastGameHistory.push({gameStatus: GameStatus.OVERTAKING, date: new Date(), elapsedTime: this.elapsedTime})
+      this.player.lastGameHistory.push({
+        gameStatus: GameStatus.OVERTAKING,
+        date: new Date(),
+        elapsedTime: this.elapsedTime,
+      });
     }
-}
-
-toggleDarkMode(){
-  this.darkMode=!this.darkMode;
-  this.darkModeButton = this.darkMode ? "Dark Mode OFF" : "Dark Mode ON";
-  const mode = this.darkMode ? GameStatus.DARK_MODE_ON : GameStatus.DARK_MODE_OFF;
-  if (this.player) {
-    this.player.lastGameHistory.push({gameStatus: mode, date: new Date(), elapsedTime: this.elapsedTime})
   }
-}
 
-toggleShowMoreButton(){
-  this.isExtendedView = !this.isExtendedView;
-  this.showMoreButton = this.isExtendedView ? 'Simple View' : 'Extended View';
-  this.gameClass = this.isExtendedView ? ['game-center'] : ['game-simple'];
-}
+  toggleDarkMode() {
+    this.darkMode = !this.darkMode;
+    this.darkModeButton = this.darkMode ? 'Dark Mode OFF' : 'Dark Mode ON';
+    const mode = this.darkMode
+      ? GameStatus.DARK_MODE_ON
+      : GameStatus.DARK_MODE_OFF;
+    if (this.player) {
+      this.player.lastGameHistory.push({
+        gameStatus: mode,
+        date: new Date(),
+        elapsedTime: this.elapsedTime,
+      });
+    }
+  }
 
-gameOver(): void {
-  this.openDialog();
-  this.gameStarted = false;
-  this.turboMode = false;
-  this.player?.lastGameHistory.push({gameStatus: GameStatus.GAME_OVER, date: new Date(), elapsedTime: this.elapsedTime});
-  this.timerStop();
-}
+  toggleShowMoreButton() {
+    this.isExtendedView = !this.isExtendedView;
+    this.showMoreButton = this.isExtendedView ? 'Simple View' : 'Extended View';
+    this.gameClass = this.isExtendedView ? ['game-center'] : ['game-simple'];
+  }
 
-endGame(){ //emitowany z ramki game over
-  this.isGameOver = true;
-  this.quitGame();
-  this.displayScoreAfterGame.emit(true);
+  gameOver(): void {
+    this.openDialog();
+    this.gameStarted = false;
+    this.turboMode = false;
+    this.player?.lastGameHistory.push({
+      gameStatus: GameStatus.GAME_OVER,
+      date: new Date(),
+      elapsedTime: this.elapsedTime,
+    });
+    this.timerStop();
+  }
 
-}
+  endGame() {
+    //emitowany z ramki game over
+    this.isGameOver = true;
+    this.quitGame();
+    this.displayScoreAfterGame.emit(true);
+  }
 
-restart(){
-  this.handleActionReset();
-  this.game.actionReset();
-  this.gameStarted = false;
-  this.showGameOverDialog = false
-}
+  restart() {
+    this.handleActionReset();
+    this.game.actionReset();
+    this.gameStarted = false;
+    this.showGameOverDialog = false;
+  }
 
-handleActionReset(){
-    if(this.player){
+  handleActionReset() {
+    if (this.player) {
       this.player.lastGameHistory = [];
+    }
+    this.player?.lastGameHistory.push({
+      gameStatus: GameStatus.RESETED,
+      date: new Date(),
+      elapsedTime: this.elapsedTime,
+    });
+    this.timerStop();
+    this.elapsedTime = 0;
+    this.points = 0;
+    this.player?.lastGameHistory.push({
+      gameStatus: GameStatus.READY,
+      date: new Date(),
+      elapsedTime: this.elapsedTime,
+    });
   }
-  this.player?.lastGameHistory.push({gameStatus: GameStatus.RESETED, date: new Date(), elapsedTime: this.elapsedTime})
-  this.timerStop();
-  this.elapsedTime= 0;
-  this.points=0;
-  this.player?.lastGameHistory.push({gameStatus: GameStatus.READY, date: new Date(), elapsedTime: this.elapsedTime})
-}
 
-quitGame(){
-  this.player?.lastGameHistory.push({gameStatus: GameStatus.QUIT_GAME, date: new Date(), elapsedTime: this.elapsedTime})
-  this.isEndGame.emit(false);
-  this.isGameOver=true;
-  
-}
-
-handleStart(){
-  this.timerStart()
-  this.gameStarted = true;
-  this.player?.lastGameHistory.push({gameStatus: GameStatus.STARTED, date: new Date(), elapsedTime: this.elapsedTime})
-}
-handleStop(){
-  this.player?.lastGameHistory.push({gameStatus: GameStatus.PAUSED, date: new Date(), elapsedTime: this.elapsedTime})
-  this.timerStop()
-  this.gameStarted = false;
-}
-
-enableTurboMode(){
-  this.turboMode=true;
-  this.game.actionTurboOn();
-  this.player?.lastGameHistory.push({gameStatus: GameStatus.TURBO_ON, date: new Date(), elapsedTime: this.elapsedTime})
-}
-
-disableTurboMode(){
-  this.turboMode=false;
-  this.game.actionTurboOff();
-  this.player?.lastGameHistory.push({gameStatus: GameStatus.TURBO_OFF, date: new Date(), elapsedTime: this.elapsedTime})
-}
-
-
-public elapsedTime: number = 0;
-private timer: any;
-private interval: number = 100; 
-
-timerStart(): void {
-  console.log("timer started")
-  this.timer = setInterval(() => {
-    this.elapsedTime += this.interval / 1000; 
-    this.elapsedTime = parseFloat(this.elapsedTime.toFixed(2)); 
-  }, this.interval);
-}
-
-timerStop(): void {
-  console.log("timer stopped")
-  clearInterval(this.timer);
-}
-
-
-
-
-@ViewChild('game') game!: NgxRaceComponent;
-
-@HostListener('document:keydown', ['$event'])
-handleKeyboardEvent(event: KeyboardEvent): void {
-  switch (event.key) {
-    case 'ArrowUp':
-      this.game.actionTurboOn();
-      break;
-    case 'ArrowDown':
-      this.game.actionTurboOff();
-      break;
-    case 'ArrowLeft':
-      this.game.actionLeft();
-      break;
-    case 'ArrowRight':
-      this.game.actionRight();
-      break;
-    case 'p':
-      this.handleStart()
-      this.game.actionStart();
-      break;
-    case 's':
-      this.handleStop()
-      this.game.actionStop();
-      break; 
+  quitGame() {
+    this.player?.lastGameHistory.push({
+      gameStatus: GameStatus.QUIT_GAME,
+      date: new Date(),
+      elapsedTime: this.elapsedTime,
+    });
+    this.isEndGame.emit(false);
+    this.isGameOver = true;
   }
-}
 
- 
+  handleStart() {
+    this.timerStart();
+    this.gameStarted = true;
+    this.player?.lastGameHistory.push({
+      gameStatus: GameStatus.STARTED,
+      date: new Date(),
+      elapsedTime: this.elapsedTime,
+    });
+  }
+  handleStop() {
+    this.player?.lastGameHistory.push({
+      gameStatus: GameStatus.PAUSED,
+      date: new Date(),
+      elapsedTime: this.elapsedTime,
+    });
+    this.timerStop();
+    this.gameStarted = false;
+  }
 
+  enableTurboMode() {
+    this.turboMode = true;
+    this.game.actionTurboOn();
+    this.player?.lastGameHistory.push({
+      gameStatus: GameStatus.TURBO_ON,
+      date: new Date(),
+      elapsedTime: this.elapsedTime,
+    });
+  }
 
+  disableTurboMode() {
+    this.turboMode = false;
+    this.game.actionTurboOff();
+    this.player?.lastGameHistory.push({
+      gameStatus: GameStatus.TURBO_OFF,
+      date: new Date(),
+      elapsedTime: this.elapsedTime,
+    });
+  }
 
+  public elapsedTime: number = 0;
+  private timer: any;
+  private interval: number = 100;
+
+  timerStart(): void {
+    console.log('timer started');
+    this.timer = setInterval(() => {
+      this.elapsedTime += this.interval / 1000;
+      this.elapsedTime = parseFloat(this.elapsedTime.toFixed(2));
+    }, this.interval);
+  }
+
+  timerStop(): void {
+    console.log('timer stopped');
+    clearInterval(this.timer);
+  }
+
+  @ViewChild('game') game!: NgxRaceComponent;
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent): void {
+    switch (event.key) {
+      case 'ArrowUp':
+        this.game.actionTurboOn();
+        break;
+      case 'ArrowDown':
+        this.game.actionTurboOff();
+        break;
+      case 'ArrowLeft':
+        this.game.actionLeft();
+        break;
+      case 'ArrowRight':
+        this.game.actionRight();
+        break;
+      case 'p':
+        this.handleStart();
+        this.game.actionStart();
+        break;
+      case 's':
+        this.handleStop();
+        this.game.actionStop();
+        break;
+    }
+  }
 }
