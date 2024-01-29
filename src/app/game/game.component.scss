@@ -8,7 +8,7 @@
 
 .simple-points-time {
   color: #45a049;
-  font-family: cursive;
+  font-family: "Comic Sans MS", cursive;
   font-size: normal;
 }
 body {
@@ -25,7 +25,7 @@ body {
   border-radius: 10px;
   box-shadow: 0 0 20px white;
   margin: auto;
-  font-family: cursive;
+  font-family: "Comic Sans MS", cursive;
   font-size: x-large;
 }
 
@@ -37,7 +37,7 @@ body {
   border-radius: 10px;
   box-shadow: 0 0 20px white;
   margin: auto;
-  font-family: cursive;
+  font-family: "Comic Sans MS", cursive;
   font-size: smaller;
   overflow-y: auto; /* Dodaj suwak tylko w pionie, gdy zawartość wychodzi poza obszar */
   text-align: left;
@@ -51,7 +51,7 @@ app-list {
   border-radius: 10px;
   box-shadow: 0 0 20px white;
   margin: auto;
-  font-family: cursive;
+  font-family: "Comic Sans MS", cursive;
   font-size: smaller;
   overflow-y: auto;
   text-align: left;
