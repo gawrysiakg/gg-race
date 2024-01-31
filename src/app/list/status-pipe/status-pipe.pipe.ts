@@ -4,29 +4,39 @@ import { GameHistory } from '../../models';
 @Pipe({
   name: 'statusPipe',
   standalone: true,
-  pure: false // (default is true)
+  pure: false, // (default is true)
   // filterBy i sortDirection. Jeśli te parametry mogą zmieniać się niezależnie od tablicy wejściowej gameHistory,
   // ustawienie potoku na nieczysty umożliwi mu ponowne uruchomienie i ponowne obliczenie danych wyjściowych za każdym razem, gdy te parametry się zmienią
 })
 export class StatusPipePipe implements PipeTransform {
-
-transform(gameHistory: Array<GameHistory>, filterBy: string, sortDirection: string): Array<GameHistory> {
-  if (sortDirection === 'asc') {
-    if (filterBy === 'all') {
-      return [...gameHistory]; 
+  transform(
+    gameHistory: Array<GameHistory>,
+    filterBy: string,
+    sortDirection: string
+  ): Array<GameHistory> {
+    if (!gameHistory) {
+      return [];
     }
-    return gameHistory.filter(history => history.gameStatus === filterBy);
-  }
 
-  if (sortDirection === 'desc') {
-    if (filterBy === 'all') {
-      return gameHistory.slice().sort((a, b) => b.date.getTime() - a.date.getTime()); //zwraca liczbę milisekund od 1 stycznia 1970 
+    const ascSort = (a: GameHistory, b: GameHistory) =>
+      a.date.getTime() - b.date.getTime();
+    const descSort = (a: GameHistory, b: GameHistory) =>
+      b.date.getTime() - a.date.getTime();
+
+    if (sortDirection === 'asc') {
+      return filterBy === 'all'
+        ? [...gameHistory]
+        : gameHistory.filter((game) => game.gameStatus === filterBy);
     }
-    return gameHistory.filter(history => history.gameStatus === filterBy)
-                      .slice() // Return a new array to maintain immutability
-                      .sort((a, b) =>  b.date.getTime() - a.date.getTime());
-  }
 
-  return [];
-}
+    if (sortDirection === 'desc') {
+      return filterBy === 'all'
+        ? gameHistory.slice().sort(descSort)
+        : gameHistory
+            .filter((game) => game.gameStatus === filterBy)
+            .sort(descSort);
+    }
+
+    return gameHistory;
+  }
 }

@@ -16,7 +16,7 @@ body {
 
 ngx-race {
   display: flex;
-  justify-content: center; /* Dodane style, aby umieścić ngx-race na środku */
+  justify-content: center;
   align-items: center;
 
   &.black-and-white {

@@ -113,11 +113,6 @@ export class GameComponent {
     if (this.player) {
       this.player.lastGameHistory = [];
     }
-    this.player?.lastGameHistory.push({
-      gameStatus: GameStatus.RESETED,
-      date: new Date(),
-      elapsedTime: this.elapsedTime,
-    });
     this.timerStop();
     this.elapsedTime = 0;
     this.points = 0;
