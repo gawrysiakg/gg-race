@@ -1,50 +1,53 @@
+html,
+body {
+  background-image: url("assets/bg/road-forest.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center center;
+  background-size: cover;
 
-html, body {
-    background-image: url('assets/bg/road-forest.jpg');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center center;
-    background-size: cover;
-
-    position: relative;
-    height: 100%;
-    min-height: 100% !important;
-    width: 100%;
-    overflow: hidden; /* Ukrycie paska przewijania */
-    text-align: -webkit-center;
+  position: relative;
+  height: 100%;
+  min-height: 100% !important;
+  width: 100%;
+  overflow: hidden; /* Ukrycie paska przewijania */
+  text-align: -webkit-center;
 }
-
-
 
 ngx-race {
+  display: flex;
+  justify-content: center; /* Dodane style, aby umieścić ngx-race na środku */
+  align-items: center;
 
-    display: flex;
-    justify-content: center; /* Dodane style, aby umieścić ngx-race na środku */
-    align-items: center;
-     
-   
-    &.black-and-white {
-        ngx-race-tile {
-            background: #ffffff;
-            &.free {
-                div {
-                    background: #ffffff;
-                }
-            }
-
-            &.car {
-                div {
-                    background: #000000;
-                }
-            }
-
-            &.othercar {
-                div {
-                    background: #7c7c7c;
-                }
-            }
+  &.black-and-white {
+    ngx-race-tile {
+      background: #ffffff;
+      &.free {
+        div {
+          background: #ffffff;
         }
+      }
+
+      &.car {
+        div {
+          background: #000000;
+        }
+      }
+
+      &.othercar {
+        div {
+          background: #7c7c7c;
+        }
+      }
     }
+  }
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  font-family: "Comic Sans MS", cursive;
+}
