@@ -1,41 +1,39 @@
 .score-list-container {
-    background-color: lightslategray;
-    display: grid;
-    width: 400px;
-    height: 350px;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px gray;
-    overflow: auto;
-  }
-  
-  .score-list {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-    font-family: cursive;
-    
-  }
-  
-  .score-list th,
-  .score-list td {
-    padding: 10px;
-    border: 1px solid #ddd;
-    text-align: left;
-  }
-  
-  .score-list th {
-    background-color: #f2f2f2;
-  }
-  
-  .score-list td {
-    background-color: rgba(236, 231, 231, 0.935);
+  background-color: lightslategray;
+  display: grid;
+  width: 400px;
+  height: 350px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px gray;
+  overflow: auto;
+}
 
-  }
-  
-  .score-list th,
-  .score-list td {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+.score-list {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-family: "Comic Neue", cursive;
+}
+
+.score-list th,
+.score-list td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.score-list th {
+  background-color: #f2f2f2;
+}
+
+.score-list td {
+  background-color: rgba(236, 231, 231, 0.935);
+}
+
+.score-list th,
+.score-list td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
