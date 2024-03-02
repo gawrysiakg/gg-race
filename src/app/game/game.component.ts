@@ -53,12 +53,7 @@ export class GameComponent {
   public grantPoints() {
     this.points++;
     if (this.player) {
-      this.player.points = this.points;
-      this.player.lastGameHistory.push({
-        gameStatus: GameStatus.OVERTAKING,
-        date: new Date(),
-        elapsedTime: this.elapsedTime,
-      });
+      this.updatePlayerGameHistory(GameStatus.OVERTAKING);
     }
   }
 
@@ -69,11 +64,7 @@ export class GameComponent {
       ? GameStatus.DARK_MODE_ON
       : GameStatus.DARK_MODE_OFF;
     if (this.player) {
-      this.player.lastGameHistory.push({
-        gameStatus: mode,
-        date: new Date(),
-        elapsedTime: this.elapsedTime,
-      });
+      this.updatePlayerGameHistory(mode);
     }
   }
 
@@ -87,11 +78,9 @@ export class GameComponent {
     this.openDialog();
     this.gameStarted = false;
     this.turboMode = false;
-    this.player?.lastGameHistory.push({
-      gameStatus: GameStatus.GAME_OVER,
-      date: new Date(),
-      elapsedTime: this.elapsedTime,
-    });
+    if (this.player) {
+      this.updatePlayerGameHistory(GameStatus.GAME_OVER);
+    }
     this.timerStop();
   }
 
@@ -116,19 +105,13 @@ export class GameComponent {
     this.timerStop();
     this.elapsedTime = 0;
     this.points = 0;
-    this.player?.lastGameHistory.push({
-      gameStatus: GameStatus.READY,
-      date: new Date(),
-      elapsedTime: this.elapsedTime,
-    });
+    this.updatePlayerGameHistory(GameStatus.READY);
   }
 
   quitGame() {
-    this.player?.lastGameHistory.push({
-      gameStatus: GameStatus.QUIT_GAME,
-      date: new Date(),
-      elapsedTime: this.elapsedTime,
-    });
+    if (this.player) {
+      this.updatePlayerGameHistory(GameStatus.QUIT_GAME);
+    }
     this.isEndGame.emit(false);
     this.isGameOver = true;
   }
@@ -136,18 +119,15 @@ export class GameComponent {
   handleStart() {
     this.timerStart();
     this.gameStarted = true;
-    this.player?.lastGameHistory.push({
-      gameStatus: GameStatus.STARTED,
-      date: new Date(),
-      elapsedTime: this.elapsedTime,
-    });
+    if (this.player) {
+      this.updatePlayerGameHistory(GameStatus.STARTED);
+    }
   }
+
   handleStop() {
-    this.player?.lastGameHistory.push({
-      gameStatus: GameStatus.PAUSED,
-      date: new Date(),
-      elapsedTime: this.elapsedTime,
-    });
+    if (this.player) {
+      this.updatePlayerGameHistory(GameStatus.PAUSED);
+    }
     this.timerStop();
     this.gameStarted = false;
   }
@@ -155,21 +135,17 @@ export class GameComponent {
   enableTurboMode() {
     this.turboMode = true;
     this.game.actionTurboOn();
-    this.player?.lastGameHistory.push({
-      gameStatus: GameStatus.TURBO_ON,
-      date: new Date(),
-      elapsedTime: this.elapsedTime,
-    });
+    if (this.player) {
+      this.updatePlayerGameHistory(GameStatus.TURBO_ON);
+    }
   }
 
   disableTurboMode() {
     this.turboMode = false;
     this.game.actionTurboOff();
-    this.player?.lastGameHistory.push({
-      gameStatus: GameStatus.TURBO_OFF,
-      date: new Date(),
-      elapsedTime: this.elapsedTime,
-    });
+    if (this.player) {
+      this.updatePlayerGameHistory(GameStatus.TURBO_OFF);
+    }
   }
 
   public elapsedTime: number = 0;
@@ -214,6 +190,17 @@ export class GameComponent {
         this.handleStop();
         this.game.actionStop();
         break;
+    }
+  }
+
+  private updatePlayerGameHistory(gameStatus: GameStatus) {
+    if (this.player) {
+      this.player.lastGameHistory = [...this.player.lastGameHistory];
+      this.player.lastGameHistory.push({
+        gameStatus,
+        date: new Date(),
+        elapsedTime: this.elapsedTime,
+      });
     }
   }
 }
