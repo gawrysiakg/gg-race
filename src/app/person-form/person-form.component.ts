@@ -8,40 +8,28 @@ import { User } from '../models';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './person-form.component.html',
-  styleUrl: './person-form.component.scss'
+  styleUrl: './person-form.component.scss',
 })
 export class PersonFormComponent {
-
   @Output() public currentPlayer = new EventEmitter<User>();
   @Input() isLoggedIn: boolean = true;
   public player: User | undefined;
-  public name =  '';
-  public email = ''; 
 
-
-  isValidName(): boolean {
-    return this.name.trim().length>0;
-  }
-
-
-  isValidEmail(): boolean {
-    return this.email!=='' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email);
-  }
-
-  
-  submit(){
+  public submit(form: FormData) {
     this.player = {
       id: 0,
-      name: this.name,
-      email: this.email,
+      name: form.name,
+      email: form.email,
       points: 0,
       lastLoggedIn: new Date(),
-      lastGameHistory: []
-    }
+      lastGameHistory: [],
+    };
     this.currentPlayer.emit(this.player);
-    this.player=undefined;
-    this.name = '';
-    this.email = ''; 
+    this.player = undefined;
   }
+}
 
+interface FormData {
+  name: string;
+  email: string;
 }

@@ -1,13 +1,81 @@
-
 p.good-luck {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #fff; 
-    background-color: lightslategray;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    box-shadow: 0 0 20px ghostwhite
-   }
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #fff;
+  background-color: lightslategray;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  box-shadow: 0 0 20px ghostwhite;
+}
 
- 
+input {
+  &.ng-touched {
+    &.ng-invalid {
+      border: 1px red solid;
+    }
+  }
+}
+
+.intro-text {
+  font-size: 1.2em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.good-luck {
+  font-weight: bold;
+  color: green;
+  margin-bottom: 10px;
+}
+
+.login-form {
+  //   max-width: 300px;
+  width: 80%;
+  margin: 20px auto;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.9em;
+  margin-bottom: 10px;
+}
+
+.success-message {
+  color: green;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #ddd;
+  color: #888;
+  cursor: not-allowed;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
