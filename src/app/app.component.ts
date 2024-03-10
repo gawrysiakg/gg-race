@@ -3,7 +3,7 @@ import { CommonModule, NgFor } from '@angular/common';
 import { GameComponent } from './game/game.component';
 import { ScoreComponent } from './score/score.component';
 import { GameStatus, User } from './models';
-import { PersonFormComponent } from './person-form/person-form.component';
+import { PersonFormComponent } from './intro/person-form/person-form.component';
 import { RouterOutlet } from '@angular/router';
 
 @Component({

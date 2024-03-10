@@ -1,0 +1,33 @@
+<app-intro-text [player]="player"></app-intro-text>
+<!-- @if(showScore){
+            <app-score [usersList]="usersList" ></app-score>
+            <button  class="play-button" (click)="toggleScore()">{{scoreButtonText}}</button>
+        }
+        @if(!showScore){
+
+            <app-person-form  (currentPlayer)="setCurrentPlayer($event)" [isLoggedIn]="isLoggedIn" ></app-person-form>
+
+            <button  class="play-button" (click)="toggleScore()">{{scoreButtonText}}</button>   <br>
+
+            <button [disabled]="player===undefined" class="play-button" (click)="startGame()">Play!</button> <br>
+
+            @if(isLoggedIn){  
+                <button  class="play-button" (click)="logout()">Log out</button>  
+            }
+        } -->
+
+<!-- <label class="intro-text">
+  Feel the rush of the wind, hear the roar of the engines, and push your skills
+  to the limit in this fast-paced adventure.
+</label> -->
+
+@if(isLoggedIn){
+<p class="good-luck">Good luck, and have fun!</p>
+<p>
+  <img src="../../assets/bg/f1.png" width="250px" height="160px" />
+</p>
+
+} @if (!isLoggedIn){
+<app-person-form (currentPlayer)="setCurrentPlayer($event)"></app-person-form>
+
+}

@@ -3,13 +3,6 @@
   to the limit in this fast-paced adventure.
 </label>
 
-@if(isLoggedIn){
-<p class="good-luck">Good luck, and have fun!</p>
-<p>
-  <img src="../../assets/bg/f1.png" width="250px" height="160px" />
-</p>
-
-} @if (!isLoggedIn){
 <form #form="ngForm" (submit)="submit(form.form.value)" class="login-form">
   @if(!nameModel.touched){
   <label>Enter Player Name</label>
@@ -54,7 +47,6 @@
     Submit
   </button>
 </form>
-}
 
 <!-- <label>
   Feel the rush of the wind, hear the roar of the engines, and push your skills
