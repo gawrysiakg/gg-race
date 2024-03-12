@@ -8,3 +8,14 @@ app-person-form {
   box-shadow: 0 0 20px gray;
   font-family: "Comic Neue", cursive;
 }
+
+.person-form-loggedin {
+  background-color: lightslategray;
+  display: grid;
+  width: 400px;
+  height: 350px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px gray;
+  font-family: "Comic Neue", cursive;
+}

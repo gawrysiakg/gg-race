@@ -22,10 +22,12 @@
 </label> -->
 
 @if(isLoggedIn){
-<p class="good-luck">Good luck, and have fun!</p>
-<p>
-  <img src="../../assets/bg/f1.png" width="250px" height="160px" />
-</p>
+<div class="person-form-loggedin">
+  <p class="good-luck">Good luck, and have fun!</p>
+  <p>
+    <img src="../../assets/bg/f1.png" width="250px" height="160px" />
+  </p>
+</div>
 
 } @if (!isLoggedIn){
 <app-person-form (currentPlayer)="setCurrentPlayer($event)"></app-person-form>

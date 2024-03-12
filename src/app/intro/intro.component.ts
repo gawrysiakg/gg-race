@@ -22,9 +22,9 @@ export class IntroComponent {
   isLoggedIn = false;
 
   setCurrentPlayer(event: User) {
+    this.isLoggedIn = true;
     this.player = event;
     this._playerInfo.setCurrentPLayer(event);
-    this.isLoggedIn = true;
   }
 
   startGame() {
