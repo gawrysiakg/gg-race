@@ -1,22 +1,30 @@
+<app-intro-text [player]="player"></app-intro-text>
+
 <div class="score-list-container">
-    <table class="score-list">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Points</th>
-          <th>Game Date:</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for(user of usersList; track user){
-          <tr>
-            <td>{{user.id}}</td>
-            <td>{{user.name}}</td>
-            <td>{{user.points}}</td>
-            <th>{{user.lastGameHistory[user.lastGameHistory.length-1].date | date:"short"}}</th>
-          </tr>
-        }
-      </tbody>
-    </table>
+  <table class="score-list">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Points</th>
+        <th>Game Date:</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for(user of usersList; track user){
+      <tr>
+        <td>{{ user.id }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.points }}</td>
+        <th>
+          {{
+            user.lastGameHistory[user.lastGameHistory.length - 1].date
+              | date : "short"
+          }}
+        </th>
+      </tr>
+      }
+    </tbody>
+  </table>
 </div>
+<button class="play-button" (click)="closeScore()">Close</button>

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { User } from '../models';
+import { User } from '../../models';
 
 @Component({
   selector: 'app-person-form',
@@ -12,11 +12,8 @@ import { User } from '../models';
 })
 export class PersonFormComponent {
   @Output() public currentPlayer = new EventEmitter<User>();
-  @Input() isLoggedIn: boolean = true;
-  public player: User | undefined;
-
   public submit(form: FormData) {
-    this.player = {
+    const player = {
       id: 0,
       name: form.name,
       email: form.email,
@@ -24,8 +21,7 @@ export class PersonFormComponent {
       lastLoggedIn: new Date(),
       lastGameHistory: [],
     };
-    this.currentPlayer.emit(this.player);
-    this.player = undefined;
+    this.currentPlayer.emit(player);
   }
 }
 

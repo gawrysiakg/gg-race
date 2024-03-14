@@ -1,0 +1,29 @@
+<app-intro-text [player]="player"></app-intro-text>
+
+@if(player){
+<div class="person-form-loggedin">
+  <p class="good-luck">Good luck, and have fun!</p>
+  <p>
+    <img src="../../assets/bg/f1.png" width="250px" height="160px" />
+  </p>
+</div>
+
+<button class="play-button" (click)="logout()">Log out</button>
+} @if (!player){
+<app-person-form (currentPlayer)="setCurrentPlayer($event)"></app-person-form>
+
+}
+
+<button class="play-button" (click)="toggleScore()">
+  {{ scoreButtonText }}
+</button>
+<br />
+
+<button
+  [disabled]="player === undefined"
+  class="play-button"
+  (click)="startGame()"
+>
+  Play!
+</button>
+<br />

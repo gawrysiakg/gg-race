@@ -1,0 +1,48 @@
+<label class="intro-text">
+  Feel the rush of the wind, hear the roar of the engines, and push your skills
+  to the limit in this fast-paced adventure.
+</label>
+
+<form #form="ngForm" (submit)="submit(form.form.value)" class="login-form">
+  @if(!nameModel.touched){
+  <label>Enter Player Name</label>
+  } @if(nameModel.touched && nameModel.invalid){
+  <label class="error-message">Name must be at least 3 characters long</label>
+  } @if(form.valid === true){
+  <label class="success-message">✅</label>
+  }
+
+  <br />
+  <input
+    type="text"
+    placeholder="Name"
+    name="name"
+    ngModel
+    required
+    minlength="3"
+    #nameModel="ngModel"
+  />
+
+  <br />
+
+  @if(form.valid === false){
+  <label>Enter Player E-mail</label>
+  } @if(form.valid === true){
+  <label class="success-message">✅</label>
+  }
+
+  <br />
+
+  <input
+    type="email"
+    placeholder="E-mail"
+    name="email"
+    ngModel
+    required
+    email
+  /><br />
+
+  <button [disabled]="form.valid === false" class="submit-button">
+    Submit
+  </button>
+</form>
