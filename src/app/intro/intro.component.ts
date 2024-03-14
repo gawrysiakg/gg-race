@@ -21,12 +21,12 @@ export class IntroComponent {
   }
 
   public player: User | undefined;
-  isLoggedIn = false;
+  //isLoggedIn = false;
   public scoreButtonText = 'Show score';
 
   setCurrentPlayer(event: User) {
     this._playerInfo.setCurrentPLayer(event);
-    this.isLoggedIn = true;
+    //this.isLoggedIn = true;
     this.player = this._playerInfo.getCurrentPlayer;
   }
 
@@ -36,7 +36,7 @@ export class IntroComponent {
       date: new Date(),
       elapsedTime: 0,
     });
-    this.isLoggedIn = true;
+    //this.isLoggedIn = true;
     this._router.navigate(['/game']);
   }
 
@@ -52,6 +52,6 @@ export class IntroComponent {
   logout() {
     this.player = undefined;
     this._playerInfo.removeCurrentPLayer();
-    this.isLoggedIn = false;
+    // this.isLoggedIn = false;
   }
 }

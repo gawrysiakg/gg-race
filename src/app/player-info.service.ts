@@ -22,7 +22,6 @@ export class PlayerInfoService {
 
     if (player) {
       player.id = this.userId;
-      //  this._usersList = [...this._usersList, { ...player }];
       this._usersList.push({ ...player });
     }
     this.userId++;
