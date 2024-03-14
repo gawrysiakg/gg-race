@@ -18,5 +18,8 @@ export class PlayerInfoService {
 
   public setCurrentPLayer(player: User | undefined) {
     this._currentPlayer = player;
+    if (player) {
+      this._usersList = [...this._usersList, player];
+    }
   }
 }

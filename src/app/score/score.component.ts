@@ -14,14 +14,14 @@ import { IntroTextComponent } from '../intro/intro-text/intro-text.component';
 })
 export class ScoreComponent {
   public player: User | undefined;
+  usersList: Array<User> = [];
   public constructor(
     private _router: Router,
     private _playerInfo: PlayerInfoService
   ) {
     this.player = _playerInfo.getCurrentPlayer;
+    this.usersList = _playerInfo.getUsersList;
   }
-
-  @Input() usersList: Array<User> = [];
 
   closeScore() {
     this._router.navigate(['/intro']);

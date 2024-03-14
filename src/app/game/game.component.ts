@@ -12,6 +12,8 @@ import { User } from '../models';
 import { GameStatus } from '../models';
 import { GameOverDialogComponent } from '../game-over-dialog/game-over-dialog.component';
 import { ListComponent } from '../list/list.component';
+import { Router } from '@angular/router';
+import { PlayerInfoService } from '../player-info.service';
 
 @Component({
   selector: 'app-game',
@@ -42,9 +44,16 @@ export class GameComponent {
   public showGameOverDialog = false;
   public statusOptions = Object.values(GameStatus);
 
+  public player: User | undefined;
+  public constructor(
+    private _router: Router,
+    private _playerInfo: PlayerInfoService
+  ) {
+    this.player = _playerInfo.getCurrentPlayer;
+  }
+
   @Output() public isEndGame = new EventEmitter<boolean>();
   @Output() public displayScoreAfterGame = new EventEmitter<boolean>();
-  @Input() public player: User | undefined;
 
   openDialog(): void {
     this.showGameOverDialog = true;
@@ -84,12 +93,12 @@ export class GameComponent {
     this.timerStop();
   }
 
-  endGame() {
-    //emitowany z ramki game over
-    this.isGameOver = true;
-    this.quitGame();
-    this.displayScoreAfterGame.emit(true);
-  }
+  // endGame() {
+  //   //emitowany z ramki game over
+  //   this.isGameOver = true;
+  //   this.quitGame();
+  //   // this.displayScoreAfterGame.emit(true);
+  // }
 
   restart() {
     this.handleActionReset();
@@ -112,8 +121,9 @@ export class GameComponent {
     if (this.player) {
       this.updatePlayerGameHistory(GameStatus.QUIT_GAME);
     }
-    this.isEndGame.emit(false);
+    // this.isEndGame.emit(false);
     this.isGameOver = true;
+    this._router.navigate(['/score']);
   }
 
   handleStart() {

@@ -1,73 +1,87 @@
 @if(!isExtendedView){
-    <span class="simple-points-time">Points: {{points}}   ---   Time: {{ elapsedTime | number: '1.2-2' }}</span> 
+<span class="simple-points-time"
+  >Points: {{ points }} --- Time: {{ elapsedTime | number : "1.2-2" }}</span
+>
 }
 
-
- <div [class]=gameClass>
-
-
-    @if(isExtendedView){
-        <div class="points-section">
-            @if(player){   
-                <p>Status: {{player.lastGameHistory[player.lastGameHistory.length-1].gameStatus}}</p>
-                <p>Player: {{player.name}}</p>  }
-    
-            <p class="points">  Points: {{points}} </p>  
-            
-            <p class="time">Time: {{ elapsedTime | number: '1.2-2' }}</p> 
-            </div>
+<div [class]="gameClass">
+  @if(isExtendedView){
+  <div class="points-section">
+    @if(player){
+    <p>
+      Status:
+      {{ player.lastGameHistory[player.lastGameHistory.length - 1].gameStatus }}
+    </p>
+    <p>Player: {{ player.name }}</p>
     }
 
+    <p class="points">Points: {{ points }}</p>
 
-    
-    <ngx-race #game [class.black-and-white]="darkMode" 
-        (carOvertaken)="grantPoints()" 
-        (gameOver)="gameOver()" 
-        [boardHeight]="boardHeight"
-        [boardWidth]="boardWidth"
-    ></ngx-race>
+    <p class="time">Time: {{ elapsedTime | number : "1.2-2" }}</p>
+  </div>
+  }
 
-    
+  <ngx-race
+    #game
+    [class.black-and-white]="darkMode"
+    (carOvertaken)="grantPoints()"
+    (gameOver)="gameOver()"
+    [boardHeight]="boardHeight"
+    [boardWidth]="boardWidth"
+  ></ngx-race>
 
-    @if(isExtendedView){
-        <app-list [player]="player" ></app-list>
-    }
-   
- </div>
-
+  @if(isExtendedView){
+  <app-list [player]="player"></app-list>
+  }
+</div>
 
 @if(!isGameOver){
 
-    <div class="buttons-panel">
-        <div class="buttons-section">
-            <button class="button" (click)="game.actionLeft()"  >&#x2190; Left</button>
-            <button class="button" (click)="game.actionRight()">Right &#x2192;</button>
-        </div>
+<div class="buttons-panel">
+  <div class="buttons-section">
+    <button class="button" (click)="game.actionLeft()">&#x2190; Left</button>
+    <button class="button" (click)="game.actionRight()">Right &#x2192;</button>
+  </div>
 
+  <div class="buttons-section">
+    @if(gameStarted){
+    <button class="button" (click)="game.actionStop()" (click)="handleStop()">
+      Pause
+    </button>
+    } @if (!gameStarted){
+    <button class="button" (click)="game.actionStart()" (click)="handleStart()">
+      Start
+    </button>
+    }
+    <button
+      class="button"
+      (click)="game.actionReset()"
+      (click)="handleActionReset()"
+    >
+      Reset
+    </button>
+    @if(!turboMode){
+    <button class="button" (click)="enableTurboMode()">Turbo ON</button>}
+    @if(turboMode){
+    <button class="button" (click)="disableTurboMode()">Turbo OFF</button>
+    }
+    <button class="button" (click)="toggleDarkMode()">
+      {{ darkModeButton }}
+    </button>
+    <button class="button" (click)="toggleShowMoreButton()">
+      {{ showMoreButton }}
+    </button>
+  </div>
 
-        <div class="buttons-section">
-            @if(gameStarted){ 
-                <button class="button" (click)="game.actionStop()" (click)="handleStop()">Pause</button> } 
-            @if (!gameStarted){
-                <button class="button" (click)="game.actionStart()" (click)="handleStart()">Start</button> }
-            <button class="button" (click)="game.actionReset()" (click)="handleActionReset()" >Reset</button>
-            @if(!turboMode){
-                <button class="button" (click)="enableTurboMode()" >Turbo ON</button>}
-            @if(turboMode){
-                <button class="button" (click)="disableTurboMode()" >Turbo OFF</button>
-            } 
-            <button class="button" (click)="toggleDarkMode()">{{darkModeButton}}</button>
-            <button class="button" (click)="toggleShowMoreButton()">{{showMoreButton}}</button>
-        </div>
-
-
-        <div class="buttons-section">
-            <button class="button" (click)="quitGame()">Quit game</button>
-        </div>
-    </div>
+  <div class="buttons-section">
+    <button class="button" (click)="quitGame()">Quit game</button>
+  </div>
+</div>
 }
 
-<app-game-over-dialog *ngIf="showGameOverDialog"
-    (quitGame)="endGame()"
-    (restartGame)="restart()">
+<app-game-over-dialog
+  *ngIf="showGameOverDialog"
+  (quitGame)="quitGame()"
+  (restartGame)="restart()"
+>
 </app-game-over-dialog>
