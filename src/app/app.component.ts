@@ -26,7 +26,7 @@ export class AppComponent {
   usersList: Array<User> = [];
   public isGameStarted = false;
   public showScore = false;
-  public scoreButtonText = 'Show score';
+
   public userId = 1;
   public player: User | undefined;
   public playerName: string = '';
@@ -58,23 +58,5 @@ export class AppComponent {
       this.usersList.push(newPlayer);
     }
     this.isMainScreen = true;
-  }
-
-  logout() {
-    this.player = undefined;
-    this.playerName = '';
-    this.isLoggedIn = false;
-    this.showScore = true;
-    this.showScore = false;
-  }
-
-  toggleScore() {
-    this.scoreButtonText = this.showScore ? 'Show score' : 'Hide score';
-    this.showScore = !this.showScore;
-  }
-
-  displayScoreAfterGame() {
-    this.toggleScore();
-    this.isGameStarted = false;
   }
 }

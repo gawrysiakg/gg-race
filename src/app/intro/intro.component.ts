@@ -20,6 +20,8 @@ export class IntroComponent {
 
   public player: User | undefined;
   isLoggedIn = false;
+  // public showScore = false;
+  public scoreButtonText = 'Show score';
 
   setCurrentPlayer(event: User) {
     this.isLoggedIn = true;
@@ -34,5 +36,25 @@ export class IntroComponent {
       elapsedTime: 0,
     });
     this.isLoggedIn = true;
+  }
+
+  toggleScore() {
+    //this.scoreButtonText = this.showScore ? 'Show score' : 'Hide score';
+    // this.showScore = !this.showScore;
+    this.scoreButtonText = 'Show score' ? 'Hide score' : 'Show score';
+    this._router.navigate(['/score']);
+  }
+
+  displayScoreAfterGame() {
+    this.toggleScore();
+    // this.isGameStarted = false;
+  }
+
+  logout() {
+    this.player = undefined;
+    // this.playerName = '';
+    this.isLoggedIn = false;
+    // this.showScore = true;
+    // this.showScore = false;
   }
 }
