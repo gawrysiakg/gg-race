@@ -21,7 +21,7 @@
   to the limit in this fast-paced adventure.
 </label> -->
 
-@if(isLoggedIn){
+@if(player){
 <div class="person-form-loggedin">
   <p class="good-luck">Good luck, and have fun!</p>
   <p>
@@ -30,7 +30,7 @@
 </div>
 
 <button class="play-button" (click)="logout()">Log out</button>
-} @if (!isLoggedIn){
+} @if (!player){
 <app-person-form (currentPlayer)="setCurrentPlayer($event)"></app-person-form>
 
 }

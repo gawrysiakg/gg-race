@@ -16,7 +16,7 @@ export class PlayerInfoService {
     return this._currentPlayer;
   }
 
-  public setCurrentPLayer(player: User) {
+  public setCurrentPLayer(player: User | undefined) {
     this._currentPlayer = player;
   }
 }

@@ -16,7 +16,9 @@ export class IntroComponent {
   public constructor(
     private _router: Router,
     private _playerInfo: PlayerInfoService
-  ) {}
+  ) {
+    this.player = _playerInfo.getCurrentPlayer;
+  }
 
   public player: User | undefined;
   isLoggedIn = false;
@@ -36,6 +38,7 @@ export class IntroComponent {
       elapsedTime: 0,
     });
     this.isLoggedIn = true;
+    this._router.navigate(['/game']);
   }
 
   toggleScore() {
@@ -52,6 +55,7 @@ export class IntroComponent {
 
   logout() {
     this.player = undefined;
+    this._playerInfo.setCurrentPLayer(undefined);
     // this.playerName = '';
     this.isLoggedIn = false;
     // this.showScore = true;
