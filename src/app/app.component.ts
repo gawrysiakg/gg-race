@@ -23,40 +23,38 @@ import { RouterOutlet } from '@angular/router';
 export class AppComponent {
   title = 'gg-race';
 
-  usersList: Array<User> = [];
-  public isGameStarted = false;
-  public showScore = false;
+  // usersList: Array<User> = [];
+  // public isGameStarted = false;
+  // public showScore = false;
 
-  public userId = 1;
-  public player: User | undefined;
-  public playerName: string = '';
-  public isMainScreen = true;
-  public isLoggedIn = false;
+  // public player: User | undefined;
+  // public playerName: string = '';
+  // public isMainScreen = true;
+  // public isLoggedIn = false;
 
-  setCurrentPlayer(event: User) {
-    this.player = event;
-    this.player.id = this.userId;
-    this.userId++;
-    this.playerName = this.player.name;
-    this.isLoggedIn = true;
-  }
+  // setCurrentPlayer(event: User) {
+  //   this.player = event;
 
-  startGame() {
-    this.isGameStarted = true;
-    this.isMainScreen = false;
-    this.player?.lastGameHistory.push({
-      gameStatus: GameStatus.READY,
-      date: new Date(),
-      elapsedTime: 0,
-    });
-  }
+  //   this.playerName = this.player.name;
+  //   this.isLoggedIn = true;
+  // }
 
-  quitGame(event: boolean) {
-    this.isGameStarted = event; //event z gry jak skończy grać
-    if (this.player) {
-      const newPlayer: User = { ...this.player };
-      this.usersList.push(newPlayer);
-    }
-    this.isMainScreen = true;
-  }
+  // startGame() {
+  //   this.isGameStarted = true;
+  //   this.isMainScreen = false;
+  //   this.player?.lastGameHistory.push({
+  //     gameStatus: GameStatus.READY,
+  //     date: new Date(),
+  //     elapsedTime: 0,
+  //   });
+  // }
+
+  // quitGame(event: boolean) {
+  //   this.isGameStarted = event; //event z gry jak skończy grać
+  //   if (this.player) {
+  //     const newPlayer: User = { ...this.player };
+  //     this.usersList.push(newPlayer);
+  //   }
+  //   this.isMainScreen = true;
+  // }
 }

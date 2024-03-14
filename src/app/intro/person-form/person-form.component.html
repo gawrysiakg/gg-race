@@ -33,7 +33,6 @@
 
   <br />
 
-  <!-- Email -->
   <input
     type="email"
     placeholder="E-mail"
@@ -47,56 +46,3 @@
     Submit
   </button>
 </form>
-
-<!-- <label>
-  Feel the rush of the wind, hear the roar of the engines, and push your skills
-  to the limit in this fast-paced adventure.</label
->
-
-@if(isLoggedIn){
-<p class="good-luck">Good luck, and have fun!</p>
-<p>
-  <img src="../../assets/bg/f1.png" width="250px" height="160px" />
-</p>
-} @if (!isLoggedIn) {
-
-<form #form="ngForm" (submit)="submit(form.form.value)">
-  @if(!nameModel.touched){
-  <label>Enter Player Name</label>
-  } @if(nameModel.touched && nameModel.invalid){
-  <label>Name must be at least 3 chars long</label>
-  } @if(form.valid === true){
-  <label>✅</label>
-  }
-  <br />
-  <input
-    type="text"
-    placeholder="Name"
-    name="name"
-    ngModel
-    required
-    minlength="3"
-    #nameModel="ngModel"
-  />
-
-  <br />
-  @if(form.valid === false){
-  <label>Enter Player E-mail</label>
-  } @if(form.valid === true){
-  <label>✅</label>
-  }
-  <br />
- 
-  <input
-    type="email"
-    placeholder="E-mail"
-    name="email"
-    ngModel
-    required
-    email
-  /><br />
-
-  <button [disabled]="form.valid === false">Submit</button>
-</form>
-
-} -->

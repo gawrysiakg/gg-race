@@ -62,6 +62,7 @@ export class GameComponent {
   public grantPoints() {
     this.points++;
     if (this.player) {
+      this.player.points++;
       this.updatePlayerGameHistory(GameStatus.OVERTAKING);
     }
   }
@@ -89,16 +90,10 @@ export class GameComponent {
     this.turboMode = false;
     if (this.player) {
       this.updatePlayerGameHistory(GameStatus.GAME_OVER);
+      this._playerInfo.updatePlayer(this.player);
     }
     this.timerStop();
   }
-
-  // endGame() {
-  //   //emitowany z ramki game over
-  //   this.isGameOver = true;
-  //   this.quitGame();
-  //   // this.displayScoreAfterGame.emit(true);
-  // }
 
   restart() {
     this.handleActionReset();
@@ -120,9 +115,10 @@ export class GameComponent {
   quitGame() {
     if (this.player) {
       this.updatePlayerGameHistory(GameStatus.QUIT_GAME);
+      this.player = { ...this.player };
     }
-    // this.isEndGame.emit(false);
     this.isGameOver = true;
+
     this._router.navigate(['/score']);
   }
 

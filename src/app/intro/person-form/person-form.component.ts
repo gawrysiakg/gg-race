@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { PlayerInfoService } from '../../player-info.service';
 import { User } from '../../models';
 
 @Component({
@@ -23,7 +22,6 @@ export class PersonFormComponent {
       lastGameHistory: [],
     };
     this.currentPlayer.emit(player);
-    // this.player = undefined;
   }
 }
 
