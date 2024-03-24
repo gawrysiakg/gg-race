@@ -1,17 +1,26 @@
-<app-intro-text [player]="player"></app-intro-text>
+<!-- <app-intro-text [player]="player"></app-intro-text> -->
 
 <div class="score-list-container">
+  <div class="score-list-container-title">Best high scores</div>
   <table class="score-list">
     <thead>
       <tr>
         <!-- <th>ID</th> -->
         <th>Name</th>
-        <th>Score</th>
+        <th>
+          Score
+
+          <button (click)="handleSortDirectionClick('asc')">
+            ▲ Asc{{ " " }}
+          </button>
+          <button (click)="handleSortDirectionClick('desc')">▼ Desc</button>
+        </th>
         <!-- <th>Game Date:</th> -->
       </tr>
     </thead>
     <tbody>
-      @for(record of score | slice:0:3 ; track record){
+      @for(record of score | bestScore:sortDirection | slice:0:10 ; track
+      record){
       <tr>
         <!-- <td>{{ user.id }}</td> -->
         <td>{{ record.name }}</td>

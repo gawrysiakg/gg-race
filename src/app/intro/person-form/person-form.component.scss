@@ -20,7 +20,8 @@ input {
 .intro-text {
   font-size: 1.2em;
   color: #333;
-  margin-bottom: 20px;
+  // margin-bottom: 20px;
+  margin: auto;
 }
 
 .good-luck {
@@ -31,7 +32,7 @@ input {
 
 .login-form {
   //   max-width: 300px;
-  width: 80%;
+  width: 90%;
   margin: 20px auto;
   padding: 15px;
   border: 1px solid #ccc;

@@ -1,21 +1,25 @@
 app-person-form {
-  background-color: lightslategray;
+  //background-color: lightslategray;
   display: grid;
   width: 400px;
   height: 350px;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 0 20px gray;
+  //box-shadow: 0 0 20px gray;
+  box-shadow: 0 0 20px rgb(254, 254, 254);
   font-family: "Comic Neue", cursive;
+  background-color: rgba(119, 136, 153, 0.7);
 }
 
 .person-form-loggedin {
-  background-color: lightslategray;
+  // background-color: lightslategray;
+  background-color: rgba(119, 136, 153, 0.7);
   display: grid;
   width: 400px;
   height: 350px;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 0 20px gray;
+  //box-shadow: 0 0 20px gray;
+  box-shadow: 0 0 20px rgb(254, 254, 254);
   font-family: "Comic Neue", cursive;
 }
