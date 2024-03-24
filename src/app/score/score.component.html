@@ -4,24 +4,24 @@
   <table class="score-list">
     <thead>
       <tr>
-        <th>ID</th>
+        <!-- <th>ID</th> -->
         <th>Name</th>
-        <th>Points</th>
-        <th>Game Date:</th>
+        <th>Score</th>
+        <!-- <th>Game Date:</th> -->
       </tr>
     </thead>
     <tbody>
-      @for(user of usersList; track user){
+      @for(record of score | slice:0:3 ; track record){
       <tr>
-        <td>{{ user.id }}</td>
-        <td>{{ user.name }}</td>
-        <td>{{ user.points }}</td>
-        <th>
+        <!-- <td>{{ user.id }}</td> -->
+        <td>{{ record.name }}</td>
+        <td>{{ record.score }}</td>
+        <!-- <th>
           {{
             user.lastGameHistory[user.lastGameHistory.length - 1].date
               | date : "short"
           }}
-        </th>
+        </th> -->
       </tr>
       }
     </tbody>

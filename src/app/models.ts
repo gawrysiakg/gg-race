@@ -29,3 +29,8 @@ export enum GameStatus {
   SIMPLE_VIEW = 'SIMPLE VIEW',
   EXTENDED_VIEW = 'EXTENDED VIEW',
 }
+
+export interface Score {
+  name: string;
+  score: number;
+}

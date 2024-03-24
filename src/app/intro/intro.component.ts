@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { PlayerInfoService } from '../player-info.service';
-import { GameStatus, User } from '../models';
+import { GameStatus, Score, User } from '../models';
 import { PersonFormComponent } from './person-form/person-form.component';
 import { IntroTextComponent } from './intro-text/intro-text.component';
+import { ScoreComponent } from '../score/score.component';
+import { ScoreService } from '../score.service';
 
 @Component({
   selector: 'app-intro',
