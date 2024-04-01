@@ -50,6 +50,9 @@ export class GameComponent {
     private _playerInfo: PlayerInfoService
   ) {
     this.player = _playerInfo.getCurrentPlayer;
+    if (!this.player) {
+      this._router.navigate(['/intro']);
+    }
   }
 
   @Output() public isEndGame = new EventEmitter<boolean>();

@@ -2,6 +2,7 @@ export interface User {
   id: number;
   name: string;
   email: string;
+  token: string;
   points: number;
   lastLoggedIn: Date;
   lastGameHistory: Array<GameHistory>;
@@ -30,7 +31,17 @@ export enum GameStatus {
   EXTENDED_VIEW = 'EXTENDED VIEW',
 }
 
-export interface Score {
+export interface ScoresListItem {
   name: string;
   score: number;
+}
+
+export interface Score {
+  name: string;
+  game: string;
+  score: number;
+}
+
+export interface AuthTokenResponse {
+  success: boolean;
 }

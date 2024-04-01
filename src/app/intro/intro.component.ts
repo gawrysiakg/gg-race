@@ -1,7 +1,7 @@
 import { Component, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { PlayerInfoService } from '../player-info.service';
-import { GameStatus, Score, User } from '../models';
+import { GameStatus, ScoresListItem, User } from '../models';
 import { PersonFormComponent } from './person-form/person-form.component';
 import { IntroTextComponent } from './intro-text/intro-text.component';
 import { ScoreComponent } from '../score/score.component';
@@ -21,15 +21,22 @@ export class IntroComponent {
   ) {
     this.player = _playerInfo.getCurrentPlayer;
   }
+  public isAuthenticated = false;
 
   public player: User | undefined;
-  //isLoggedIn = false;
   public scoreButtonText = 'Show score';
 
   setCurrentPlayer(event: User) {
-    this._playerInfo.setCurrentPLayer(event);
-    //this.isLoggedIn = true;
-    this.player = this._playerInfo.getCurrentPlayer;
+    this._playerInfo.validateToken(event.token).subscribe((result) => {
+      this.isAuthenticated = result.success;
+      if (this.isAuthenticated) {
+        this._playerInfo.setCurrentPLayer(event);
+
+        this.player = this._playerInfo.getCurrentPlayer;
+      } else {
+        alert('Invalid token');
+      }
+    });
   }
 
   startGame() {
@@ -38,7 +45,6 @@ export class IntroComponent {
       date: new Date(),
       elapsedTime: 0,
     });
-    //this.isLoggedIn = true;
     this._router.navigate(['/game']);
   }
 

@@ -1,18 +1,22 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Score } from '../../models';
+import { ScoresListItem } from '../../models';
 
 @Pipe({
   name: 'bestScore',
   standalone: true,
 })
 export class BestScorePipe implements PipeTransform {
-  transform(score: Array<Score>, sortDirection: string): Array<Score> {
+  transform(
+    score: Array<ScoresListItem>,
+    sortDirection: string
+  ): Array<ScoresListItem> {
     if (!score) {
       return [];
     }
 
-    const ascSort = (a: Score, b: Score) => a.score - b.score;
-    const descSort = (a: Score, b: Score) => b.score - a.score;
+    const ascSort = (a: ScoresListItem, b: ScoresListItem) => a.score - b.score;
+    const descSort = (a: ScoresListItem, b: ScoresListItem) =>
+      b.score - a.score;
 
     if (sortDirection === 'asc') {
       return score.slice().sort(ascSort);
