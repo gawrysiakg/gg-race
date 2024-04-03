@@ -55,8 +55,8 @@ export class GameComponent {
     }
   }
 
-  @Output() public isEndGame = new EventEmitter<boolean>();
-  @Output() public displayScoreAfterGame = new EventEmitter<boolean>();
+  // @Output() public isEndGame = new EventEmitter<boolean>();
+  // @Output() public displayScoreAfterGame = new EventEmitter<boolean>();
 
   openDialog(): void {
     this.showGameOverDialog = true;
