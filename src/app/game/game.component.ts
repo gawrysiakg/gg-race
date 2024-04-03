@@ -50,10 +50,13 @@ export class GameComponent {
     private _playerInfo: PlayerInfoService
   ) {
     this.player = _playerInfo.getCurrentPlayer;
+    if (!this.player) {
+      this._router.navigate(['/intro']);
+    }
   }
 
-  @Output() public isEndGame = new EventEmitter<boolean>();
-  @Output() public displayScoreAfterGame = new EventEmitter<boolean>();
+  // @Output() public isEndGame = new EventEmitter<boolean>();
+  // @Output() public displayScoreAfterGame = new EventEmitter<boolean>();
 
   openDialog(): void {
     this.showGameOverDialog = true;

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Score, User } from '../models';
+import { ScoresListItem, User } from '../models';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { PlayerInfoService } from '../player-info.service';
@@ -16,7 +16,7 @@ import { BestScorePipe } from './score-pipe/best-score.pipe';
 })
 export class ScoreComponent {
   public player: User | undefined;
-  public score: Array<Score> = [];
+  public score: Array<ScoresListItem> = [];
   usersList: Array<User> = [];
   public constructor(
     private _router: Router,

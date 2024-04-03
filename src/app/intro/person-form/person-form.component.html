@@ -26,7 +26,7 @@
   <br />
 
   @if(form.valid === false){
-  <label>Enter Player E-mail</label>
+  <label>Enter Student ID</label>
   } @if(form.valid === true){
   <label class="success-message">✅</label>
   }
@@ -34,12 +34,12 @@
   <br />
 
   <input
-    type="email"
-    placeholder="E-mail"
-    name="email"
+    type="text"
+    minlength="4"
+    placeholder="Student ID"
+    name="token"
     ngModel
     required
-    email
   /><br /><br />
 
   <button [disabled]="form.valid === false" class="submit-button">

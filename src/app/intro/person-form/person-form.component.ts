@@ -16,7 +16,8 @@ export class PersonFormComponent {
     const player = {
       id: 0,
       name: form.name,
-      email: form.email,
+      email: ' ',
+      token: form.token,
       points: 0,
       lastLoggedIn: new Date(),
       lastGameHistory: [],
@@ -27,5 +28,5 @@ export class PersonFormComponent {
 
 interface FormData {
   name: string;
-  email: string;
+  token: string;
 }
