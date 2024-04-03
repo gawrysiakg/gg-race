@@ -1,5 +1,7 @@
 <div class="score-list-container">
-  <div class="score-list-container-title">My best scores</div>
+  <div class="score-list-container-title">
+    {{ player?.name }} - My best scores
+  </div>
   <table class="score-list">
     <thead>
       <tr>
@@ -17,8 +19,8 @@
       </tr>
     </thead>
     <tbody>
-      @for(record of score | bestScore:sortDirection | slice:0:10 ; track
-      record){
+      @for(record of score | myBestScores:sortDirection:player!.name |
+      slice:0:10 ; track record){
       <tr>
         <!-- <td>{{ user.id }}</td> -->
         <td>{{ record.name }}</td>

@@ -3,13 +3,13 @@ import { ScoresListItem, User } from '../models';
 import { Router } from '@angular/router';
 import { PlayerInfoService } from '../player-info.service';
 import { ScoreService } from '../score.service';
-import { BestScorePipe } from '../score/score-pipe/best-score.pipe';
 import { CommonModule } from '@angular/common';
+import { MyBestScoresPipe } from './my-best-scores-pipe/my-best-scores.pipe';
 
 @Component({
   selector: 'app-my-scores',
   standalone: true,
-  imports: [CommonModule, BestScorePipe],
+  imports: [CommonModule, MyBestScoresPipe],
   templateUrl: './my-scores.component.html',
   styleUrl: './my-scores.component.scss',
 })
