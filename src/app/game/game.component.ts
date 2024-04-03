@@ -122,7 +122,7 @@ export class GameComponent {
     }
     this.isGameOver = true;
 
-    this._router.navigate(['/score']);
+    this._router.navigate(['/my-scores']);
   }
 
   handleStart() {
