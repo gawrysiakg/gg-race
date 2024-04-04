@@ -1,24 +1,22 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ScoresListItem, User } from '../models';
-import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { PlayerInfoService } from '../player-info.service';
-import { IntroTextComponent } from '../intro/intro-text/intro-text.component';
 import { ScoreService } from '../score.service';
-import { BestScorePipe } from './score-pipe/best-score.pipe';
+import { CommonModule } from '@angular/common';
+import { MyBestScoresPipe } from './my-best-scores-pipe/my-best-scores.pipe';
 
 @Component({
-  selector: 'app-score',
+  selector: 'app-my-scores',
   standalone: true,
-  imports: [CommonModule, IntroTextComponent, BestScorePipe],
-  templateUrl: './score.component.html',
-  styleUrl: './score.component.scss',
+  imports: [CommonModule, MyBestScoresPipe],
+  templateUrl: './my-scores.component.html',
+  styleUrl: './my-scores.component.scss',
 })
-export class ScoreComponent {
+export class MyScoresComponent {
   public player: User | undefined;
   public score: Array<ScoresListItem> = [];
   usersList: Array<User> = [];
-  intervalId: any; //
   public constructor(
     private _router: Router,
     private _playerInfo: PlayerInfoService,
@@ -29,18 +27,6 @@ export class ScoreComponent {
     this._scoreService.loadScore().subscribe((result) => (this.score = result));
   }
 
-  ngOnInit(): void {
-    this.refreshScoreList();
-
-    this.intervalId = setInterval(() => {
-      this.refreshScoreList();
-    }, 30000); // 30 sekund (30000 milisekund)
-  }
-
-  refreshScoreList() {
-    this._scoreService.loadScore().subscribe((result) => (this.score = result));
-  }
-
   sortDirection: 'asc' | 'desc' = 'desc';
 
   handleSortDirectionClick(direction: 'asc' | 'desc') {
@@ -48,9 +34,5 @@ export class ScoreComponent {
   }
   closeScore() {
     this._router.navigate(['/intro']);
-  }
-
-  ngOnDestroy() {
-    clearInterval(this.intervalId);
   }
 }

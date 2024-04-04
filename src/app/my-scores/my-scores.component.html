@@ -1,0 +1,39 @@
+<div class="score-list-container">
+  <div class="score-list-container-title">
+    {{ player?.name }} - My best scores
+  </div>
+  <table class="score-list">
+    <thead>
+      <tr>
+        <!-- <th>ID</th> -->
+        <th>Name</th>
+        <th>
+          Score
+
+          <button (click)="handleSortDirectionClick('asc')">
+            ▲ Asc{{ " " }}
+          </button>
+          <button (click)="handleSortDirectionClick('desc')">▼ Desc</button>
+        </th>
+        <!-- <th>Game Date:</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      @for(record of score | myBestScores:sortDirection:player!.name |
+      slice:0:10 ; track record){
+      <tr>
+        <!-- <td>{{ user.id }}</td> -->
+        <td>{{ record.name }}</td>
+        <td>{{ record.score }}</td>
+        <!-- <th>
+          {{
+            user.lastGameHistory[user.lastGameHistory.length - 1].date
+              | date : "short"
+          }}
+        </th> -->
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>
+<button class="play-button" (click)="closeScore()">Close</button>

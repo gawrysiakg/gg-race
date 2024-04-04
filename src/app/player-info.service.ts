@@ -14,29 +14,6 @@ export class PlayerInfoService {
 
   constructor(private _http: HttpClient) {}
 
-  // public validateToken(token: string): Observable<boolean> {
-  //   const URL = 'https://scores.chrum.it/check-token';
-  //   return new Observable<boolean>((observer) => {
-  //     this._http
-  //       .post<TokenDto>(
-  //         URL,
-  //         { 'auth-token': token },
-  //         { headers: { 'Content-Type': 'application/json' } }
-  //       )
-  //       .subscribe(
-  //         (result) => {
-  //           this.isAuthenticated = result.auth_token;
-  //           observer.next(this.isAuthenticated);
-  //           observer.complete();
-  //           console.log(this.isAuthenticated);
-  //         },
-  //         (error) => {
-  //           observer.error(error);
-  //         }
-  //       );
-  //   });
-  // }
-
   public validateToken(token: string) {
     const URL = 'https://scores.chrum.it/check-token';
 

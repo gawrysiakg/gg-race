@@ -14,6 +14,7 @@ import { GameOverDialogComponent } from '../game-over-dialog/game-over-dialog.co
 import { ListComponent } from '../list/list.component';
 import { Router } from '@angular/router';
 import { PlayerInfoService } from '../player-info.service';
+import { ScoreService } from '../score.service';
 
 @Component({
   selector: 'app-game',
@@ -47,7 +48,8 @@ export class GameComponent {
   public player: User | undefined;
   public constructor(
     private _router: Router,
-    private _playerInfo: PlayerInfoService
+    private _playerInfo: PlayerInfoService,
+    private _scoreService: ScoreService
   ) {
     this.player = _playerInfo.getCurrentPlayer;
     if (!this.player) {
@@ -119,10 +121,18 @@ export class GameComponent {
     if (this.player) {
       this.updatePlayerGameHistory(GameStatus.QUIT_GAME);
       this.player = { ...this.player };
+      this._scoreService.sendScoreToServer(this.player, this.points).subscribe(
+        (response) => {
+          console.log('Score sent successfully!', response);
+        },
+        (error) => {
+          console.error('Error while sending score:', error);
+        }
+      );
     }
     this.isGameOver = true;
 
-    this._router.navigate(['/score']);
+    this._router.navigate(['/my-scores']);
   }
 
   handleStart() {
