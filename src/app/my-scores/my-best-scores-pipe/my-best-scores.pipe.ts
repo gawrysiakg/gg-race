@@ -7,37 +7,33 @@ import { ScoresListItem } from '../../models';
 })
 export class MyBestScoresPipe implements PipeTransform {
   transform(
-    score: Array<ScoresListItem>,
+    scores: Array<ScoresListItem>,
     sortDirection: string,
     playerName: string
   ): Array<ScoresListItem> {
-    if (!score) {
+    if (!scores || !scores.length) {
       return [];
     }
 
-    const ascSort = (a: ScoresListItem, b: ScoresListItem) => a.score - b.score;
-    const descSort = (a: ScoresListItem, b: ScoresListItem) =>
-      b.score - a.score;
+    const sortedScores = scores.slice().sort((a, b) => {
+      if (sortDirection === 'asc') {
+        return a.score - b.score;
+      } else {
+        return b.score - a.score;
+      }
+    });
 
-    if (sortDirection === 'asc' && playerName !== undefined) {
-      return score
-        .slice()
-        .sort(ascSort)
-        .filter((item) => item.name === playerName);
+    if (playerName !== undefined) {
+      return sortedScores.filter((item) => item.name === playerName);
     }
 
-    if (sortDirection === 'desc' && playerName !== undefined) {
-      return score
-        .slice()
-        .sort(descSort)
-        .filter((item) => item.name === playerName);
-    }
-    return [];
+    return sortedScores;
   }
 
   // transform(
   //   score: Array<ScoresListItem>,
-  //   sortDirection: string
+  //   sortDirection: string,
+  //   playerName: string
   // ): Array<ScoresListItem> {
   //   if (!score) {
   //     return [];
@@ -47,12 +43,18 @@ export class MyBestScoresPipe implements PipeTransform {
   //   const descSort = (a: ScoresListItem, b: ScoresListItem) =>
   //     b.score - a.score;
 
-  //   if (sortDirection === 'asc') {
-  //     return score.slice().sort(ascSort);
+  //   if (sortDirection === 'asc' && playerName !== undefined) {
+  //     return score
+  //       .slice()
+  //       .sort(ascSort)
+  //       .filter((item) => item.name === playerName);
   //   }
 
-  //   if (sortDirection === 'desc') {
-  //     return score.slice().sort(descSort);
+  //   if (sortDirection === 'desc' && playerName !== undefined) {
+  //     return score
+  //       .slice()
+  //       .sort(descSort)
+  //       .filter((item) => item.name === playerName);
   //   }
   //   return [];
   // }

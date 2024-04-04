@@ -18,6 +18,7 @@ export class ScoreComponent {
   public player: User | undefined;
   public score: Array<ScoresListItem> = [];
   usersList: Array<User> = [];
+  intervalId: any; //
   public constructor(
     private _router: Router,
     private _playerInfo: PlayerInfoService,
@@ -28,6 +29,18 @@ export class ScoreComponent {
     this._scoreService.loadScore().subscribe((result) => (this.score = result));
   }
 
+  ngOnInit(): void {
+    this.refreshScoreList();
+
+    this.intervalId = setInterval(() => {
+      this.refreshScoreList();
+    }, 30000); // 30 sekund (30000 milisekund)
+  }
+
+  refreshScoreList() {
+    this._scoreService.loadScore().subscribe((result) => (this.score = result));
+  }
+
   sortDirection: 'asc' | 'desc' = 'desc';
 
   handleSortDirectionClick(direction: 'asc' | 'desc') {
@@ -35,5 +48,9 @@ export class ScoreComponent {
   }
   closeScore() {
     this._router.navigate(['/intro']);
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.intervalId);
   }
 }
