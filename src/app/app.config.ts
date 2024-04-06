@@ -13,7 +13,7 @@ export const appConfig: ApplicationConfig = {
       // kolejność jest ważna
       { path: 'intro', component: IntroComponent },
       { path: 'game', component: GameComponent },
-      { path: 'score', component: ScoreComponent },
+      //  { path: 'score', component: ScoreComponent },
       { path: 'my-scores', component: MyScoresComponent },
       { path: '**', redirectTo: 'intro' },
     ]),

@@ -1,3 +1,5 @@
+@if(!showScore){
+
 <app-intro-text [player]="player"></app-intro-text>
 
 @if(player){
@@ -14,11 +16,6 @@
 
 }
 
-<button class="play-button" (click)="toggleScore()">
-  {{ scoreButtonText }}
-</button>
-<br />
-
 <button
   [disabled]="player === undefined"
   class="play-button"
@@ -27,3 +24,11 @@
   Play!
 </button>
 <br />
+
+} @if(showScore){
+<app-score [score$]="score$"></app-score>
+
+}
+<button class="play-button" (click)="toggleScore()">
+  {{ scoreButtonText }}
+</button>

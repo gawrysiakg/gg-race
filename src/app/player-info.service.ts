@@ -15,7 +15,8 @@ export class PlayerInfoService {
   constructor(private _http: HttpClient) {}
 
   public validateToken(token: string) {
-    const URL = 'https://scores.chrum.it/check-token';
+    const URL = 'http://localhost:8080/check-token';
+    //const URL = 'https://scores.chrum.it/check-token';
 
     return this._http.post<AuthTokenResponse>(
       URL,
@@ -23,23 +24,6 @@ export class PlayerInfoService {
       { headers: { 'Content-Type': 'application/json' } }
     );
   }
-
-  // public validateToken(token: string): boolean {
-  //   const URL = 'https://scores.chrum.it/check-token';
-
-  //   this._http
-  //     .post<TokenDto>(
-  //       URL,
-  //       { 'auth-token': token },
-  //       { headers: { 'Content-Type': 'application/json' } }
-  //     )
-  //     .subscribe((result) => {
-  //       this.isAuthenticated = result.success;
-
-  //       console.log(this.isAuthenticated);
-  //     });
-  //   return this.isAuthenticated;
-  // }
 
   public get getUsersList() {
     return this._usersList;
@@ -51,7 +35,6 @@ export class PlayerInfoService {
 
   public get getCurrentPlayer() {
     return this._currentPlayer;
-    // return this._currentPlayer || ({} as User);
   }
 
   public setCurrentPLayer(player: User | undefined) {
@@ -80,3 +63,20 @@ export class PlayerInfoService {
     }
   }
 }
+
+// public validateToken(token: string): boolean {
+//   const URL = 'https://scores.chrum.it/check-token';
+
+//   this._http
+//     .post<TokenDto>(
+//       URL,
+//       { 'auth-token': token },
+//       { headers: { 'Content-Type': 'application/json' } }
+//     )
+//     .subscribe((result) => {
+//       this.isAuthenticated = result.success;
+
+//       console.log(this.isAuthenticated);
+//     });
+//   return this.isAuthenticated;
+// }

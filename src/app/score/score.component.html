@@ -19,8 +19,11 @@
       </tr>
     </thead>
     <tbody>
-      @for(record of score | bestScore:sortDirection | slice:0:10 ; track
-      record){
+      <!-- @for(record of score$ | async | bestScore:sortDirection | slice:0:10 ;
+      track record){ -->
+      @for(record of score$ | async| bestScore:sortDirection | slice:0:10 ;
+      track record){
+      <div *ngIf="!record">Loading scores...</div>
       <tr>
         <!-- <td>{{ user.id }}</td> -->
         <td>{{ record.name }}</td>
@@ -36,4 +39,3 @@
     </tbody>
   </table>
 </div>
-<button class="play-button" (click)="closeScore()">Close</button>
