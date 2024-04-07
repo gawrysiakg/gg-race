@@ -1,4 +1,11 @@
-@if(!isExtendedView){
+@if(showScore){
+<app-score [score$]="score$"></app-score>
+
+<button class="play-button" (click)="toggleScore()">
+  {{ scoreButtonText }}
+</button>
+
+} @if(!showScore){ @if(!isExtendedView){
 <span class="simple-points-time"
   >Points: {{ points }} --- Time: {{ elapsedTime | number : "1.2-2" }}</span
 >
@@ -77,11 +84,13 @@
     <button class="button" (click)="quitGame()">Quit game</button>
   </div>
 </div>
-}
+} }
+
+<!-- 
 
 <app-game-over-dialog
   *ngIf="showGameOverDialog"
   (quitGame)="quitGame()"
   (restartGame)="restart()"
 >
-</app-game-over-dialog>
+</app-game-over-dialog> -->

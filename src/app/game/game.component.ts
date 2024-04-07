@@ -1,31 +1,19 @@
-import {
-  Component,
-  EventEmitter,
-  HostListener,
-  Input,
-  Output,
-  ViewChild,
-} from '@angular/core';
+import { Component, HostListener, ViewChild } from '@angular/core';
 import { NgxRaceComponent, NgxRaceModule } from 'ngx-race';
 import { CommonModule, NgFor } from '@angular/common';
-import { User } from '../models';
+import { ScoresListItem, User } from '../models';
 import { GameStatus } from '../models';
-import { GameOverDialogComponent } from '../game-over-dialog/game-over-dialog.component';
 import { ListComponent } from '../list/list.component';
 import { Router } from '@angular/router';
 import { PlayerInfoService } from '../player-info.service';
 import { ScoreService } from '../score.service';
+import { Observable, map, of } from 'rxjs';
+import { ScoreComponent } from '../score/score.component';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [
-    CommonModule,
-    NgxRaceModule,
-    NgFor,
-    GameOverDialogComponent,
-    ListComponent,
-  ],
+  imports: [CommonModule, NgxRaceModule, NgFor, ListComponent, ScoreComponent],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
 })
@@ -42,8 +30,10 @@ export class GameComponent {
   public isExtendedView = true;
   public gameClass = this.isExtendedView ? ['game-center'] : ['game-simple'];
   public isGameOver = false;
-  public showGameOverDialog = false;
   public statusOptions = Object.values(GameStatus);
+  public showScore = false;
+  public scoreButtonText = 'Hide score';
+  public score$: Observable<Array<ScoresListItem>>; //= of([]);
 
   public player: User | undefined;
   public constructor(
@@ -55,13 +45,12 @@ export class GameComponent {
     if (!this.player) {
       this._router.navigate(['/intro']);
     }
-  }
-
-  // @Output() public isEndGame = new EventEmitter<boolean>();
-  // @Output() public displayScoreAfterGame = new EventEmitter<boolean>();
-
-  openDialog(): void {
-    this.showGameOverDialog = true;
+    this.score$ = this._scoreService.loadScore().pipe(
+      map((users) => {
+        return users.filter((item) => item.name === this.player?.name);
+      })
+    );
+    // .subscribe((result) => (this.score = result));
   }
 
   public grantPoints() {
@@ -90,7 +79,7 @@ export class GameComponent {
   }
 
   gameOver(): void {
-    this.openDialog();
+    // this.openDialog();
     this.gameStarted = false;
     this.turboMode = false;
     if (this.player) {
@@ -98,13 +87,23 @@ export class GameComponent {
       this._playerInfo.updatePlayer(this.player);
     }
     this.timerStop();
+    this.toggleScore();
+
+    // to pozwoli wysłać score
+    this._scoreService.sendScoreToServer(this.player!, this.points).subscribe(
+      (response) => {
+        console.log('Score sent successfully!', response);
+      },
+      (error) => {
+        console.error('Error while sending score:', error);
+      }
+    );
   }
 
   restart() {
     this.handleActionReset();
     this.game.actionReset();
     this.gameStarted = false;
-    this.showGameOverDialog = false;
   }
 
   handleActionReset() {
@@ -121,18 +120,17 @@ export class GameComponent {
     if (this.player) {
       this.updatePlayerGameHistory(GameStatus.QUIT_GAME);
       this.player = { ...this.player };
-      this._scoreService.sendScoreToServer(this.player, this.points).subscribe(
-        (response) => {
-          console.log('Score sent successfully!', response);
-        },
-        (error) => {
-          console.error('Error while sending score:', error);
-        }
-      );
+      // this._scoreService.sendScoreToServer(this.player, this.points).subscribe(
+      //   (response) => {
+      //     console.log('Score sent successfully!', response);
+      //   },
+      //   (error) => {
+      //     console.error('Error while sending score:', error);
+      //   }
+      // );
     }
     this.isGameOver = true;
-
-    this._router.navigate(['/my-scores']);
+    this.toggleScore();
   }
 
   handleStart() {
@@ -221,5 +219,20 @@ export class GameComponent {
         elapsedTime: this.elapsedTime,
       });
     }
+  }
+
+  toggleScore() {
+    // this.scoreButtonText = 'Show score' ? 'Hide score' : 'Show score';
+    // this.scoreButtonText = this.showScore ? 'Show score' : 'Hide score';
+    this.showScore = !this.showScore;
+    //this._router.navigate(['/score']);
+    if (!this.showScore) {
+      this._router.navigate(['/intro']);
+    }
+  }
+
+  displayScoreAfterGame() {
+    this.quitGame();
+    this.toggleScore();
   }
 }
