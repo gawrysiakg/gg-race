@@ -23,7 +23,7 @@ export class IntroComponent {
     private _scoreService: ScoreService
   ) {
     this.player = _playerInfo.getCurrentPlayer;
-    this.score$ = this._scoreService.loadScore();
+    this.score$ = this._scoreService.loadScore() || of([]);
     // .subscribe((result) => (this.score = result));
   }
   public isAuthenticated = false;

@@ -7,9 +7,11 @@ import {
   interval,
   pipe,
   repeatWhen,
+  retryWhen,
   shareReplay,
   startWith,
   switchMap,
+  timer,
 } from 'rxjs';
 
 @Injectable({
@@ -23,24 +25,25 @@ export class ScoreService {
 
   constructor(private _http: HttpClient) {}
 
-  // loadScore(): Observable<Array<ScoresListItem>> {
-  //   //const URL = 'https://scores.chrum.it/scores/race';
-  //   const URL = 'http://localhost:8080/scores/race';
-  //   return this._http
-  //     .get<Array<ScoresListItem>>(URL, {
-  //       headers: { Accept: 'application/json' },
-  //     })
-  //     .pipe(
-  //       switchMap(() => interval(30000)),
-  //       switchMap(() =>
-  //         this._http.get<Array<ScoresListItem>>(URL, {
-  //           headers: { Accept: 'application/json' },
-  //         })
-  //       )
-  //     );
-  // }
+  // pierwsze score za 30 s
+  loadScore3(): Observable<Array<ScoresListItem>> {
+    //const URL = 'https://scores.chrum.it/scores/race';
+    const URL = 'http://localhost:8080/scores/race';
+    return this._http
+      .get<Array<ScoresListItem>>(URL, {
+        headers: { Accept: 'application/json' },
+      })
+      .pipe(
+        switchMap(() => interval(30000)),
+        switchMap(() =>
+          this._http.get<Array<ScoresListItem>>(URL, {
+            headers: { Accept: 'application/json' },
+          })
+        )
+      );
+  }
 
-  loadScore(): Observable<Array<ScoresListItem>> {
+  loadScore2(): Observable<Array<ScoresListItem>> {
     const URL = 'http://localhost:8080/scores/race';
 
     return this._http
@@ -50,10 +53,36 @@ export class ScoreService {
       .pipe(
         // Use `shareReplay(1)` to share the latest emitted value with all subscribers.
         shareReplay(1),
-        // Use `concatWith(interval(30000).pipe(switchMap(() => this.loadScore())))` to:
-        // 1. Emit the initial value fetched from the HTTP request.
-        // 2. After the initial value, emit new values every 30 seconds by calling `loadScore()` again.
-        concatWith(interval(30000).pipe(switchMap(() => this.loadScore())))
+        concatWith(
+          interval(30000).pipe(
+            switchMap(() =>
+              this._http.get<Array<ScoresListItem>>(URL, {
+                headers: { Accept: 'application/json' },
+              })
+            )
+          )
+        )
+      );
+  }
+
+  // lepiej:
+  loadScore(): Observable<Array<ScoresListItem>> {
+    const URL = 'http://localhost:8080/scores/race';
+
+    return this._http
+      .get<Array<ScoresListItem>>(URL, {
+        headers: { Accept: 'application/json' },
+      })
+      .pipe(
+        switchMap((data) =>
+          timer(0, 30000).pipe(
+            switchMap(() =>
+              this._http.get<Array<ScoresListItem>>(URL, {
+                headers: { Accept: 'application/json' },
+              })
+            )
+          )
+        )
       );
   }
 
