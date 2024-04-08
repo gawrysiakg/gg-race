@@ -79,7 +79,7 @@ export class GameComponent {
   }
 
   gameOver(): void {
-    // this.openDialog();
+    // this.openDialog(); // zmienione na komponent score z filtrowaniem po name
     this.gameStarted = false;
     this.turboMode = false;
     if (this.player) {
@@ -89,7 +89,7 @@ export class GameComponent {
     this.timerStop();
     this.toggleScore();
 
-    // to pozwoli wysłać score
+    // to pozwoli wysłać score na serwer
     this._scoreService.sendScoreToServer(this.player!, this.points).subscribe(
       (response) => {
         console.log('Score sent successfully!', response);
@@ -120,14 +120,6 @@ export class GameComponent {
     if (this.player) {
       this.updatePlayerGameHistory(GameStatus.QUIT_GAME);
       this.player = { ...this.player };
-      // this._scoreService.sendScoreToServer(this.player, this.points).subscribe(
-      //   (response) => {
-      //     console.log('Score sent successfully!', response);
-      //   },
-      //   (error) => {
-      //     console.error('Error while sending score:', error);
-      //   }
-      // );
     }
     this.isGameOver = true;
     this.toggleScore();
@@ -222,10 +214,7 @@ export class GameComponent {
   }
 
   toggleScore() {
-    // this.scoreButtonText = 'Show score' ? 'Hide score' : 'Show score';
-    // this.scoreButtonText = this.showScore ? 'Show score' : 'Hide score';
     this.showScore = !this.showScore;
-    //this._router.navigate(['/score']);
     if (!this.showScore) {
       this._router.navigate(['/intro']);
     }

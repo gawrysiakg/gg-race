@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { PlayerInfoService } from '../player-info.service';
 import { GameStatus, ScoresListItem, User } from '../models';
@@ -24,22 +24,13 @@ export class IntroComponent {
   ) {
     this.player = _playerInfo.getCurrentPlayer;
     this.score$ = this._scoreService.loadScore() || of([]);
-    // .subscribe((result) => (this.score = result));
+    // .subscribe((result) => (this.score = result)); // added async
   }
   public isAuthenticated = false;
-
   public player: User | undefined;
-  //public score: Array<ScoresListItem> = [];
-
-  // =
-  // this._scoreService.loadScore();
   public scoreButtonText = 'Show score';
   public showScore = false;
-  intervalId: any; //
-
-  // ngOnInit(): void {
-  //   this.score$ = this._scoreService.loadScore();
-  // }
+  intervalId: any;
 
   setCurrentPlayer(event: User) {
     this._playerInfo.validateToken(event.token).subscribe((result) => {
@@ -64,10 +55,8 @@ export class IntroComponent {
   }
 
   toggleScore() {
-    // this.scoreButtonText = 'Show score' ? 'Hide score' : 'Show score';
     this.scoreButtonText = this.showScore ? 'Show score' : 'Hide score';
     this.showScore = !this.showScore;
-    //this._router.navigate(['/score']);
   }
 
   displayScoreAfterGame() {
@@ -77,26 +66,5 @@ export class IntroComponent {
   logout() {
     this.player = undefined;
     this._playerInfo.removeCurrentPLayer();
-    // this.isLoggedIn = false;
-  }
-
-  // ngOnInit(): void {
-  //   this.refreshScoreList();
-
-  //   this.intervalId = setInterval(() => {
-  //     this.refreshScoreList();
-  //   }, 30000); // 30 sekund (30000 milisekund)
-  // }
-
-  // refreshScoreList() {
-  //   this._scoreService.loadScore().subscribe((result) => (this.score = result));
-  // }
-
-  // closeScore() {
-  //   this._router.navigate(['/intro']);
-  // }
-
-  ngOnDestroy() {
-    clearInterval(this.intervalId);
   }
 }
