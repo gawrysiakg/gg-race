@@ -1,11 +1,8 @@
-<!-- <app-intro-text [player]="player"></app-intro-text> -->
-
 <div class="score-list-container">
   <div class="score-list-container-title">Best high scores</div>
   <table class="score-list">
     <thead>
       <tr>
-        <!-- <th>ID</th> -->
         <th>Name</th>
         <th>
           Score
@@ -15,25 +12,16 @@
           </button>
           <button (click)="handleSortDirectionClick('desc')">▼ Desc</button>
         </th>
-        <!-- <th>Game Date:</th> -->
       </tr>
     </thead>
     <tbody>
-      @for(record of score | bestScore:sortDirection | slice:0:10 ; track
-      record){
+      @if(score$ | async; as scores){ @for(record of scores |
+      bestScore:sortDirection | slice:0:10 ; track record){
       <tr>
-        <!-- <td>{{ user.id }}</td> -->
         <td>{{ record.name }}</td>
         <td>{{ record.score }}</td>
-        <!-- <th>
-          {{
-            user.lastGameHistory[user.lastGameHistory.length - 1].date
-              | date : "short"
-          }}
-        </th> -->
       </tr>
-      }
+      } }
     </tbody>
   </table>
 </div>
-<button class="play-button" (click)="closeScore()">Close</button>
