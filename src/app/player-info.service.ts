@@ -15,8 +15,8 @@ export class PlayerInfoService {
   constructor(private _http: HttpClient) {}
 
   public validateToken(token: string) {
-    const URL = 'http://localhost:8080/check-token';
-    //const URL = 'https://scores.chrum.it/check-token';
+    //const URL = 'http://localhost:8080/check-token';
+    const URL = 'https://scores.chrum.it/check-token';
 
     return this._http.post<AuthTokenResponse>(
       URL,
