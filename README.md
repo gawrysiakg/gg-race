@@ -6,7 +6,7 @@ Link to demo: https://gawrysiak-race.netlify.app/
 
 ## Project Overview
 
-This project is a simple game application that allows users to log in and play a simple game. Player can check score and view their current gameplay history. It is built using Angular and follows the specified requirements.
+This project is a simple game application that allows users to log in and play a simple game. Player can check score and view their current gameplay history. Game gets score from external server, and after "game over" - makes post to server to add player score. This game is built using Angular 17 and follows the specified requirements.
 
 ##
 
@@ -14,24 +14,39 @@ This project is a simple game application that allows users to log in and play a
 
 ## Specification
 
-#### Main Page
+### App
 
-The intro page serves as the starting point for users and includes a quick introductory text and a player form. Users must enter their name and email before starting the game( do not register, only enter valid name and email).
+**Components Used:**
 
-- **Components Used:**
-  - `AppComponent`: Main component with player data and users list.
-  - `PersonFormComponent`: Manages the user input for name and email with ngModel and provides validation feedback.
-  - `ScoreComponent`: Takes the usersList as Input and render as a table.
+- `AppComponent`: Main component with RouterOutlet.
 
-#### Game Page
+### Intro Page
+
+The intro page serves as the starting point for users and includes a quick introductory text and a player form. Users must enter their name and userID before starting the game. System makes post to external server to check token, then log in player. Actual score is also retrieved from server.
+
+**Components Used:**
+
+- `AppComponent`: Main component with RouterOutlet.
+- `IntroComponent`: Smart component, checking userId on server, retrieving score.
+  - `IntroTextComponent`: Top welcome text, dumb component.
+  - `PersonFormComponent`: Player form with ngForm provides validation feedback, emiting player as output.
+  - `ScoreComponent`: Takes the score$: Observable as Input and render as a table with sorting function (pipe).
+
+### Game Page
 
 The game page contains the actual gameplay and includes features such as an exit game button, extended view, dark mode changer and a points counting mechanism. The game itself is implemented using ngx-race library (from https://github.com/chrum/ngx-race).
 
-- **Components Used:**
-  - `GameComponent`: Integrates the game library (ngx-race) and manages game-related functionality: points-section (status, points, player name and timer).
-  - `NgxRaceComponent`: Main game logic from external library.
-  - `ListComponent`: It takes User an Input and displays current player's game history( implemented sorting by status or asc-desc using custom StatusPipe).
-  - `GameOverDialogComponent`: Activated after Game Over - End Game or Restart..
+**Components Used:**
+
+- `GameComponent`: Integrates the game library (ngx-race) and manages game-related functionality: points-section (status, points, player name and timer).
+  - `NgxRaceModule`: Main game logic from external library.
+  - `ListComponent`: Dumb component. It takes User as Input and displays current player's game history (sorting by status or asc-desc using custom StatusPipe).
+  - `ScoreComponent`: Takes the score$: Observable as Input and render as a table with sorting function (pipe).
+
+## Services
+
+- `PlayerInfoService`: Validate token on server, sets current player
+- `ScoreService`: Load score, sends score to server.
 
 ## Usage
 
@@ -42,9 +57,10 @@ The game page contains the actual gameplay and includes features such as an exit
 
 ## Additional Notes
 
-- The project does not use routing but relies on conditional rendering to navigate between pages.
-- NgModel is utilized for form management, providing user-friendly validation and error handling.
+- This project uses routing and http communication.
+- NgForm is utilized for form management, providing user-friendly validation and error handling.
 - The game page integrates the ngx-race game library for an interactive gaming experience.
-- My extra points version includes a gameplay history feature with filtering and sorting options.
+- My version includes a gameplay history feature with filtering and sorting options.
+- Score component is used in IntroComponent to render top 10 scores for all users, and in GameComponent to render only current player score (using pipe and map from rxjs)
 
 ## Author GG
