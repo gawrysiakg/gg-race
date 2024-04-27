@@ -7,11 +7,17 @@ import { IntroTextComponent } from './intro-text/intro-text.component';
 import { ScoreComponent } from '../score/score.component';
 import { ScoreService } from '../score.service';
 import { Observable, of } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-intro',
   standalone: true,
-  imports: [PersonFormComponent, IntroTextComponent, ScoreComponent],
+  imports: [
+    PersonFormComponent,
+    IntroTextComponent,
+    ScoreComponent,
+    FormsModule,
+  ],
   templateUrl: './intro.component.html',
   styleUrl: './intro.component.scss',
 })
@@ -26,6 +32,7 @@ export class IntroComponent {
     this.score$ = this._scoreService.loadScore() || of([]);
     // .subscribe((result) => (this.score = result)); // added async
   }
+  public selectedColor = 'normal';
   public isAuthenticated = false;
   public player: User | undefined;
   public scoreButtonText = 'Show score';
@@ -51,7 +58,7 @@ export class IntroComponent {
       date: new Date(),
       elapsedTime: 0,
     });
-    this._router.navigate(['/game']);
+    this._router.navigate(['/game', this.selectedColor]);
   }
 
   toggleScore() {

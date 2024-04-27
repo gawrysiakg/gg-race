@@ -18,11 +18,11 @@ import {
   providedIn: 'root',
 })
 export class ScoreService {
-  private POST_SCORE_URL = 'https://scores.chrum.it/scores';
-  //private POST_SCORE_URL = 'http://localhost:8080/scores';
+  //private POST_SCORE_URL = 'https://scores.chrum.it/scores';
+  private POST_SCORE_URL = 'http://localhost:8080/scores';
 
-  private URL = 'https://scores.chrum.it/scores/race';
-  //private URL = 'http://localhost:8080/scores/race';
+  //private URL = 'https://scores.chrum.it/scores/race';
+  private URL = 'http://localhost:8080/scores/race';
 
   constructor(private _http: HttpClient) {}
 

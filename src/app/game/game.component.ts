@@ -4,7 +4,7 @@ import { CommonModule, NgFor } from '@angular/common';
 import { ScoresListItem, User } from '../models';
 import { GameStatus } from '../models';
 import { ListComponent } from '../list/list.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PlayerInfoService } from '../player-info.service';
 import { ScoreService } from '../score.service';
 import { Observable, map, of } from 'rxjs';
@@ -18,8 +18,14 @@ import { ScoreComponent } from '../score/score.component';
   styleUrl: './game.component.scss',
 })
 export class GameComponent {
-  public darkMode = true;
-  public theme = this.darkMode ? 'black-and-white' : '';
+  public darkMode =
+    this._route.snapshot.params['colors'] === 'high contrast' ? true : false;
+  //public theme = this.darkMode ? 'black-and-white' : '';
+  public theme =
+    this._route.snapshot.params['colors'] === 'high%20contrast'
+      ? 'black-and-white'
+      : '';
+
   public darkModeButton = this.darkMode ? 'Dark Mode OFF' : 'Dark Mode ON';
   public points = 0;
   public boardHeight: number = 20;
@@ -39,7 +45,8 @@ export class GameComponent {
   public constructor(
     private _router: Router,
     private _playerInfo: PlayerInfoService,
-    private _scoreService: ScoreService
+    private _scoreService: ScoreService,
+    private _route: ActivatedRoute
   ) {
     this.player = _playerInfo.getCurrentPlayer;
     if (!this.player) {
@@ -69,6 +76,11 @@ export class GameComponent {
       : GameStatus.DARK_MODE_OFF;
     if (this.player) {
       this.updatePlayerGameHistory(mode);
+    }
+    if (this.darkMode) {
+      this._router.navigate(['/game/high contrast']);
+    } else {
+      this._router.navigate(['/game/normal']);
     }
   }
 

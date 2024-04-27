@@ -15,6 +15,15 @@
 <app-person-form (currentPlayer)="setCurrentPlayer($event)"></app-person-form>
 
 }
+<div class="play-button">
+  Colors
+  <select [(ngModel)]="selectedColor">
+    <option selected value="normal">normal</option>
+    <option value="high contrast">high contrast</option>
+  </select>
+</div>
+
+<br />
 
 <button
   [disabled]="player === undefined"
