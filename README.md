@@ -63,4 +63,10 @@ The game page contains the actual gameplay and includes features such as an exit
 - My version includes a gameplay history feature with filtering and sorting options.
 - Score component is used in IntroComponent to render top 10 scores for all users, and in GameComponent to render only current player score (using pipe and map from rxjs)
 
+## Recent Updates
+
+- **Route Guard Implementation:** Added a `playerDataGuard` to ensure that users cannot access the game page without proper validation. The guard checks if the user is logged in and has the necessary credentials.
+- **Router Configuration:** Updated the router configuration to include the new route guard and handle color parameter changes in the game route.
+- **Dynamic Color Change:** Implemented functionality to change the game color based on a URL parameter, enhancing the customization options for the user.
+
 ## Author GG
