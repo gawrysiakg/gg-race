@@ -34,7 +34,10 @@ export class PlayerInfoService {
   }
 
   public get getCurrentPlayer() {
-    return this._currentPlayer;
+    const player = localStorage.getItem('currentPlayer');
+    console.log(' get current player', player);
+    return JSON.parse(player!);
+    //return this._currentPlayer;
   }
 
   public setCurrentPLayer(player: User | undefined) {
@@ -43,19 +46,23 @@ export class PlayerInfoService {
     if (player) {
       player.id = this.userId;
       this._usersList.push({ ...player });
+      localStorage.setItem('currentPlayer', JSON.stringify(player));
+      console.log(' set current player', JSON.stringify(player));
     }
     this.userId++;
   }
 
   public removeCurrentPLayer() {
     this._currentPlayer = undefined;
+    localStorage.removeItem('currentPlayer');
+    console.log('removed current player');
   }
 
   public updatePlayer(player: User) {
     const playerIndex = this._usersList.findIndex(
       (user) => user.id === player.id
     );
-
+    localStorage.setItem('currentPlayer', JSON.stringify(player));
     if (playerIndex !== -1) {
       this._usersList[playerIndex] = player;
     } else {

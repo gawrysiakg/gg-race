@@ -49,9 +49,11 @@ export class GameComponent {
     private _route: ActivatedRoute
   ) {
     this.player = _playerInfo.getCurrentPlayer;
-    if (!this.player) {
-      this._router.navigate(['/intro']);
-    }
+    this.updatePlayerGameHistory(GameStatus.READY);
+    // checked by guard
+    // if (!this.player) {
+    //   this._router.navigate(['/intro']);
+    // }
     this.score$ = this._scoreService.loadScore().pipe(
       map((users) => {
         return users.filter((item) => item.name === this.player?.name);
@@ -229,6 +231,7 @@ export class GameComponent {
     this.showScore = !this.showScore;
     if (!this.showScore) {
       this._router.navigate(['/intro']);
+      this._playerInfo.removeCurrentPLayer();
     }
   }
 

@@ -2,7 +2,7 @@
 
 <app-intro-text [player]="player"></app-intro-text>
 
-@if(player){
+<!-- @if(player){
 <div class="person-form-loggedin">
   <p class="good-luck">Good luck, and have fun!</p>
   <p>
@@ -14,7 +14,8 @@
 } @if (!player){
 <app-person-form (currentPlayer)="setCurrentPlayer($event)"></app-person-form>
 
-}
+} -->
+<app-person-form (currentPlayer)="setCurrentPlayer($event)"></app-person-form>
 <div class="play-button">
   Colors
   <select [(ngModel)]="selectedColor">
@@ -25,13 +26,13 @@
 
 <br />
 
-<button
+<!-- <button
   [disabled]="player === undefined"
   class="play-button"
   (click)="startGame()"
 >
   Play!
-</button>
+</button> -->
 <br />
 
 } @if(showScore){

@@ -28,7 +28,7 @@ export class IntroComponent {
     private _playerInfo: PlayerInfoService,
     private _scoreService: ScoreService
   ) {
-    this.player = _playerInfo.getCurrentPlayer;
+    // this.player = _playerInfo.getCurrentPlayer; //nie chcę przypisywać gracza, bo po przejściu z game do intro przez url pamiętało imię gracza
     this.score$ = this._scoreService.loadScore() || of([]);
     // .subscribe((result) => (this.score = result)); // added async
   }
@@ -46,6 +46,7 @@ export class IntroComponent {
         this._playerInfo.setCurrentPLayer(event);
 
         this.player = this._playerInfo.getCurrentPlayer;
+        this.startGame();
       } else {
         alert('Invalid token');
       }
