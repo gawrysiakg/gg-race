@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AuthTokenResponse, User } from './models';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -15,8 +14,8 @@ export class PlayerInfoService {
   constructor(private _http: HttpClient) {}
 
   public validateToken(token: string) {
-    const URL = 'http://localhost:8080/check-token';
-    //const URL = 'https://scores.chrum.it/check-token';
+    //const URL = 'http://localhost:8080/check-token';
+    const URL = 'https://scores.chrum.it/check-token';
 
     return this._http.post<AuthTokenResponse>(
       URL,
@@ -37,7 +36,6 @@ export class PlayerInfoService {
     const player = localStorage.getItem('currentPlayer');
     console.log(' get current player', player);
     return JSON.parse(player!);
-    //return this._currentPlayer;
   }
 
   public setCurrentPLayer(player: User | undefined) {
@@ -70,20 +68,3 @@ export class PlayerInfoService {
     }
   }
 }
-
-// public validateToken(token: string): boolean {
-//   const URL = 'https://scores.chrum.it/check-token';
-
-//   this._http
-//     .post<TokenDto>(
-//       URL,
-//       { 'auth-token': token },
-//       { headers: { 'Content-Type': 'application/json' } }
-//     )
-//     .subscribe((result) => {
-//       this.isAuthenticated = result.success;
-
-//       console.log(this.isAuthenticated);
-//     });
-//   return this.isAuthenticated;
-// }

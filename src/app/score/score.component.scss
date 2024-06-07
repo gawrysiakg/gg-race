@@ -1,22 +1,14 @@
-// body {
-//   padding: 50px;
-// }
-
 .score-list-container {
-  //background-color: rgb(119, 136, 153) ;
   margin-top: 80px;
   background-color: rgba(119, 136, 153, 0.7);
   display: grid;
   width: 85vh;
   height: 70vh;
-  // width: 400px;
-  // height: 350px;
+
   padding: 20px;
   border-radius: 10px;
-  //box-shadow: 0 0 20px gray;
   box-shadow: 0 0 20px rgb(254, 254, 254);
   overflow: auto;
-  // opacity: 0.7;
 }
 .score-list-container-title {
   font-size: xx-large;
@@ -24,7 +16,6 @@
 }
 
 .score-list {
-  // width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
   font-family: "Comic Neue", cursive;
@@ -42,7 +33,6 @@
 }
 
 .score-list td {
-  //   background-color: rgba(236, 231, 231, 0.771);
   background-color: rgba(255, 255, 255, 0.771);
 }
 

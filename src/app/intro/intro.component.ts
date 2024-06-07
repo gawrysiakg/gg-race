@@ -22,15 +22,13 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './intro.component.scss',
 })
 export class IntroComponent {
-  public score$: Observable<Array<ScoresListItem>>; //= of([]);
+  public score$: Observable<Array<ScoresListItem>>;
   public constructor(
     private _router: Router,
     private _playerInfo: PlayerInfoService,
     private _scoreService: ScoreService
   ) {
-    // this.player = _playerInfo.getCurrentPlayer; //nie chcę przypisywać gracza, bo po przejściu z game do intro przez url pamiętało imię gracza
     this.score$ = this._scoreService.loadScore() || of([]);
-    // .subscribe((result) => (this.score = result)); // added async
   }
   public selectedColor = 'normal';
   public isAuthenticated = false;

@@ -4,9 +4,6 @@ import { GameHistory } from '../../models';
 @Pipe({
   name: 'statusPipe',
   standalone: true,
-  // pure: false, // (default is true)
-  // filterBy i sortDirection. Jeśli te parametry mogą zmieniać się niezależnie od tablicy wejściowej gameHistory,
-  // ustawienie potoku na nieczysty umożliwi mu ponowne uruchomienie i ponowne obliczenie danych wyjściowych za każdym razem, gdy te parametry się zmienią
 })
 export class StatusPipePipe implements PipeTransform {
   transform(

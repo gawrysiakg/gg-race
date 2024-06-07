@@ -20,7 +20,6 @@ import { ScoreComponent } from '../score/score.component';
 export class GameComponent {
   public darkMode =
     this._route.snapshot.params['colors'] === 'high contrast' ? true : false;
-  //public theme = this.darkMode ? 'black-and-white' : '';
   public theme =
     this._route.snapshot.params['colors'] === 'high%20contrast'
       ? 'black-and-white'
@@ -39,7 +38,7 @@ export class GameComponent {
   public statusOptions = Object.values(GameStatus);
   public showScore = false;
   public scoreButtonText = 'Hide score';
-  public score$: Observable<Array<ScoresListItem>>; //= of([]);
+  public score$: Observable<Array<ScoresListItem>>;
 
   public player: User | undefined;
   public constructor(
@@ -50,16 +49,11 @@ export class GameComponent {
   ) {
     this.player = _playerInfo.getCurrentPlayer;
     this.updatePlayerGameHistory(GameStatus.READY);
-    // checked by guard
-    // if (!this.player) {
-    //   this._router.navigate(['/intro']);
-    // }
     this.score$ = this._scoreService.loadScore().pipe(
       map((users) => {
         return users.filter((item) => item.name === this.player?.name);
       })
     );
-    // .subscribe((result) => (this.score = result));
   }
 
   public grantPoints() {
@@ -93,7 +87,6 @@ export class GameComponent {
   }
 
   gameOver(): void {
-    // this.openDialog(); // zmienione na komponent score z filtrowaniem po name
     this.gameStarted = false;
     this.turboMode = false;
     if (this.player) {
@@ -103,7 +96,6 @@ export class GameComponent {
     this.timerStop();
     this.toggleScore();
 
-    // to pozwoli wysłać score na serwer
     this._scoreService.sendScoreToServer(this.player!, this.points).subscribe(
       (response) => {
         console.log('Score sent successfully!', response);
