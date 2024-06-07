@@ -4,7 +4,7 @@ import { CommonModule, NgFor } from '@angular/common';
 import { ScoresListItem, User } from '../models';
 import { GameStatus } from '../models';
 import { ListComponent } from '../list/list.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PlayerInfoService } from '../player-info.service';
 import { ScoreService } from '../score.service';
 import { Observable, map, of } from 'rxjs';
@@ -18,8 +18,13 @@ import { ScoreComponent } from '../score/score.component';
   styleUrl: './game.component.scss',
 })
 export class GameComponent {
-  public darkMode = true;
-  public theme = this.darkMode ? 'black-and-white' : '';
+  public darkMode =
+    this._route.snapshot.params['colors'] === 'high contrast' ? true : false;
+  public theme =
+    this._route.snapshot.params['colors'] === 'high%20contrast'
+      ? 'black-and-white'
+      : '';
+
   public darkModeButton = this.darkMode ? 'Dark Mode OFF' : 'Dark Mode ON';
   public points = 0;
   public boardHeight: number = 20;
@@ -33,24 +38,22 @@ export class GameComponent {
   public statusOptions = Object.values(GameStatus);
   public showScore = false;
   public scoreButtonText = 'Hide score';
-  public score$: Observable<Array<ScoresListItem>>; //= of([]);
+  public score$: Observable<Array<ScoresListItem>>;
 
   public player: User | undefined;
   public constructor(
     private _router: Router,
     private _playerInfo: PlayerInfoService,
-    private _scoreService: ScoreService
+    private _scoreService: ScoreService,
+    private _route: ActivatedRoute
   ) {
     this.player = _playerInfo.getCurrentPlayer;
-    if (!this.player) {
-      this._router.navigate(['/intro']);
-    }
+    this.updatePlayerGameHistory(GameStatus.READY);
     this.score$ = this._scoreService.loadScore().pipe(
       map((users) => {
         return users.filter((item) => item.name === this.player?.name);
       })
     );
-    // .subscribe((result) => (this.score = result));
   }
 
   public grantPoints() {
@@ -70,6 +73,11 @@ export class GameComponent {
     if (this.player) {
       this.updatePlayerGameHistory(mode);
     }
+    if (this.darkMode) {
+      this._router.navigate(['/game/high contrast']);
+    } else {
+      this._router.navigate(['/game/normal']);
+    }
   }
 
   toggleShowMoreButton() {
@@ -79,7 +87,6 @@ export class GameComponent {
   }
 
   gameOver(): void {
-    // this.openDialog(); // zmienione na komponent score z filtrowaniem po name
     this.gameStarted = false;
     this.turboMode = false;
     if (this.player) {
@@ -89,7 +96,6 @@ export class GameComponent {
     this.timerStop();
     this.toggleScore();
 
-    // to pozwoli wysłać score na serwer
     this._scoreService.sendScoreToServer(this.player!, this.points).subscribe(
       (response) => {
         console.log('Score sent successfully!', response);
@@ -217,6 +223,7 @@ export class GameComponent {
     this.showScore = !this.showScore;
     if (!this.showScore) {
       this._router.navigate(['/intro']);
+      this._playerInfo.removeCurrentPLayer();
     }
   }
 

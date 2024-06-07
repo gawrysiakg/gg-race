@@ -3,31 +3,25 @@
   to the limit in this fast-paced adventure.
 </label>
 
-<form #form="ngForm" (submit)="submit(form.form.value)" class="login-form">
-  @if(!nameModel.touched){
+<form [formGroup]="userForm" (submit)="submit()" class="login-form">
+  @if(!name.touched && name.invalid){
   <label>Enter Player Name</label>
-  } @if(nameModel.touched && nameModel.invalid){
+  } @if(name.touched && name.invalid){
   <label class="error-message">Name must be at least 3 characters long</label>
-  } @if(form.valid === true){
+  } @if(name.valid){
   <label class="success-message">✅</label>
   }
 
   <br />
-  <input
-    type="text"
-    placeholder="Name"
-    name="name"
-    ngModel
-    required
-    minlength="3"
-    #nameModel="ngModel"
-  />
+  <input type="text" placeholder="Name" formControlName="name" />
 
   <br />
 
-  @if(form.valid === false){
+  @if(!studentId.touched && studentId.invalid){
   <label>Enter Student ID</label>
-  } @if(form.valid === true){
+  } @if(studentId.touched && studentId.invalid){
+  <label class="error-message">Only numbers</label>
+  } @if(studentId.valid === true){
   <label class="success-message">✅</label>
   }
 
@@ -35,14 +29,11 @@
 
   <input
     type="text"
-    minlength="4"
     placeholder="Student ID"
-    name="token"
-    ngModel
-    required
+    formControlName="studentId"
   /><br /><br />
 
-  <button [disabled]="form.valid === false" class="submit-button">
-    Submit
+  <button [disabled]="userForm.valid === false" class="submit-button">
+    Play
   </button>
 </form>

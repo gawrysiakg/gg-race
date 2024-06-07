@@ -12,7 +12,6 @@ import { Observable, of } from 'rxjs';
   styleUrl: './score.component.scss',
 })
 export class ScoreComponent {
-  //@Input() public score: Array<ScoresListItem> = [];
   @Input() public score$: Observable<ScoresListItem[]> = of([]); // Observable emitujący pustą tablicę
   public constructor() {}
   sortDirection: 'asc' | 'desc' = 'desc';

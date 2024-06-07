@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AuthTokenResponse, User } from './models';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -34,7 +33,9 @@ export class PlayerInfoService {
   }
 
   public get getCurrentPlayer() {
-    return this._currentPlayer;
+    const player = localStorage.getItem('currentPlayer');
+    console.log(' get current player', player);
+    return JSON.parse(player!);
   }
 
   public setCurrentPLayer(player: User | undefined) {
@@ -43,19 +44,23 @@ export class PlayerInfoService {
     if (player) {
       player.id = this.userId;
       this._usersList.push({ ...player });
+      localStorage.setItem('currentPlayer', JSON.stringify(player));
+      console.log(' set current player', JSON.stringify(player));
     }
     this.userId++;
   }
 
   public removeCurrentPLayer() {
     this._currentPlayer = undefined;
+    localStorage.removeItem('currentPlayer');
+    console.log('removed current player');
   }
 
   public updatePlayer(player: User) {
     const playerIndex = this._usersList.findIndex(
       (user) => user.id === player.id
     );
-
+    localStorage.setItem('currentPlayer', JSON.stringify(player));
     if (playerIndex !== -1) {
       this._usersList[playerIndex] = player;
     } else {
@@ -63,20 +68,3 @@ export class PlayerInfoService {
     }
   }
 }
-
-// public validateToken(token: string): boolean {
-//   const URL = 'https://scores.chrum.it/check-token';
-
-//   this._http
-//     .post<TokenDto>(
-//       URL,
-//       { 'auth-token': token },
-//       { headers: { 'Content-Type': 'application/json' } }
-//     )
-//     .subscribe((result) => {
-//       this.isAuthenticated = result.success;
-
-//       console.log(this.isAuthenticated);
-//     });
-//   return this.isAuthenticated;
-// }
