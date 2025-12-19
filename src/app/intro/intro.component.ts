@@ -38,17 +38,19 @@ export class IntroComponent {
   intervalId: any;
 
   setCurrentPlayer(event: User) {
-    this._playerInfo.validateToken(event.token).subscribe((result) => {
-      this.isAuthenticated = result.success;
-      if (this.isAuthenticated) {
-        this._playerInfo.setCurrentPLayer(event);
+    // this._playerInfo.validateToken(event.token).subscribe((result) => {
+    //this.isAuthenticated = result.success;
+    this.isAuthenticated = true;
 
-        this.player = this._playerInfo.getCurrentPlayer;
-        this.startGame();
-      } else {
-        alert('Invalid token');
-      }
-    });
+    if (this.isAuthenticated) {
+      this._playerInfo.setCurrentPLayer(event);
+
+      this.player = this._playerInfo.getCurrentPlayer;
+      this.startGame();
+    } else {
+      alert('Invalid token');
+    }
+    //});
   }
 
   startGame() {
